@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".fragments.ContactsFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivNoContactsOrNoGroupsContacts"
+        android:layout_width="250dp"
+        android:layout_height="180dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        app:srcCompat="@drawable/search_no_contacts_or_groups" />
+
+    <LinearLayout
+        android:id="@+id/llNotFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:elevation="@dimen/margin_medium_2"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:elevation="@dimen/margin_medium_2"
+            app:srcCompat="@drawable/search_not_found" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/nunito_sans"
+            android:text="No contact or group with name"
+            android:textColor="@color/colorPrimaryLight_2" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/nunito_sans"
+                android:gravity="center"
+                android:text="&quot;"
+                android:textColor="@color/colorPrimaryLight_2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSearchName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:text="Aung Thiha"
+                android:textColor="@color/colorPrimaryText" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/nunito_sans"
+                android:gravity="center"
+                android:text="&quot; exists"
+                android:textColor="@color/colorPrimaryLight_2" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/llActionBarContacts"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                android:elevation="@dimen/margin_medium_2"
+                android:fadingEdgeLength="@dimen/margin_small"
+                android:translationZ="@dimen/margin_medium">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="@dimen/margin_medium_2"
+                    android:fontFamily="@font/yorkie_demo_semibold"
+                    android:text="@string/lbl_contacts"
+                    android:textSize="@dimen/text_34sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnAddNewContact"
+                    android:layout_width="@dimen/width_36dp"
+                    android:layout_height="@dimen/height_36dp"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="@dimen/margin_medium_2"
+                    app:srcCompat="@drawable/button_add_new_contact" />
+
+            </FrameLayout>
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/etSearchContacts"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_48dp"
+                android:layout_below="@+id/llActionBarContacts"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:background="@drawable/background_search_contacts"
+                android:visibility="visible"
+                app:closeIcon="@drawable/baseline_close_accent_24dp"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@android:color/transparent"
+                app:queryHint="@string/lbl_search"
+                app:searchIcon="@drawable/baseline_search_accent_24dp" />
+
+            <LinearLayout
+                android:id="@+id/tvGroupsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etSearchContacts"
+                android:layout_marginStart="@dimen/margin_medium_3"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_semibold"
+                    android:text="@string/lbl_groups"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/text_regular" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNumberOfGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_semibold"
+                    android:text="@string/lbl_dash"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/text_regular" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_semibold"
+                    android:text="@string/lbl_close_bracket"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/text_regular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llNewGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tvGroupsLabel"
+                android:layout_marginTop="@dimen/margin_medium_3"
+                android:clipToPadding="false"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnAddNewGroup"
+                    android:layout_width="@dimen/margin_90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium_2"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/button_add_new_group" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvGroupContacts"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/margin_10dp"
+                    android:layout_weight="1"
+                    android:clipToPadding="false"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/view_holder_group_list" />
+
+            </LinearLayout>
+
+            <include
+                android:id="@+id/vpContacts"
+                layout="@layout/view_pod_contacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llNewGroup" />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
