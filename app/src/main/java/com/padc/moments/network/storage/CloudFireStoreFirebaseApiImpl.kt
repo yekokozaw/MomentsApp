@@ -48,6 +48,13 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
+    override fun updateFCMToken(userId: String, token: String) {
+
+        database.collection("users")
+            .document(userId)
+            .update("fcm_key",token)
+    }
+
     private fun changeBitmapToUrlString(bitmap: Bitmap): Task<Uri> {
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)

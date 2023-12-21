@@ -29,4 +29,4 @@ const val HEADER_CONNECTION = "Connection"
 
 // Keys
 const val GIPHY_API_KEY = "fNcKKGdZ8bta2IdgEAA1PTwLe6VbS1I8"
-const val FCM_AUTH_KEY = "key=AAAAkB9_iQg:APA91bHzN5j5MXxPLbdnXmSn_bqU7T_9rU7ykh-7fgczELHkl24UzKoRRl5VsO6QXYw5VirlpDOuUoF48cJHSTnOxlPBFyUJvOK7RLw3QjNttVKIrs_oiHmiUy0eHjcvE4aK-NOEJ3ym"
+const val FCM_AUTH_KEY = "key=AAAAe7X9jYQ:APA91bG7S7iFP05WUtW2qDiK35mCq1jNgn__P-vPKfTaZXjmRaPoBoZKic-kqzbtU1N_ycd56ClkmZll_4WX_IwM3Jykz4pYwcMPaM3e_E3DbfPPipmyMYAtdA3_MpoukdhECGDJrlh9"

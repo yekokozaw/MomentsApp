@@ -14,14 +14,26 @@ import com.padc.moments.fragments.MomentFragment
 import com.padc.moments.fragments.ProfileFragment
 import com.padc.moments.fragments.SettingFragment
 import com.google.firebase.messaging.FirebaseMessaging
+import com.padc.moments.network.auth.AuthManager
+import com.padc.moments.network.auth.FirebaseAuthManager
+import com.padc.moments.network.storage.PresenceManager
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
-
+    private val mAuthManager : AuthManager = FirebaseAuthManager
+    private  lateinit var mPresenceManager: PresenceManager
+    private lateinit var fcmToken : String
     companion object {
         fun newIntent(context: Context): Intent {
             return Intent(context, MainActivity::class.java)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            Log.d("NewTokenMainActivity",it.result)
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,11 +41,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val userId = mAuthManager.getUserId()
+        mPresenceManager = PresenceManager(userId)
+        mPresenceManager.setUserOnline()
         setUpBottomNavigationView()
-
-        FirebaseMessaging.getInstance().token.addOnCompleteListener {
-            Log.i("NewTokenMainActivity",it.result)
-        }
     }
 
     private fun setUpBottomNavigationView() {
@@ -66,6 +77,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        mPresenceManager.setUserOffline()
+        super.onDestroy()
+    }
     private fun switchFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer,fragment)

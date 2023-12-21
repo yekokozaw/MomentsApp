@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -28,20 +29,21 @@ import com.padc.moments.data.vos.fcm.Data
 import com.padc.moments.data.vos.fcm.DataX
 import com.padc.moments.data.vos.fcm.FCMBody
 import com.padc.moments.databinding.ActivityChatDetailBinding
+import com.padc.moments.delegates.ChatDetailsImageDelegate
 import com.padc.moments.mvp.impls.ChatDetailPresenterImpl
 import com.padc.moments.mvp.interfaces.ChatDetailPresenter
 import com.padc.moments.mvp.views.ChatDetailView
 import com.padc.moments.network.retrofit.responses.FCMResponse
+import com.padc.moments.network.storage.PresenceManager
 import java.io.IOException
 
 @Suppress("DEPRECATION")
-class ChatDetailActivity : AppCompatActivity(), ChatDetailView {
+class ChatDetailActivity : AppCompatActivity(), ChatDetailView,ChatDetailsImageDelegate{
 
     private lateinit var binding: ActivityChatDetailBinding
-
+    private  lateinit var mPresenceManager: PresenceManager
     // Presenters
     private lateinit var mPresenter: ChatDetailPresenter
-
     // Adapters
     private lateinit var mAdapter: ChatDetailAdapter
     private lateinit var mImageAdapter: ImageChatDetailAdapter
@@ -87,6 +89,8 @@ class ChatDetailActivity : AppCompatActivity(), ChatDetailView {
 
         mReceiverId = intent?.extras?.getString(EXTRA_USER_ID, "") ?: ""
         mGroupId = intent?.extras?.getString(EXTRA_GROUP_ID, "") ?: ""
+        mPresenceManager = PresenceManager(mReceiverId)
+        isOnlineOrOffline(mReceiverId)
 
         setUpListeners()
 
@@ -99,13 +103,28 @@ class ChatDetailActivity : AppCompatActivity(), ChatDetailView {
         }
     }
 
+    private fun isOnlineOrOffline(mReceiverId: String) {
+        mPresenceManager.checkState(
+            onSuccess = {
+                if (it){
+                    binding.textIsOnline.text = "Online"
+                    binding.ivIsOnline.visibility = View.VISIBLE
+                }else {
+                    binding.textIsOnline.text = "Offline"
+                    binding.ivIsOnline.visibility = View.INVISIBLE
+                }
+            },
+            onFailure = { Toast.makeText(this,it,Toast.LENGTH_SHORT).show()}
+        )
+    }
+
     private fun setUpPresenters() {
         mPresenter = ViewModelProvider(this)[ChatDetailPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
 
     private fun setUpRecyclerView() {
-        mAdapter = ChatDetailAdapter()
+        mAdapter = ChatDetailAdapter(this)
         binding.rvConversation.adapter = mAdapter
         binding.rvConversation.layoutManager = LinearLayoutManager(this)
     }
@@ -535,7 +554,6 @@ class ChatDetailActivity : AppCompatActivity(), ChatDetailView {
 
         if ((requestCode == REQUEST_CODE_GALLERY || requestCode == REQUEST_IMAGE_CAPTURE || requestCode == REQUEST_CODE_GIF) && resultCode == Activity.RESULT_OK) {
 
-
             if (requestCode == REQUEST_CODE_GIF) {
                 Toast.makeText(this, "You took a gif", Toast.LENGTH_SHORT).show()
                 val gifUrl = data?.getStringExtra("data") ?: ""
@@ -600,7 +618,6 @@ class ChatDetailActivity : AppCompatActivity(), ChatDetailView {
         mImageAdapter.setNewData(mImageList.toList())
     }
 
-
     override fun showError(error: String) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
     }
@@ -608,5 +625,9 @@ class ChatDetailActivity : AppCompatActivity(), ChatDetailView {
     override fun navigateToSearchGifsActivity() {
         startActivityForResult(SearchGifsActivity.newIntent(this), REQUEST_CODE_GIF)
         overridePendingTransition(R.anim.scroll_up, 0)
+    }
+
+    override fun onTapImage(imageUrl: String) {
+        startActivity(FullSizeImageActivity.newIntent(this,imageUrl))
     }
 }

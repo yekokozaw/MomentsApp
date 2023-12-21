@@ -4,20 +4,25 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.padc.moments.data.vos.PrivateMessageVO
 import com.padc.moments.databinding.ViewHolderMessageSendBinding
+import com.padc.moments.delegates.ChatDetailsImageDelegate
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class MessageSendViewHolder(itemView: View) : IBaseMessageViewHolder(itemView) {
+class MessageSendViewHolder(private val delegate: ChatDetailsImageDelegate,itemView: View)
+    : IBaseMessageViewHolder(itemView) {
 
     private var binding: ViewHolderMessageSendBinding
-
+    private var imageUrl : String? = null
     init {
         binding = ViewHolderMessageSendBinding.bind(itemView)
+        binding.ivSendImageChatDetail.setOnClickListener {
+            imageUrl?.let { it1 -> delegate.onTapImage(it1) }
+        }
     }
 
     override fun bindData(message: PrivateMessageVO) {
-
+        imageUrl = message.file
         if (message.message.isEmpty() && message.file.isNotEmpty()) {
             binding.flSendMessage.visibility = View.GONE
             binding.mcvSendImageChatDetail.visibility = View.VISIBLE

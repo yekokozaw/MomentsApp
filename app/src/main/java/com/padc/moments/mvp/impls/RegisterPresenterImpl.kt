@@ -10,13 +10,13 @@ import com.padc.moments.data.models.UserModelImpl
 import com.padc.moments.data.vos.UserVO
 import com.padc.moments.mvp.interfaces.RegisterPresenter
 import com.padc.moments.mvp.views.RegisterView
+import com.padc.moments.network.storage.PresenceManager
 
 class RegisterPresenterImpl : RegisterPresenter , ViewModel() {
 
     private var mView:RegisterView? = null
     private val mUserModel:UserModel = UserModelImpl
     private val mAuthModel:AuthenticationModel = AuthenticationModelImpl
-
     override fun initPresenter(view: RegisterView) {
         mView = view
     }

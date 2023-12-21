@@ -19,11 +19,11 @@ import com.padc.moments.databinding.FragmentChatBinding
 import com.padc.moments.mvp.impls.ChatPresenterImpl
 import com.padc.moments.mvp.interfaces.ChatPresenter
 import com.padc.moments.mvp.views.ChatView
+import com.padc.moments.network.storage.PresenceManager
 
 class ChatFragment : Fragment(), ChatView {
 
     private lateinit var binding: FragmentChatBinding
-
     // Adapters
     private lateinit var mActiveChatAdapter: ActiveChatAdapter
     private lateinit var mChatAdapter: ChatAdapter

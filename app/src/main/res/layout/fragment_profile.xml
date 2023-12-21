@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    tools:srcCompat="@drawable/ath_profile" />
+                    tools:srcCompat="@drawable/my_profile" />
 
             </com.google.android.material.card.MaterialCardView>
 

@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -96,6 +97,11 @@ dependencies {
 
     // Live Data
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+
+    //Room
+    implementation "androidx.room:room-common:2.4.3"
+    implementation "androidx.room:room-ktx:2.4.3"
+    kapt "androidx.room:room-compiler:2.4.3"
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"

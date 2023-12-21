@@ -42,7 +42,7 @@
                 app:cornerRadius="25dp"
                 app:hasBorderCircle="false"
                 app:isActive="true"
-                app:srcCompat="@drawable/ath_profile" />
+                app:srcCompat="@drawable/my_profile" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvGroupName"
@@ -55,7 +55,7 @@
                 android:maxLines="1"
                 android:fontFamily="@font/noto_sans"
                 android:layout_marginBottom="@dimen/margin_5dp"
-                android:text="Aung Thiha"
+                android:text="David Kyaw"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_smaller" />
 

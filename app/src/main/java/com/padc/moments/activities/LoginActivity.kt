@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.messaging.FirebaseMessaging
 import com.padc.moments.databinding.ActivityLoginBinding
 import com.padc.moments.mvp.impls.LoginPresenterImpl
 import com.padc.moments.mvp.interfaces.LoginPresenter
@@ -15,6 +16,7 @@ class LoginActivity : AppCompatActivity() , LoginView {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var mPresenter:LoginPresenter
+    private lateinit var fcmToken:String
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -22,6 +24,12 @@ class LoginActivity : AppCompatActivity() , LoginView {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            fcmToken = it.result
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -44,6 +52,7 @@ class LoginActivity : AppCompatActivity() , LoginView {
 
             if(phoneNumber=="" && email != "" && password != "") {
                 mPresenter.onTapLoginButton(
+                    fcmToken,
                     binding.etPhoneNumberLogin.text.toString(),
                     binding.etEmailLogin.text.toString(),
                     binding.etPasswordLogin.text.toString()

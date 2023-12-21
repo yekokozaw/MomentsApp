@@ -1,6 +1,7 @@
 package com.padc.moments.data.models
 
 import android.graphics.Bitmap
+import com.padc.moments.data.vos.TokenVO
 import com.padc.moments.data.vos.UserVO
 import com.padc.moments.data.vos.fcm.FCMBody
 import com.padc.moments.network.retrofit.responses.FCMResponse
@@ -27,5 +28,7 @@ interface UserModel {
         onSuccess: (FCMResponse) -> Unit,
         onFailure: (String) -> Unit
     )
+
+    fun uploadFCMToken(userId : String,token : String)
 
 }

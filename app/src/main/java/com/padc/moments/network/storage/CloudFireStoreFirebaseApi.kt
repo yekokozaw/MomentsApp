@@ -2,10 +2,13 @@ package com.padc.moments.network.storage
 
 import android.graphics.Bitmap
 import com.padc.moments.data.vos.MomentVO
+import com.padc.moments.data.vos.TokenVO
 import com.padc.moments.data.vos.UserVO
 
 interface CloudFireStoreFirebaseApi {
     fun addUser(user: UserVO)
+
+    fun updateFCMToken( userId: String,token : String)
     fun updateAndUploadProfileImage(bitmap: Bitmap, user: UserVO)
     fun getUsers(
         onSuccess: (users: List<UserVO>) -> Unit, onFailure: (String) -> Unit

@@ -4,20 +4,25 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.padc.moments.data.vos.PrivateMessageVO
 import com.padc.moments.databinding.ViewHolderMessageReceiveBinding
+import com.padc.moments.delegates.ChatDetailsImageDelegate
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class MessageReceiveViewHolder(itemView: View) : IBaseMessageViewHolder(itemView) {
+class MessageReceiveViewHolder(private val delegate: ChatDetailsImageDelegate,itemView: View)
+    : IBaseMessageViewHolder(itemView) {
 
     private var binding:ViewHolderMessageReceiveBinding
-
+    private var imageUrl : String? = null
     init {
         binding = ViewHolderMessageReceiveBinding.bind(itemView)
+        binding.ivReceiveImage.setOnClickListener {
+            imageUrl?.let { it1 -> delegate.onTapImage(it1) }
+        }
     }
 
     override fun bindData(message: PrivateMessageVO) {
-
+        imageUrl = message.file
         Glide.with(itemView.context)
             .load(message.userProfileImage)
             .into(binding.ivProfileChatHead)

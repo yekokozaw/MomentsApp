@@ -14,7 +14,7 @@
     <string name="lbl_get_otp">Get OTP</string>
     <string name="lbl_don_t_receive_the_otp">Don\'t receive the OTP?</string>
     <string name="margin_resend_code">Resend Code</string>
-    <string name="aung_thiha">Aung Thiha</string>
+    <string name="aung_thiha">David Kyaw</string>
     <string name="lbl_name">Name</string>
     <string name="lbl_gender">Gender</string>
     <string name="lbl_other">Other</string>
@@ -64,4 +64,6 @@
     <string name="lbl_privacy">Privacy</string>
     <string name="lbl_general">General</string>
     <string name="lbl_help_amp_feedback"><![CDATA[Help & Feedback]]></string>
+    <string name="ye_ko_zaw">Ye Ko Zaw</string>
+    <string name="lbl_email">Email</string>
 </resources>

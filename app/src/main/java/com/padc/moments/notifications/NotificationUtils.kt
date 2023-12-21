@@ -22,7 +22,7 @@ object NotificationUtils {
             val channel = NotificationChannel(
                 NOTIFICATION_CHANNEL_ID,
                 name,
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             )
             notificationManager.createNotificationChannel(channel)
         }

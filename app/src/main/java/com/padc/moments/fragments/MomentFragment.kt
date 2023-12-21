@@ -85,7 +85,6 @@ class MomentFragment : Fragment(), MomentView {
         mViewpod.setNewData(mMomentList, "moment")
     }
 
-
     override fun getMomentIsBookmarked(id: String, isBookmarked: Boolean) {
         for (moment in mMomentList) {
             if (id == moment.id) {

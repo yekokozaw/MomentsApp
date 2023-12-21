@@ -22,14 +22,14 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvWelcomeLblLogin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_below="@id/btnBackLogin"
             android:layout_marginStart="@dimen/margin_38dp"
             android:layout_marginTop="@dimen/margin_xxlarge"
             android:fontFamily="@font/yorkie_demo_bold"
             android:text="@string/welcome_lbl"
             android:textColor="@color/colorPrimaryText"
-            android:textSize="@dimen/text_30sp" />
+            android:textSize="@dimen/text_30sp"
+            android:layout_height="wrap_content"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLoginToContinueLblLogin"
@@ -56,6 +56,7 @@
             android:id="@+id/tvPhoneNoLabelLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_below="@id/tvLoginIllustrationLogin"
             android:layout_marginStart="@dimen/margin_38dp"
             android:layout_marginTop="@dimen/margin_40dp"
@@ -73,6 +74,7 @@
             android:layout_marginEnd="@dimen/margin_xlarge"
             android:fontFamily="@font/yorkie_demo_regular"
             android:hint="@string/hint_09"
+            android:visibility="gone"
             android:inputType="phone"
             android:minHeight="48dp"
             android:textColor="@color/colorSecondaryText"
@@ -86,7 +88,7 @@
             android:layout_marginStart="@dimen/margin_38dp"
             android:layout_marginTop="@dimen/margin_medium_3"
             android:fontFamily="@font/noto_sans"
-            android:text="Email"
+            android:text="@string/lbl_email"
             android:textColor="@color/colorPrimaryLight"
             android:textSize="@dimen/text_small" />
 
@@ -143,15 +145,16 @@
             android:textColor="@color/colorSecondaryText"
             android:textSize="@dimen/text_regular" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"
             android:layout_width="130dp"
             android:layout_height="@dimen/height_48dp"
+            app:cornerRadius="@dimen/margin_medium"
+            android:text="@string/lbl_login"
             android:layout_below="@+id/tvForgotPasswordLabelLogin"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_50dp"
-            android:layout_marginBottom="@dimen/margin_50dp"
-            app:srcCompat="@drawable/button_login" />
+            android:layout_marginBottom="@dimen/margin_50dp" />
 
     </RelativeLayout>
 

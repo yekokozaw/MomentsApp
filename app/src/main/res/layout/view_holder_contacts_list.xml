@@ -15,7 +15,7 @@
         app:cornerRadius="30dp"
         app:isActive="false"
         app:hasBorderCircle="false"
-        app:srcCompat="@drawable/ath_profile" />
+        app:srcCompat="@drawable/my_profile" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvNameContacts"

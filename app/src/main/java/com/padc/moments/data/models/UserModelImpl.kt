@@ -1,12 +1,15 @@
 package com.padc.moments.data.models
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
+import com.padc.moments.data.vos.TokenVO
 import com.padc.moments.data.vos.UserVO
 import com.padc.moments.data.vos.fcm.FCMBody
 import com.padc.moments.network.retrofit.responses.FCMResponse
 import com.padc.moments.network.storage.CloudFireStoreFirebaseApiImpl
 import com.padc.moments.network.storage.CloudFireStoreFirebaseApi
+import com.padc.moments.persistence.MomentDatabase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,7 +65,7 @@ object UserModelImpl : UserModel , RetrofitAbstractBaseModel() {
                         onSuccess(ticket)
                     }
                 } else {
-                    onFailure("Don't make errors,Aung Thiha")
+                    onFailure("Don't make errors")
                 }
             }
 
@@ -72,4 +75,10 @@ object UserModelImpl : UserModel , RetrofitAbstractBaseModel() {
 
         })
     }
+
+    override fun uploadFCMToken(userId: String, token : String) {
+        mFirebaseApi.updateFCMToken(userId,token)
+    }
+
+
 }

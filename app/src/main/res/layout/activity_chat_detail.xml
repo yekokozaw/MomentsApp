@@ -20,6 +20,7 @@
             android:id="@+id/btnBackChatDetail"
             android:layout_width="@dimen/width_30dp"
             android:layout_height="@dimen/height_30dp"
+            android:elevation="8dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/margin_medium_2"
@@ -34,24 +35,46 @@
             android:layout_marginEnd="@dimen/margin_medium_2"
             app:srcCompat="@drawable/button_chat_option" />
 
-        <com.padc.moments.views.components.RoundedProfileImage
-            android:id="@+id/ivProfileImageChatDetail"
+        <FrameLayout
+            android:id="@+id/flUserProfile"
             android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/margin_medium"
-            android:layout_toEndOf="@+id/btnBackChatDetail"
-            android:elevation="@dimen/margin_medium"
-            android:scaleType="centerCrop"
-            app:cornerRadius="25dp"
-            app:isActive="true"/>
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_toEndOf="@id/btnBackChatDetail"
+            android:layout_height="50dp">
+
+            <com.padc.moments.views.components.RoundedProfileImage
+                android:id="@+id/ivProfileImageChatDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                tools:visibility="visible"
+                android:background="@color/zxing_transparent"
+                android:src="@drawable/my_profile"
+                android:layout_toEndOf="@+id/btnBackChatDetail"
+                android:scaleType="centerCrop"
+                app:hasBorderCircle="false"
+                app:cornerRadius="25dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/ivIsOnline"
+                android:layout_width="22dp"
+                android:layout_height="18dp"
+                android:layout_gravity="bottom|right"
+                android:elevation="6dp"
+                android:padding="0dp"
+                app:chipIconSize="14dp"
+                app:chipIcon="@drawable/baseline_circle_green_24"/>
+
+        </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/llUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/margin_10dp"
-            android:layout_toEndOf="@+id/ivProfileImageChatDetail"
+            android:layout_toEndOf="@+id/flUserProfile"
             android:orientation="vertical"
             tools:ignore="RelativeOverlap">
 
@@ -59,12 +82,14 @@
                 android:id="@+id/tvNameChatDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:elevation="4dp"
                 android:fontFamily="@font/noto_sans_bold"
-                tools:text="@string/aung_thiha"
+                tools:text="Ye Ko Zaw"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="@dimen/text_regular_2x" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textIsOnline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_medium"
@@ -136,6 +161,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:padding="@dimen/margin_10dp"
+                    android:elevation="8dp"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/baseline_send_white_24dp" />
 
@@ -160,12 +186,13 @@
                 android:id="@+id/btnOpenGallery"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:elevation="4dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/background_buttons_chat_detail">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:padding="@dimen/margin_10dp"
                     android:scaleType="centerCrop"
@@ -178,12 +205,13 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
+                android:elevation="4dp"
                 android:layout_marginStart="@dimen/margin_36dp"
                 android:background="@drawable/background_buttons_chat_detail">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:padding="@dimen/margin_10dp"
                     android:scaleType="centerCrop"
@@ -200,8 +228,8 @@
                 android:background="@drawable/background_buttons_chat_detail">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:padding="@dimen/margin_10dp"
                     android:scaleType="centerCrop"
@@ -213,12 +241,13 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
+                android:elevation="4dp"
                 android:layout_marginStart="@dimen/margin_36dp"
                 android:background="@drawable/background_buttons_chat_detail">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:padding="@dimen/margin_10dp"
                     android:scaleType="centerCrop"
@@ -230,12 +259,13 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
+                android:elevation="4dp"
                 android:layout_marginStart="@dimen/margin_36dp"
                 android:background="@drawable/background_buttons_chat_detail">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:padding="@dimen/margin_10dp"
                     android:scaleType="centerCrop"

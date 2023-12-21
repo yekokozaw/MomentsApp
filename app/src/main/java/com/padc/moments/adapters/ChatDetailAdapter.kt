@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.padc.moments.R
 import com.padc.moments.data.vos.PrivateMessageVO
+import com.padc.moments.delegates.ChatDetailsImageDelegate
 import com.padc.moments.views.viewholders.IBaseMessageViewHolder
 import com.padc.moments.views.viewholders.MessageReceiveViewHolder
 import com.padc.moments.views.viewholders.MessageSendViewHolder
 
-class ChatDetailAdapter : RecyclerView.Adapter<IBaseMessageViewHolder>() {
+class ChatDetailAdapter(private val delegate: ChatDetailsImageDelegate) : RecyclerView.Adapter<IBaseMessageViewHolder>() {
 
     private val VIEW_TYPE_SEND = 0
     private val VIEW_TYPE_RECEIVE = 1
@@ -23,11 +24,11 @@ class ChatDetailAdapter : RecyclerView.Adapter<IBaseMessageViewHolder>() {
         return if (viewType == VIEW_TYPE_SEND) {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.view_holder_message_send, parent, false)
-            MessageSendViewHolder(view)
+            MessageSendViewHolder(delegate,view)
         } else {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.view_holder_message_receive, parent, false)
-            MessageReceiveViewHolder(view)
+            MessageReceiveViewHolder(delegate,view)
         }
     }
 

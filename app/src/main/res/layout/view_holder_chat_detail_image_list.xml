@@ -14,7 +14,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ath_profile" />
+        app:srcCompat="@drawable/my_profile" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"

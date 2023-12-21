@@ -22,12 +22,12 @@
             android:layout_marginStart="@dimen/margin_medium"
             app:cornerRadius="30dp"
             app:isActive="true"
-            app:srcCompat="@drawable/ath_profile" />
+            app:srcCompat="@drawable/my_profile" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvNameChat"
             android:layout_width="wrap_content"
-            android:text="@string/aung_thiha"
+            android:text="Ye Ko Zaw"
             android:layout_toEndOf="@+id/ivProfileImageChat"
             android:layout_marginStart="@dimen/margin_10dp"
             android:layout_marginTop="@dimen/margin_14dp"

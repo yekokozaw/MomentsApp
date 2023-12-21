@@ -20,7 +20,7 @@ class RoundedProfileImage @JvmOverloads constructor(
     private var contextCircular = context
 
     private var cornerRadius = 0f
-    private var isActive = false
+    var isActive = false
     private var hasBorderCircle = true
     private val path = Path()
 

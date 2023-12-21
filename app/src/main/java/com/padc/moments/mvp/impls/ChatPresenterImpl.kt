@@ -10,6 +10,7 @@ import com.padc.moments.data.models.UserModel
 import com.padc.moments.data.models.UserModelImpl
 import com.padc.moments.mvp.interfaces.ChatPresenter
 import com.padc.moments.mvp.views.ChatView
+import com.padc.moments.network.storage.PresenceManager
 
 class ChatPresenterImpl : ChatPresenter , ViewModel() {
 
