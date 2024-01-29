@@ -1,13 +1,11 @@
 package com.padc.moments.views.viewholders
 
+import android.text.format.DateUtils
 import android.view.View
 import com.bumptech.glide.Glide
 import com.padc.moments.data.vos.PrivateMessageVO
 import com.padc.moments.databinding.ViewHolderMessageReceiveBinding
 import com.padc.moments.delegates.ChatDetailsImageDelegate
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 class MessageReceiveViewHolder(private val delegate: ChatDetailsImageDelegate,itemView: View)
     : IBaseMessageViewHolder(itemView) {
@@ -40,13 +38,13 @@ class MessageReceiveViewHolder(private val delegate: ChatDetailsImageDelegate,it
             binding.mcvReceiveImageChatDetail.visibility = View.GONE
 
             binding.tvReceivedMessage.text = message.message
-            binding.tvTimeReceiveMessage.text = getCurrentHourAndMinutes(message.timeStamp)
+            binding.tvTimeReceiveMessage.text = getTimeAgo(message.timeStamp)
         } else {
             binding.rlChatMessage.visibility = View.VISIBLE
             binding.mcvReceiveImageChatDetail.visibility = View.VISIBLE
 
             binding.tvReceivedMessage.text = message.message
-            binding.tvTimeReceiveMessage.text = getCurrentHourAndMinutes(message.timeStamp)
+            binding.tvTimeReceiveMessage.text = getTimeAgo(message.timeStamp)
 
             Glide.with(itemView.context)
                 .load(message.file)
@@ -54,14 +52,20 @@ class MessageReceiveViewHolder(private val delegate: ChatDetailsImageDelegate,it
         }
     }
 
-    private fun getCurrentHourAndMinutes(currentTimeMillis:Long) :String {
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = currentTimeMillis
+//    private fun getCurrentHourAndMinutes(currentTimeMillis:Long) :String {
+//        val calendar = Calendar.getInstance()
+//        calendar.timeInMillis = currentTimeMillis
+//
+//        val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
+//        val minutes = calendar.get(Calendar.MINUTE)
+//
+//        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+//        return timeFormat.format(calendar.time)
+//    }
 
-        val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
-        val minutes = calendar.get(Calendar.MINUTE)
-
-        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        return timeFormat.format(calendar.time)
+    fun getTimeAgo(timestamp: Long): String {
+        val now = System.currentTimeMillis()
+        val timeAgo = DateUtils.getRelativeTimeSpanString(timestamp, now, DateUtils.MINUTE_IN_MILLIS)
+        return timeAgo.toString()
     }
 }

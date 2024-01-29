@@ -66,4 +66,8 @@
     <string name="lbl_help_amp_feedback"><![CDATA[Help & Feedback]]></string>
     <string name="ye_ko_zaw">Ye Ko Zaw</string>
     <string name="lbl_email">Email</string>
+    <string name="lbl_a_machine_resembling_a_human_being_and_able_to_replicate_certain_human_movements_and_functions_automatically">A machine resembling a human being and able to replicate certain human movements and functions automatically.</string>
+    <string name="_1_3">1/3</string>
+    <string name="lbl_12_30_am">12:30 AM</string>
+    <string name="you_sent_a_video">You sent a Video</string>
 </resources>

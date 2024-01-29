@@ -44,6 +44,10 @@ class ProfilePresenterImpl : ProfilePresenter , ViewModel() {
         mView?.showOptionDialogBox(momentId,momentOwnerUserId)
     }
 
+    override fun onTapLikeButton(momentId: String, likes : Map<String,String>,isLike : Boolean) {
+
+    }
+
     override fun onTapOpenCameraButton() {
         mView?.openCamera()
     }

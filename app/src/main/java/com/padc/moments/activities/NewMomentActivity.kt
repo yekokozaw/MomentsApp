@@ -85,13 +85,17 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
 
     private fun getMomentPost(): MomentVO {
         val caption = binding.etPostNewMoment.text.toString()
+        val createLike = "0"
+        val likedList = emptyMap<String,String>()
         return MomentVO(
             System.currentTimeMillis().toString(),
             userId,
             userName,
             userProfileImage,
             caption,
-            mPresenter.getMomentImages().dropLast(1)
+            mPresenter.getMomentImages().dropLast(1),
+            likedList,
+            createLike
         )
     }
 
@@ -135,6 +139,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
                 fileOutputStream.flush()
                 fileOutputStream.close()
                 val uri: Uri = FileProvider.getUriForFile(applicationContext, applicationContext.packageName + ".provider", file)
+
                 mAdapter.setNewData(uri.toString())
                 dialog.dismiss()
                 return

@@ -21,13 +21,13 @@
             android:layout_marginBottom="@dimen/margin_medium"
             android:layout_marginStart="@dimen/margin_medium"
             app:cornerRadius="30dp"
-            app:isActive="true"
+            app:isActive="false"
             app:srcCompat="@drawable/my_profile" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvNameChat"
             android:layout_width="wrap_content"
-            android:text="Ye Ko Zaw"
+            android:text="Barbie Girl"
             android:layout_toEndOf="@+id/ivProfileImageChat"
             android:layout_marginStart="@dimen/margin_10dp"
             android:layout_marginTop="@dimen/margin_14dp"
@@ -39,7 +39,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLastMessage"
             android:layout_width="wrap_content"
-            android:text="You sent a Video"
+            android:text="@string/you_sent_a_video"
             android:layout_toEndOf="@+id/ivProfileImageChat"
             android:layout_marginStart="@dimen/margin_10dp"
             android:layout_marginTop="@dimen/margin_small"
@@ -52,24 +52,23 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLastOnlineChat"
             android:layout_width="wrap_content"
-            android:text="5 mins"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/margin_medium"
-            android:layout_marginTop="@dimen/margin_14dp"
+            android:layout_marginTop="@dimen/margin_medium"
             android:fontFamily="@font/noto_sans_semibold"
-            android:textSize="@dimen/text_small"
+            android:textSize="@dimen/text_9sp_small"
             android:textColor="@color/colorPrimaryText"
             android:layout_height="wrap_content"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/width_20dp"
-            android:layout_height="@dimen/height_20dp"
-            app:srcCompat="@drawable/icon_seen"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_below="@+id/tvLastOnlineChat"
-            android:layout_marginEnd="@dimen/margin_medium"
-            android:scaleType="centerCrop"/>
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:layout_width="@dimen/width_20dp"-->
+<!--            android:layout_height="@dimen/height_20dp"-->
+<!--            app:srcCompat="@drawable/icon_seen"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginTop="@dimen/margin_small"-->
+<!--            android:layout_below="@+id/tvLastOnlineChat"-->
+<!--            android:layout_marginEnd="@dimen/margin_medium"-->
+<!--            android:scaleType="centerCrop"/>-->
 
     </RelativeLayout>
 

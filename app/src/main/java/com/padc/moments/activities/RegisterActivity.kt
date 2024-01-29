@@ -229,7 +229,6 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     }
 
     override fun navigateToLoginScreen() {
-
         val dialogBindingRegister = DialogRegisterationSuccessfulBinding.inflate(layoutInflater)
         val dialogRegister = RegisterSuccessfulDialog(this)
         dialogRegister.setContentView(dialogBindingRegister.root)

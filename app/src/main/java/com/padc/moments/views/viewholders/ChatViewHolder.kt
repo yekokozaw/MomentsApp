@@ -1,5 +1,6 @@
 package com.padc.moments.views.viewholders
 
+import android.text.format.DateUtils
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -44,5 +45,15 @@ class ChatViewHolder(itemView: View,private val delegate: ChatItemActionDelegate
         } else {
             binding.tvLastMessage.text = message.message
         }
+
+        binding.tvLastOnlineChat.text = getTimeAgo(message.timeStamp)
+
     }
+
+    fun getTimeAgo(timestamp: Long): String {
+        val now = System.currentTimeMillis()
+        val timeAgo = DateUtils.getRelativeTimeSpanString(timestamp, now, DateUtils.MINUTE_IN_MILLIS)
+        return timeAgo.toString()
+    }
+
 }

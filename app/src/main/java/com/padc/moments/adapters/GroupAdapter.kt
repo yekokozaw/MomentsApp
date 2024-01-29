@@ -6,15 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.padc.moments.R
 import com.padc.moments.data.vos.GroupVO
-import com.padc.moments.databinding.ViewHolderGroupListBinding
 import com.padc.moments.delegates.GroupItemActionDelegate
 import com.padc.moments.views.viewholders.GroupViewHolder
 import java.util.ArrayList
 
 class GroupAdapter(private val delegate: GroupItemActionDelegate) :
     RecyclerView.Adapter<GroupViewHolder>() {
-
-    private lateinit var binding: ViewHolderGroupListBinding
 
     private var mGroupList: ArrayList<GroupVO> = arrayListOf()
 

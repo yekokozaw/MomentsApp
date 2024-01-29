@@ -17,7 +17,6 @@
         android:gravity="top"
         android:scaleType="centerCrop"
         app:cornerRadius="25dp"
-        app:isActive="true"
         app:srcCompat="@drawable/my_profile" />
 
     <RelativeLayout
@@ -41,7 +40,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/margin_10dp"
             android:paddingEnd="@dimen/margin_10dp"
-            android:text="I"
+            android:text="@string/you_sent_a_video"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/text_15sp" />
 
@@ -49,12 +48,12 @@
             android:id="@+id/tvTimeReceiveMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
+            android:layout_alignEnd="@id/tvReceivedMessage"
             android:layout_below="@+id/tvReceivedMessage"
-            android:fontFamily="@font/noto_sans_myanmar_regular"
-            android:text="12:30 AM"
-            android:textColor="@color/colorPrimaryLight_2"
-            android:textSize="8sp" />
+            android:fontFamily="@font/yorkie_demo_regular"
+            android:textColor="@color/colorLightBlue"
+            android:textSize="@dimen/text_9sp_small" />
 
     </RelativeLayout>
 

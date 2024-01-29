@@ -34,6 +34,7 @@
                 android:layout_width="@dimen/width_36dp"
                 android:layout_height="@dimen/height_36dp"
                 android:layout_gravity="center_vertical|end"
+                android:background="?android:selectableItemBackgroundBorderless"
                 android:layout_marginEnd="@dimen/margin_medium_2"
                 app:srcCompat="@drawable/button_add_post" />
 

@@ -1,5 +1,6 @@
 package com.padc.moments.mvp.impls
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.padc.moments.data.models.AuthenticationModel
@@ -39,6 +40,10 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
         mView?.showOptionDialogBox(momentId,momentOwnerUserId)
     }
 
+    override fun onTapLikeButton(momentId: String,likes : Map<String,String>,isLike : Boolean) {
+        mView?.getMomentIsLiked(momentId,likes,isLike)
+    }
+
     override fun onTapAddMomentButton() {
         mView?.navigateToNewMomentScreen()
     }
@@ -61,6 +66,18 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
 
     override fun getUserId(): String {
         return mAuthModel.getUserId()
+    }
+
+    override fun addLikedToMoment(momentId: String,likes : Map<String, String>) {
+        val likeList = likes + Pair(getUserId(),"name")
+        Log.d("likes",likeList.toString())
+        mMomentModel.addLikedToMoment(momentId = momentId, likeList)
+    }
+
+    override fun deleteLikedToMoment(momentId: String, likes: Map<String, String>) {
+        val likeList = likes - getUserId()
+        Log.d("likes",likeList.toString())
+        mMomentModel.addLikedToMoment(momentId = momentId, likeList)
     }
 
     override fun addMomentToUserBookmarked(currentUserId: String, moment: MomentVO) {

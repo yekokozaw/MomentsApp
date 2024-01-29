@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:paddingTop="@dimen/margin_card_medium"
     android:paddingBottom="@dimen/margin_small">
 
@@ -16,10 +15,11 @@
         android:layout_marginEnd="@dimen/margin_medium_2"
         android:orientation="vertical">
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/flSendMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:background="@drawable/background_send_chat_message"
             android:paddingStart="@dimen/margin_10dp"
             android:paddingTop="@dimen/margin_5dp"
@@ -36,7 +36,7 @@
                 android:paddingBottom="2dp"
                 android:paddingLeft="@dimen/margin_medium"
                 android:paddingRight="@dimen/margin_medium"
-                android:text="Hello I am Gadone Developer"
+                android:text="@string/lbl_email"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_15sp" />
 
@@ -45,24 +45,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_marginEnd="@dimen/margin_30dp"
+                android:layout_marginEnd="@dimen/margin_medium"
                 android:layout_marginBottom="5dp"
-                android:fontFamily="@font/dm_sans"
-                android:visibility="gone"
-                android:text="12:30 AM"
-                android:textColor="@color/white"
-                android:textSize="8sp" />
+                android:fontFamily="@font/yorkie_demo_regular"
+                android:visibility="visible"
+                android:text="@string/lbl_12_30_am"
+                android:textColor="@color/colorWhiteGrey"
+                android:textSize="@dimen/text_9sp_small" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/width_20dp"
-                android:layout_height="@dimen/height_20dp"
-                android:visibility="gone"
-                android:layout_gravity="bottom|end"
-                android:layout_marginTop="@dimen/margin_large"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/icon_seen" />
+<!--            <androidx.appcompat.widget.AppCompatImageView-->
+<!--                android:layout_width="@dimen/width_20dp"-->
+<!--                android:layout_height="@dimen/height_20dp"-->
+<!--                android:visibility="visible"-->
+<!--                android:layout_gravity="bottom|end"-->
+<!--                android:layout_marginTop="@dimen/margin_large"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                app:srcCompat="@drawable/icon_seen" />-->
 
-        </FrameLayout>
+        </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcvSendImageChatDetail"

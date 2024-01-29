@@ -13,6 +13,10 @@ interface MomentPresenter  : BasePresenter<MomentView> , MomentItemActionDelegat
 
     fun getUserId(): String
 
+    fun addLikedToMoment(momentId: String,likes : Map<String, String>)
+
+    fun deleteLikedToMoment(momentId : String, likes: Map<String, String>)
+
     fun addMomentToUserBookmarked(currentUserId:String,moment: MomentVO)
 
     fun deleteMomentFromUserBookmarked(currentUserId: String,momentId:String)

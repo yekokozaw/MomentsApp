@@ -52,7 +52,7 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
         mMomentModel.updateAndUploadMomentImage(bitmap)
     }
 
-    override fun getMomentImages() :String {
+    override fun getMomentImages() : String {
         return mMomentModel.getMomentImages()
     }
 
@@ -63,5 +63,4 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
     override fun getUserId(): String {
         return mAuthModel.getUserId()
     }
-
 }

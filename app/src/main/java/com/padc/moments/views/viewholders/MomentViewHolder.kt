@@ -1,5 +1,6 @@
 package com.padc.moments.views.viewholders
 
+import android.text.format.DateUtils
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -29,6 +30,14 @@ class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDele
             delegate.onTapOptionButton(mMoment?.id ?: "",mMoment?.userId ?: "")
         }
 
+        binding.btnPostFavourite.setOnClickListener {
+            if(mMoment?.isLiked == true) {
+                mMoment!!.likedList?.let { it1 -> delegate.onTapLikeButton(mMoment?.id ?: "" , it1,false) }
+            } else {
+                mMoment!!.likedList?.let { it1 -> delegate.onTapLikeButton(mMoment?.id ?: "" , it1,true) }
+            }
+        }
+
         binding.btnMomentBookmark.setOnClickListener {
             if(mMoment?.isBookmarked == true) {
                 delegate.onTapBookmarkButton(mMoment?.id ?: "",false)
@@ -40,7 +49,8 @@ class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDele
 
     fun bindData(data: MomentVO, tabName: String) {
         mMoment = data
-
+        binding.tvMomentLastOnline.text = getTimeAgo(data.id.toLong())
+        binding.tvLikes.text = data.likedList?.size.toString()
         binding.tvMomentProfileName.text = data.userName
         binding.tvMomentCaption.text = data.caption
 
@@ -48,8 +58,19 @@ class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDele
             .load(data.userProfileImage)
             .into(binding.ivMomentProfilePic)
 
+        if (data.imageUrl.isEmpty())
+            binding.viewPagerMomentImages.visibility = View.GONE
+
         setUpMomentImages()
         mAdapter.setNewData(changeImageStringToList(data.imageUrl))
+
+        if (data.isLiked){
+            binding.btnPostFavourite.setImageResource(R.drawable.baseline_favorite_24dp)
+            mMoment?.isLiked = true
+        }else {
+            binding.btnPostFavourite.setImageResource(R.drawable.baseline_favorite_border_accent_24dp)
+            mMoment?.isLiked = false
+        }
 
         if(data.isBookmarked) {
             binding.btnMomentBookmark.setImageResource(R.drawable.baseline_bookmark_red_24dp)
@@ -74,4 +95,9 @@ class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDele
         binding.viewPagerMomentImages.adapter = mAdapter
     }
 
+    fun getTimeAgo(timestamp: Long): String {
+        val now = System.currentTimeMillis()
+        val timeAgo = DateUtils.getRelativeTimeSpanString(timestamp, now, DateUtils.MINUTE_IN_MILLIS)
+        return timeAgo.toString()
+    }
 }

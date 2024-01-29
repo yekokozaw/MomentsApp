@@ -7,5 +7,9 @@ data class MomentVO(
     var userProfileImage:String = "",
     var caption:String = "",
     var imageUrl:String = "",
+    var likedList: Map<String, String>?,
+    var likes:String = "",
+    var isLiked: Boolean = false,
     var isBookmarked:Boolean = false
+
 )

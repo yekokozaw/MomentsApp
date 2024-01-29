@@ -23,6 +23,7 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
     // General
     private var mMomentImages: String = ""
 
+
     override fun addUser(user: UserVO) {
 
         val userMap = hashMapOf(
@@ -185,6 +186,7 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             "id" to moment.id,
             "user_id" to moment.userId,
             "user_name" to moment.userName,
+            "likes" to moment.likes,
             "user_profile_image" to moment.userProfileImage,
             "caption" to moment.caption,
             "image_url" to moment.imageUrl
@@ -221,7 +223,7 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
         urlTask.addOnCompleteListener {
             val imageUrl = it.result?.toString()
             mMomentImages += "$imageUrl,"
-            Log.i("Ath", mMomentImages)
+            Log.i("YeKo", mMomentImages)
         }
     }
 
@@ -252,6 +254,8 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                         val userProfileImage = data["user_profile_image"] as String
                         val caption = data["caption"] as String
                         val imageUrl = data["image_url"] as String
+                        val likes = data["likes"] as String
+                        val likedList = data["Liked"] as? Map<String, String> ?: emptyMap()
                         val isBookmarked = data["is_bookmarked"] as? Boolean ?: false
                         val moment = MomentVO(
                             id,
@@ -260,6 +264,8 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                             userProfileImage,
                             caption,
                             imageUrl,
+                            likedList,
+                            likes,
                             isBookmarked
                         )
                         momentList.add(moment)
@@ -340,6 +346,25 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
+    override fun addLikedToMoment(momentId: String,likes : Map<String, String>) {
+
+        database.collection("moments")
+            .document(momentId)
+            .update("Liked",likes)
+            .addOnSuccessListener {
+                Log.d("success","Successful Add")
+            }.addOnFailureListener {
+                Log.d("addLike","Failure")
+            }
+    }
+
+
+    override fun deleteLikedToMoment(momentId: String,currentUserId: String, name: String) {
+//        database.collection("moments")
+//            .document(momentId)
+
+    }
+
     override fun addMomentToUserBookmarked(currentUserId: String, moment: MomentVO) {
         val userMap = hashMapOf(
             "id" to moment.id,
@@ -396,7 +421,9 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                         val userName = data["user_name"] as String
                         val userProfileImage = data["user_profile_image"] as String
                         val caption = data["caption"] as String
+                        val likes = data["likes"] as? String ?: ""
                         val imageUrl = data["image_url"] as String
+                        val likedList = data["Liked"] as? Map<String, String> ?: emptyMap()
                         val isBookmarked = data["is_bookmarked"] as? Boolean ?: false
                         val moment = MomentVO(
                             id,
@@ -405,6 +432,8 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                             userProfileImage,
                             caption,
                             imageUrl,
+                            likedList,
+                            likes,
                             isBookmarked
                         )
                         momentList.add(moment)

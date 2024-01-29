@@ -82,6 +82,30 @@ class MomentFragment : Fragment(), MomentView {
 
     override fun showMoments(momentList: List<MomentVO>) {
         mMomentList = momentList as ArrayList<MomentVO>
+        for (moment in momentList){
+            val likedList = moment.likedList
+            if (likedList != null) {
+                if (likedList.containsKey(mPresenter.getUserId()))
+                    moment.isLiked = true
+            }
+        }
+        mViewpod.setNewData(mMomentList, "moment")
+    }
+
+    override fun getMomentIsLiked(momentId : String,likes : Map<String,String>,isLike : Boolean) {
+        for (moment in mMomentList) {
+            if (momentId == moment.id) {
+                if (isLike) {
+                    moment.isLiked = true
+                    mPresenter.addLikedToMoment(momentId,likes)
+                    break
+                } else {
+                    moment.isLiked = false
+                    mPresenter.deleteLikedToMoment(momentId,likes)
+                    break
+                }
+            }
+        }
         mViewpod.setNewData(mMomentList, "moment")
     }
 
@@ -102,6 +126,7 @@ class MomentFragment : Fragment(), MomentView {
         mViewpod.setNewData(mMomentList, "moment")
     }
 
+    //bookmark checked to true
     override fun showMomentsFromBookmarked(momentList: List<MomentVO>) {
         mBookmarkedMoments = momentList
 

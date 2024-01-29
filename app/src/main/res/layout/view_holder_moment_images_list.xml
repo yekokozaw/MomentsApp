@@ -4,22 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--    <com.google.android.material.card.MaterialCardView-->
-    <!--        android:id="@+id/mcvMomentPicture"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:cardCornerRadius="@dimen/margin_medium">-->
-
-    <!--        -->
-
-    <!--    </com.google.android.material.card.MaterialCardView>-->
-
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivMomentPictureMoment"
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/ath_post_picture" />
+        app:srcCompat="@drawable/my_profile" />
 
     <FrameLayout
         android:layout_width="43dp"
@@ -36,7 +26,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/inter_medium"
             android:gravity="center"
-            android:text="1/3"
+            android:text="@string/_1_3"
             android:textColor="@color/white"
             android:textSize="@dimen/text_regular" />
 

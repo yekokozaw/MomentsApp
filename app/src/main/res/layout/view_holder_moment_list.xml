@@ -41,7 +41,6 @@
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_toEndOf="@id/mcvPostProfilePic"
         android:fontFamily="@font/noto_sans_medium"
-        android:text="5 hours ago"
         android:textColor="@color/colorPrimaryLight_2"
         android:textSize="@dimen/text_small" />
 
@@ -66,7 +65,7 @@
         android:fontFamily="@font/noto_sans_medium"
         android:maxLines="5"
         android:textColor="@color/colorPrimaryText"
-        android:text="A machine resembling a human being and able to replicate certain human movements and functions automatically." />
+        android:text="@string/lbl_a_machine_resembling_a_human_being_and_able_to_replicate_certain_human_movements_and_functions_automatically" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerMomentImages"
@@ -86,9 +85,9 @@
         android:layout_height="wrap_content"/>
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLikes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3"
         android:layout_marginTop="@dimen/margin_medium_2"
         android:layout_below="@+id/viewPagerMomentImages"
         android:layout_toEndOf="@+id/btnPostFavourite"
@@ -96,7 +95,6 @@
         android:textSize="@dimen/text_15sp"
         android:textColor="@color/colorPrimaryText"
         android:fontFamily="@font/inter_medium" />
-
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnMomentBookmark"
@@ -112,7 +110,6 @@
         android:id="@+id/tvPostNumberOfComments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3"
         android:layout_toStartOf="@+id/btnMomentBookmark"
         android:layout_marginTop="@dimen/margin_medium_2"
         android:layout_below="@+id/viewPagerMomentImages"
@@ -131,6 +128,13 @@
         app:srcCompat="@drawable/icon_post_comment"
         android:scaleType="centerCrop"
         android:layout_height="30dp"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:layout_below="@id/ivPostComment"
+        android:background="@color/colorWhiteGrey"/>
 
 
 </RelativeLayout>

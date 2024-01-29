@@ -68,6 +68,8 @@ class ChatDetailActivity : AppCompatActivity(), ChatDetailView,ChatDetailsImageD
     companion object {
         private const val EXTRA_USER_ID = "UserId"
         private const val EXTRA_GROUP_ID = "GroupId"
+        private const val ONLINE = "Online"
+        private const val OFFLINE = "Offline"
         fun newIntent(context: Context, userId: String, groupId: String): Intent {
             val intent = Intent(context, ChatDetailActivity::class.java)
             intent.putExtra(EXTRA_USER_ID, userId)
@@ -90,27 +92,30 @@ class ChatDetailActivity : AppCompatActivity(), ChatDetailView,ChatDetailsImageD
         mReceiverId = intent?.extras?.getString(EXTRA_USER_ID, "") ?: ""
         mGroupId = intent?.extras?.getString(EXTRA_GROUP_ID, "") ?: ""
         mPresenceManager = PresenceManager(mReceiverId)
-        isOnlineOrOffline(mReceiverId)
 
         setUpListeners()
 
         mPresenter.onUIReady(this)
 
         if (mGroupId.isEmpty()) {
+            isOnlineOrOffline()
             mPresenter.getMessages(mPresenter.getUserId(), mReceiverId)
         } else {
+            //for group chat header
+            binding.ivIsOnline.visibility = View.GONE
+            binding.textIsOnline.visibility = View.GONE
             mPresenter.getGroupMessages(mGroupId.toLong())
         }
     }
 
-    private fun isOnlineOrOffline(mReceiverId: String) {
+    private fun isOnlineOrOffline() {
         mPresenceManager.checkState(
             onSuccess = {
                 if (it){
-                    binding.textIsOnline.text = "Online"
+                    binding.textIsOnline.text = ONLINE
                     binding.ivIsOnline.visibility = View.VISIBLE
                 }else {
-                    binding.textIsOnline.text = "Offline"
+                    binding.textIsOnline.text = OFFLINE
                     binding.ivIsOnline.visibility = View.INVISIBLE
                 }
             },

@@ -40,6 +40,10 @@ object MomentModelImpl : MomentModel {
         mFirebaseApi.getMoments(onSuccess = onSuccess, onFailure = onFailure)
     }
 
+    override fun addLikedToMoment(momentId: String,likes : Map<String, String>) {
+        mFirebaseApi.addLikedToMoment(momentId,likes)
+    }
+
     override fun addMomentToUserBookmarked(currentUserId: String, moment: MomentVO) {
         mFirebaseApi.addMomentToUserBookmarked(currentUserId,moment)
     }

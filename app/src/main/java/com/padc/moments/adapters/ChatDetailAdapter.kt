@@ -18,7 +18,6 @@ class ChatDetailAdapter(private val delegate: ChatDetailsImageDelegate) : Recycl
 
     private var mMessageList: List<PrivateMessageVO> = listOf()
     private var mUserId: String = ""
-    private var mCurrentTime = ""
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IBaseMessageViewHolder {
         return if (viewType == VIEW_TYPE_SEND) {
