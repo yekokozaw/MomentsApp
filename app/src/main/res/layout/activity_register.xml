@@ -39,7 +39,7 @@
             android:layout_marginStart="@dimen/margin_38dp"
             android:layout_marginTop="@dimen/margin_5dp"
             android:fontFamily="@font/noto_sans_myanmar_regular"
-            android:text="@string/lbl_create_a_new_account"
+            android:text="@string/please_upload_photo_less_than_1mb"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/text_regular_2x" />
 
@@ -49,7 +49,7 @@
             android:layout_below="@+id/tvCreateANewAccountRegister"
             android:layout_marginTop="@dimen/margin_30dp"
             app:cardCornerRadius="@dimen/margin_10dp"
-            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/margin_large"
             app:rippleColor="@color/colorAccent"
             app:strokeWidth="0dp"
             app:strokeColor="@color/colorPrimary"
@@ -59,10 +59,24 @@
                 android:id="@+id/ivProfileImageRegister"
                 android:layout_width="@dimen/margin_100dp"
                 android:scaleType="centerCrop"
+                android:elevation="8dp"
                 app:srcCompat="@drawable/profile_image_holder"
                 android:layout_height="90dp"/>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <Spinner
+            android:id="@+id/gradeSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/margin_36dp"
+            android:elevation="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_50dp"
+            android:layout_marginEnd="70dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/tvCreateANewAccountRegister"
+            android:entries="@array/spinner_grade"
+            android:spinnerMode="dropdown"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvNameLabelRegister"
@@ -91,14 +105,39 @@
             android:textSize="@dimen/text_regular_2x" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvDateOfBirthRegister"
+            android:id="@+id/tvEmailRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/etNameRegister"
             android:layout_marginStart="@dimen/margin_38dp"
+            android:layout_marginTop="@dimen/margin_medium_3"
+            android:fontFamily="@font/noto_sans"
+            android:text="Email"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="@dimen/text_small" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etEmailRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvEmailRegister"
+            android:layout_marginStart="@dimen/margin_xlarge"
+            android:layout_marginEnd="@dimen/margin_xlarge"
+            android:fontFamily="@font/yorkie_demo_regular"
+            android:hint="@string/aung_thiha"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/text_regular_2x" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDateOfBirthRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etEmailRegister"
+            android:layout_marginStart="@dimen/margin_38dp"
             android:layout_marginTop="@dimen/margin_xlarge"
             android:fontFamily="@font/noto_sans"
-            android:text="@string/lbl_name"
+            android:text="@string/lbl_dob"
             android:textColor="@color/colorPrimaryLight"
             android:textSize="@dimen/text_small" />
 
@@ -136,7 +175,6 @@
                 android:elevation="@dimen/margin_medium"
                 android:spinnerMode="dropdown"
                 tools:ignore="TouchTargetSizeCheck" />
-
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -211,11 +249,27 @@
             android:textColor="@color/colorSecondaryText"
             android:textSize="@dimen/text_regular_2x" />
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etPhoneNoRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etPasswordRegister"
+            android:layout_marginStart="@dimen/margin_xlarge"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:layout_marginEnd="@dimen/margin_xlarge"
+            android:fontFamily="@font/yorkie_demo_regular"
+            android:hint="Phone number"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:paddingBottom="@dimen/margin_large"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/text_regular_2x" />
+
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/cbAgreeTermsRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/etPasswordRegister"
+            android:layout_below="@id/etPhoneNoRegister"
             android:layout_marginStart="@dimen/margin_xlarge"
             android:layout_marginTop="@dimen/margin_30dp"
             android:fontFamily="@font/noto_sans_medium"

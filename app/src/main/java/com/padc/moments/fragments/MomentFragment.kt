@@ -20,6 +20,7 @@ import com.padc.moments.views.viewpods.MomentViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.messaging.FirebaseMessaging
+import com.padc.moments.activities.CommentActivity
 import java.util.*
 
 class MomentFragment : Fragment(), MomentView {
@@ -92,21 +93,25 @@ class MomentFragment : Fragment(), MomentView {
         mViewpod.setNewData(mMomentList, "moment")
     }
 
-    override fun getMomentIsLiked(momentId : String,likes : Map<String,String>,isLike : Boolean) {
+    override fun navigateToCommentScreen(momentId: String) {
+        startActivity(CommentActivity.newIntent(requireActivity(),momentId))
+    }
+
+    override fun getMomentIsLiked(id : String, likes : Map<String,String>, isLike : Boolean) {
         for (moment in mMomentList) {
-            if (momentId == moment.id) {
+            if (id == moment.id) {
                 if (isLike) {
                     moment.isLiked = true
-                    mPresenter.addLikedToMoment(momentId,likes)
+                    mPresenter.addLikedToMoment(id,likes)
                     break
                 } else {
                     moment.isLiked = false
-                    mPresenter.deleteLikedToMoment(momentId,likes)
+                    mPresenter.deleteLikedToMoment(id,likes)
                     break
                 }
             }
         }
-        mViewpod.setNewData(mMomentList, "moment")
+        //mViewpod.setNewData(mMomentList, "moment")
     }
 
     override fun getMomentIsBookmarked(id: String, isBookmarked: Boolean) {
@@ -138,7 +143,7 @@ class MomentFragment : Fragment(), MomentView {
                 }
             }
         }
-        mViewpod.setNewData(mMomentList, "moment")
+        //mViewpod.setNewData(mMomentList, "moment")
     }
 
     override fun showOptionDialogBox(momentId:String,momentOwnerUserId:String) {

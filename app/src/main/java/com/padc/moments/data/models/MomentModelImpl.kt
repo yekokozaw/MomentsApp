@@ -1,9 +1,11 @@
 package com.padc.moments.data.models
 
 import android.graphics.Bitmap
+import com.padc.moments.data.vos.CommentVO
 import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.network.storage.CloudFireStoreFirebaseApiImpl
 import com.padc.moments.network.storage.CloudFireStoreFirebaseApi
+import com.padc.moments.network.storage.sendMessageToTopic
 
 object MomentModelImpl : MomentModel {
 
@@ -11,6 +13,7 @@ object MomentModelImpl : MomentModel {
 
     override fun createMoment(moment: MomentVO) {
         mFirebaseApi.createMoment(moment)
+        sendMessageToTopic("all",moment.userName,moment.caption)
     }
 
     override fun deleteMoment(
@@ -23,6 +26,18 @@ object MomentModelImpl : MomentModel {
 
     override fun updateAndUploadMomentImage(bitmap: Bitmap) {
         mFirebaseApi.updateAndUploadMomentImage(bitmap)
+    }
+
+    override fun addCommentToMoment(momentId: String, comment: CommentVO, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
+        mFirebaseApi.addCommentToMoment(momentId, comment,onSuccess,onFailure)
+    }
+
+    override fun getCommentFromMoment(
+        momentId: String,
+        onSuccess: (comments: List<CommentVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getCommentFromMoment(momentId,onSuccess,onFailure)
     }
 
     override fun getMomentImages(): String {

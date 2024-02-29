@@ -36,10 +36,11 @@ object AuthenticationModelImpl : AuthenticationModel {
         gender: String,
         imageUrl:String,
         fcmKey:String,
+        grade : String,
         onSuccess: (user: UserVO) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        mAuthManager.register(userName, phoneNumber, email, password, birthDate, gender,imageUrl,fcmKey, onSuccess, onFailure)
+        mAuthManager.register(userName, phoneNumber, email, password, birthDate, gender,imageUrl,fcmKey, grade, onSuccess, onFailure)
     }
 
     override fun getUserId(): String {
@@ -48,6 +49,10 @@ object AuthenticationModelImpl : AuthenticationModel {
 
     override fun addToken(token: TokenVO) {
         mMomentDatabase?.getDao()?.addToken(token)
+    }
+
+    override fun deleteToken() {
+        mMomentDatabase?.getDao()?.deleteToken()
     }
 
     override fun getToken(): TokenVO? {

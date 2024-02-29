@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.padc.moments.data.vos.CommentVO
 import java.io.ByteArrayOutputStream
 import java.util.UUID
 
@@ -36,7 +37,8 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             "gender" to user.gender,
             "qr_code" to user.userId,
             "image_url" to user.imageUrl,
-            "fcm_key" to user.fcmKey
+            "fcm_key" to user.fcmKey,
+            "grade" to user.grade
         )
 
         database.collection("users")
@@ -122,6 +124,7 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                         val qrCode = data["qr_code"] as String
                         val imageUrl = data["image_url"] as String
                         val fcmKey = data["fcm_key"].toString()
+                        val grade = data["grade"].toString()
                         val user = UserVO(
                             id,
                             name,
@@ -132,7 +135,8 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                             gender,
                             qrCode,
                             imageUrl,
-                            fcmKey
+                            fcmKey,
+                            grade
                         )
                         userList.add(user)
                     }
@@ -223,7 +227,6 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
         urlTask.addOnCompleteListener {
             val imageUrl = it.result?.toString()
             mMomentImages += "$imageUrl,"
-            Log.i("YeKo", mMomentImages)
         }
     }
 
@@ -358,16 +361,57 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
+    override fun getCommentFromMoment(
+        momentId: String,
+        onSuccess: (comments :List<CommentVO>)-> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        database.collection("moments")
+            .document(momentId)
+            .collection("Comments")
+            .addSnapshotListener { value, error ->
+                error?.let {
+                    onFailure(it.localizedMessage ?: "Check Internet Connection")
+                } ?: run {
+                    val commentList : MutableList<CommentVO> = arrayListOf()
+                    val documentList = value?.documents ?: arrayListOf()
+                    for (document in documentList){
+                        val data = document.data
+                        val userName = data?.get("userName") as String
+                        val userProfile = data["userProfileImage"] as String
+                        val comment = data["comment"] as String
+                        val timeStamp = data["timestamp"] as Long
+                        val commentData =  CommentVO(
+                            userName,
+                            timeStamp,
+                            userProfile,
+                            comment
+                        )
+                        commentList.add(commentData)
+                    }
+                    onSuccess(commentList)
+                }
+            }
+    }
 
-    override fun deleteLikedToMoment(momentId: String,currentUserId: String, name: String) {
-//        database.collection("moments")
-//            .document(momentId)
-
+    override fun addCommentToMoment(momentId: String, comment: CommentVO, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
+        database.collection("moments")
+            .document(momentId)
+            .collection("Comments")
+            .document(comment.timestamp.toString())
+            .set(comment)
+            .addOnSuccessListener {
+                onSuccess("Done")
+            }
+            .addOnFailureListener {
+                onFailure("Failure")
+            }
     }
 
     override fun addMomentToUserBookmarked(currentUserId: String, moment: MomentVO) {
         val userMap = hashMapOf(
             "id" to moment.id,
+            "Liked" to moment.likedList,
             "user_id" to moment.userId,
             "user_name" to moment.userName,
             "user_profile_image" to moment.userProfileImage,

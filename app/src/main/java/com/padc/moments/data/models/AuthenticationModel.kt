@@ -18,6 +18,7 @@ interface AuthenticationModel {
         gender:String,
         imageUrl:String,
         fcmKey:String,
+        grade : String,
         onSuccess: (user: UserVO) -> Unit,
         onFailure: (String) -> Unit
     )
@@ -26,5 +27,6 @@ interface AuthenticationModel {
 
     fun addToken(token: TokenVO)
 
+    fun deleteToken()
     fun getToken() : TokenVO?
 }

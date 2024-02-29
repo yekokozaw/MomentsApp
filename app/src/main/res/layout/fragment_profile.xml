@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    tools:srcCompat="@drawable/my_profile" />
+                    android:src="@drawable/jennie_kim" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -83,6 +83,7 @@
                 android:layout_width="@dimen/width_48dp"
                 android:layout_height="@dimen/height_48dp"
                 android:layout_alignParentBottom="true"
+                android:visibility="gone"
                 android:layout_marginStart="@dimen/margin_50dp"
                 android:layout_marginBottom="@dimen/margin_medium_2"
                 android:layout_toEndOf="@+id/ivUpdatePictureProfile"
@@ -155,10 +156,10 @@
                     android:text="1998-10-04"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_regular" />
-
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llDateProfile"
@@ -186,7 +187,33 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llGender"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_toEndOf="@+id/mcvProfilePicProfile"
+                android:orientation="horizontal">
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivGenderGrade"
+                    android:layout_width="@dimen/width_24dp"
+                    android:layout_height="@dimen/height_24dp"
+                    app:srcCompat="@drawable/graduation_cap" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvGenderGrade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_14dp"
+                    android:fontFamily="@font/noto_sans_myanmar_regular"
+                    android:gravity="center"
+                    android:text="first"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_regular" />
+
+            </LinearLayout>
         </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatTextView

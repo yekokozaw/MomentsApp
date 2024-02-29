@@ -1,6 +1,7 @@
 package com.padc.moments.network.storage
 
 import android.graphics.Bitmap
+import com.padc.moments.data.vos.CommentVO
 import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.data.vos.UserVO
 
@@ -41,7 +42,8 @@ interface CloudFireStoreFirebaseApi {
 
     fun addLikedToMoment(momentId: String,likes : Map<String, String>)
 
-    fun deleteLikedToMoment(momentId: String,currentUserId: String,name: String)
+    fun getCommentFromMoment(momentId : String,onSuccess: (comments :List<CommentVO>)-> Unit,onFailure: (String) -> Unit)
+    fun addCommentToMoment(momentId : String,comment : CommentVO,onSuccess: (String) -> Unit,onFailure: (String) -> Unit)
     fun addMomentToUserBookmarked(currentUserId: String, moment: MomentVO)
 
     fun deleteMomentFromUserBookmarked(currentUserId: String, momentId: String)

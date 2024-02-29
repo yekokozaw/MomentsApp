@@ -1,8 +1,10 @@
 package com.padc.moments.activities
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -11,6 +13,8 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +37,6 @@ import java.util.UUID
 class NewMomentActivity : AppCompatActivity(), NewMomentView {
 
     private lateinit var binding: ActivityNewMomentBinding
-
     // Adapter
     private lateinit var mAdapter: NewMomentImageAdapter
 
@@ -115,9 +118,6 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         super.onActivityResult(requestCode, resultCode, data)
 
         if ((requestCode == REQUEST_CODE_GALLERY || requestCode == REQUEST_IMAGE_CAPTURE) && resultCode == Activity.RESULT_OK) {
-//            if (data == null || data.data == null) {
-//                return
-//            }
 
             val filePath = data?.data
 
@@ -177,11 +177,40 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         dialog.setCancelable(true)
 
         dialogBinding.btnTakePhotoRegister.setOnClickListener {
-            openCamera()
+
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.CAMERA
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // Request permission
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.CAMERA),
+                    REQUEST_IMAGE_CAPTURE
+                )
+            } else {
+                // Permission already granted, open the gallery
+                openCamera()
+            }
         }
 
         dialogBinding.btnChooseFromGalleryRegister.setOnClickListener {
-            chooseImageFromGallery()
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // Request permission
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    REQUEST_CODE_GALLERY
+                )
+            } else {
+                // Permission already granted, open the gallery
+                chooseImageFromGallery()
+            }
         }
 
         dialogBinding.btnCancelBottomSheetDialog.setOnClickListener {

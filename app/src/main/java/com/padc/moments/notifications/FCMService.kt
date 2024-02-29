@@ -14,7 +14,7 @@ class FCMService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
-        if(message.data["chat_type"] == "private") {
+        if(message.data["chat_type"] == "private" || message.data["topic"]=="all") {
 
             NotificationUtils.sendNotification(
                 this,
@@ -27,7 +27,8 @@ class FCMService : FirebaseMessagingService() {
                     PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_ONE_SHOT
                 )
             )
-        } else {
+        }
+        else {
             NotificationUtils.sendNotification(
                 this,
                 title = message.data["title"] ?: "",

@@ -1,9 +1,11 @@
 package com.padc.moments.fragments
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color.BLACK
 import android.graphics.Color.WHITE
@@ -17,6 +19,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -117,11 +121,39 @@ class ProfileFragment : Fragment() , ProfileView {
             dialog.setCancelable(true)
 
             dialogBinding.btnTakePhotoRegister.setOnClickListener {
-                mPresenter.onTapOpenCameraButton()
+                if (ContextCompat.checkSelfPermission(
+                        requireActivity(),
+                        Manifest.permission.CAMERA
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // Request permission
+                    ActivityCompat.requestPermissions(
+                        requireActivity(),
+                        arrayOf(Manifest.permission.CAMERA),
+                        REQUEST_IMAGE_CAPTURE
+                    )
+                } else {
+                    // Permission already granted, open the gallery
+                    mPresenter.onTapOpenCameraButton()
+                }
             }
 
             dialogBinding.btnChooseFromGalleryRegister.setOnClickListener {
-                mPresenter.onTapGalleryImage()
+                if (ContextCompat.checkSelfPermission(
+                        requireActivity(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // Request permission
+                    ActivityCompat.requestPermissions(
+                        requireActivity(),
+                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                        REQUEST_CODE_GALLERY
+                    )
+                } else {
+                    // Permission already granted, open the gallery
+                    mPresenter.onTapGalleryImage()
+                }
             }
 
             dialogBinding.btnCancelBottomSheetDialog.setOnClickListener {
@@ -130,7 +162,6 @@ class ProfileFragment : Fragment() , ProfileView {
             dialog.show()
         }
     }
-
 
     @Throws(WriterException::class)
     fun textToImageEncode(Value: String?): Bitmap? {
@@ -173,6 +204,7 @@ class ProfileFragment : Fragment() , ProfileView {
 
                 mUser = user
 
+                binding.tvGenderGrade.text = user.grade
                 binding.tvNameProfile.text = user.userName
                 binding.tvPhoneNumberProfile.text = user.phoneNumber
                 binding.tvDateProfile.text = user.birthDate

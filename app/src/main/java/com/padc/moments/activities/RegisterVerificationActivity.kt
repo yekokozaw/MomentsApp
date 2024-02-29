@@ -64,9 +64,6 @@ class RegisterVerificationActivity : AppCompatActivity(), RegisterVerificationVi
         val email = binding.etEmailRegisterVerification.text.toString()
         val otp = binding.otpPinRegisterVerification.text.toString()
 
-        if(otp == mOtp) {
-            startActivity(RegisterActivity.newIntent(this,phoneNumber,email))
-        }
     }
 
     override fun showOtp(otp: String) {

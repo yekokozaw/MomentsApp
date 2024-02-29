@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import com.padc.moments.data.vos.PrivateMessageVO
 import com.padc.moments.databinding.ViewHolderMessageSendBinding
 import com.padc.moments.delegates.ChatDetailsImageDelegate
+import com.padc.moments.utils.getTimeAgo
 
 class MessageSendViewHolder(private val delegate: ChatDetailsImageDelegate,itemView: View)
     : IBaseMessageViewHolder(itemView) {
@@ -46,12 +47,6 @@ class MessageSendViewHolder(private val delegate: ChatDetailsImageDelegate,itemV
                 .load(message.file)
                 .into(binding.ivSendImageChatDetail)
         }
-    }
-
-    fun getTimeAgo(timestamp: Long): String {
-        val now = System.currentTimeMillis()
-        val timeAgo = DateUtils.getRelativeTimeSpanString(timestamp, now, DateUtils.MINUTE_IN_MILLIS)
-        return timeAgo.toString()
     }
 
 //    private fun getCurrentHourAndMinutes(currentTimeMillis: Long): String {

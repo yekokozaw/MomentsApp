@@ -1,11 +1,11 @@
 package com.padc.moments.views.viewholders
 
-import android.text.format.DateUtils
 import android.view.View
 import com.bumptech.glide.Glide
 import com.padc.moments.data.vos.PrivateMessageVO
 import com.padc.moments.databinding.ViewHolderMessageReceiveBinding
 import com.padc.moments.delegates.ChatDetailsImageDelegate
+import com.padc.moments.utils.getTimeAgo
 
 class MessageReceiveViewHolder(private val delegate: ChatDetailsImageDelegate,itemView: View)
     : IBaseMessageViewHolder(itemView) {
@@ -63,9 +63,4 @@ class MessageReceiveViewHolder(private val delegate: ChatDetailsImageDelegate,it
 //        return timeFormat.format(calendar.time)
 //    }
 
-    fun getTimeAgo(timestamp: Long): String {
-        val now = System.currentTimeMillis()
-        val timeAgo = DateUtils.getRelativeTimeSpanString(timestamp, now, DateUtils.MINUTE_IN_MILLIS)
-        return timeAgo.toString()
-    }
 }

@@ -7,6 +7,8 @@ import com.padc.moments.data.models.AuthenticationModel
 import com.padc.moments.data.models.AuthenticationModelImpl
 import com.padc.moments.data.models.MomentModel
 import com.padc.moments.data.models.MomentModelImpl
+import com.padc.moments.data.models.UserModel
+import com.padc.moments.data.models.UserModelImpl
 import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.mvp.interfaces.MomentPresenter
 import com.padc.moments.mvp.views.MomentView
@@ -14,9 +16,10 @@ import com.padc.moments.mvp.views.MomentView
 class MomentPresenterImpl : MomentPresenter , ViewModel() {
 
     private var mView:MomentView? = null
+    private var userName : String = ""
     private val mMomentModel:MomentModel = MomentModelImpl
+    private val mUserModel : UserModel = UserModelImpl
     private val mAuthModel:AuthenticationModel = AuthenticationModelImpl
-
     override fun initPresenter(view: MomentView) {
         mView = view
     }
@@ -30,6 +33,7 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
                 mView?.showError(it)
             }
         )
+        getUserName()
     }
 
     override fun onTapBookmarkButton(id: String,isBookmarked:Boolean) {
@@ -38,6 +42,10 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
 
     override fun onTapOptionButton(momentId:String,momentOwnerUserId:String) {
         mView?.showOptionDialogBox(momentId,momentOwnerUserId)
+    }
+
+    override fun onTapCommentButton(momentId: String) {
+        mView?.navigateToCommentScreen(momentId)
     }
 
     override fun onTapLikeButton(momentId: String,likes : Map<String,String>,isLike : Boolean) {
@@ -69,14 +77,21 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
     }
 
     override fun addLikedToMoment(momentId: String,likes : Map<String, String>) {
-        val likeList = likes + Pair(getUserId(),"name")
-        Log.d("likes",likeList.toString())
+        val likeList = likes + Pair(getUserId(),userName)
         mMomentModel.addLikedToMoment(momentId = momentId, likeList)
     }
 
+    private fun getUserName() {
+        mUserModel.getSpecificUser(
+            mAuthModel.getUserId(),
+            onSuccess = {
+                userName = it.userName
+            }, onFailure = {
+
+            })
+    }
     override fun deleteLikedToMoment(momentId: String, likes: Map<String, String>) {
         val likeList = likes - getUserId()
-        Log.d("likes",likeList.toString())
         mMomentModel.addLikedToMoment(momentId = momentId, likeList)
     }
 

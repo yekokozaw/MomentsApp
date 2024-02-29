@@ -11,6 +11,7 @@ import com.padc.moments.data.vos.UserVO
 import com.padc.moments.mvp.interfaces.RegisterPresenter
 import com.padc.moments.mvp.views.RegisterView
 import com.padc.moments.network.storage.PresenceManager
+import com.padc.moments.network.storage.subscribeToTopic
 
 class RegisterPresenterImpl : RegisterPresenter , ViewModel() {
 
@@ -43,6 +44,7 @@ class RegisterPresenterImpl : RegisterPresenter , ViewModel() {
             gender = user.gender,
             imageUrl = user.imageUrl,
             fcmKey= user.fcmKey,
+            grade = user.grade,
             onSuccess = {
                 mUserModel.addUser(it)
                 mUserModel.updateAndUploadProfileImage(bitmap, it)

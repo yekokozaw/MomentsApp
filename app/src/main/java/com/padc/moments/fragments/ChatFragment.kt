@@ -1,6 +1,7 @@
 package com.padc.moments.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,6 +73,7 @@ class ChatFragment : Fragment(), ChatView {
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
     }
 
+
     private fun setUpChatRecyclerView() {
         mChatAdapter = ChatAdapter(mPresenter)
         binding.rvChats.adapter = mChatAdapter
@@ -90,6 +92,7 @@ class ChatFragment : Fragment(), ChatView {
 
     override fun navigateToChatDetailScreen(userId: String) {
         startActivity(ChatDetailActivity.newIntent(requireActivity(), userId,""))
+
     }
 
     override fun navigateToGroupChatDetailScreen(groupId: Long) {
@@ -117,6 +120,18 @@ class ChatFragment : Fragment(), ChatView {
         if(mMessageList.size == mChatUserList.size) {
             mChatAdapter.setNewData(mChatUserList,mMessageList)
         }
+        else{
+            //In this state, chatAdapter will not working
+        }
+    }
+
+    //this block is for refreshing chat data when it come back.
+    override fun onResume() {
+        super.onResume()
+
+        mMessageList.clear()
+        mChatUserList.clear()
+        mPresenter.getChatHistoryUserId(mPresenter.getUserId())
     }
 
     override fun getGroups(groupList: List<GroupVO>) {

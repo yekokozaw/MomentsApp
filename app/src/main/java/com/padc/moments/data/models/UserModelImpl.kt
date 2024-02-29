@@ -51,7 +51,6 @@ object UserModelImpl : UserModel , RetrofitAbstractBaseModel() {
         onSuccess: (FCMResponse) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        Log.i("FCMModel",fcmBody.toString())
         mFCMApi.sendFCMNotification(
             fcmBody = fcmBody
         ).enqueue(object : Callback<FCMResponse> {

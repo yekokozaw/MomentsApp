@@ -11,7 +11,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.flexath.moments"
+        applicationId "com.padc.moments"
         minSdk 23
         targetSdk 33
         versionCode 1
@@ -105,6 +105,8 @@ dependencies {
     implementation "androidx.room:room-ktx:2.4.3"
     kapt "androidx.room:room-compiler:2.4.3"
 
+    //Photo Picker
+    implementation 'androidx.media:media:1.4.0'
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 }

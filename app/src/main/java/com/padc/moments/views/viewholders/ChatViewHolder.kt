@@ -43,7 +43,11 @@ class ChatViewHolder(itemView: View,private val delegate: ChatItemActionDelegate
             val lastMessage = "${message.userName} sent a photo"
             binding.tvLastMessage.text = lastMessage
         } else {
-            binding.tvLastMessage.text = message.message
+            if (user.userId != message.userId){
+                val ownerMessage = "You :"+message.message
+                binding.tvLastMessage.text = ownerMessage
+            }else
+                binding.tvLastMessage.text = message.message
         }
 
         binding.tvLastOnlineChat.text = getTimeAgo(message.timeStamp)

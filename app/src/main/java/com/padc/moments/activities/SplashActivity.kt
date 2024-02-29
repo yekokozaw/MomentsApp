@@ -54,7 +54,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun setUpListeners() {
         binding.btnSignUpSplash.setOnClickListener {
-            startActivity(RegisterVerificationActivity.newIntent(this))
+            startActivity(RegisterActivity.newIntent(this))
         }
 
         binding.btnLoginSplash.setOnClickListener {

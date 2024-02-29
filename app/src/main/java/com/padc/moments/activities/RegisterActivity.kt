@@ -45,18 +45,14 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     private var day = ""
     private var month = ""
     private var year = ""
+    private var grade = ""
     private var gender = ""
     private lateinit var dialog:BottomSheetDialog
     private lateinit var fcmToken:String
 
     companion object {
-        private const val EXTRA_PHONE_NUMBER = "PhoneNumber"
-        private const val EXTRA_EMAIL = "EmailAddress"
-        fun newIntent(context: Context, phoneNumber: String, email: String): Intent {
-            val intent = Intent(context, RegisterActivity::class.java)
-            intent.putExtra(EXTRA_PHONE_NUMBER, phoneNumber)
-            intent.putExtra(EXTRA_EMAIL, email)
-            return intent
+        fun newIntent(context: Context): Intent {
+            return Intent(context, RegisterActivity::class.java)
         }
     }
 
@@ -137,8 +133,8 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private fun getNewUserInformation(): UserVO {
         val userName = binding.etNameRegister.text.toString()
-        val phoneNumber = intent?.extras?.getString(EXTRA_PHONE_NUMBER,"") ?: ""
-        val email = intent?.extras?.getString(EXTRA_EMAIL,"") ?: ""
+        val phoneNumber = binding.etPhoneNoRegister.text.toString()
+        val email = binding.etEmailRegister.text.toString()
         val password = binding.etPasswordRegister.text.toString()
 
         return UserVO(
@@ -149,6 +145,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             birthDate = "$year-$month-$day",
             gender = gender,
             fcmKey = fcmToken,
+            grade = grade
         )
     }
 
@@ -183,11 +180,21 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             ) {
                 if(position > 0) {
                     day = adapter?.getItemAtPosition(position).toString()
-                    Toast.makeText(this@RegisterActivity,day,Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        binding.gradeSpinner.onItemSelectedListener = object : OnItemSelectedListener{
+            override fun onItemSelected(adapter: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                grade = adapter?.getItemAtPosition(position).toString()
+                Log.d("grade",grade)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                grade = p0.toString()
+            }
         }
 
         binding.monthSpinnerRegister.onItemSelectedListener = object : OnItemSelectedListener {
@@ -200,7 +207,6 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
                 if(position > 0) {
                     month = adapter?.getItemAtPosition(position).toString()
-                    Toast.makeText(this@RegisterActivity,month,Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -217,7 +223,6 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
                 if(position > 0) {
                     year = adapter?.getItemAtPosition(position).toString()
-                    Toast.makeText(this@RegisterActivity,year,Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}

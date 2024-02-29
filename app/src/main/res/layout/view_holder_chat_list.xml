@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/margin_medium"
+    android:padding="@dimen/margin_small"
     android:background="@color/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -45,6 +45,7 @@
             android:layout_marginTop="@dimen/margin_small"
             android:fontFamily="@font/noto_sans"
             android:layout_below="@+id/tvNameChat"
+            android:maxLength="30"
             android:textSize="@dimen/text_regular"
             android:textColor="@color/colorPrimaryLight_2"
             android:layout_height="wrap_content"/>

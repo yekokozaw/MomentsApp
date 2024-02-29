@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Moments</string>
+    <string name="app_name">Social</string>
     <string name="splash_lbl_1">End-to-end secured messaging app with Social Elements</string>
     <string name="splash_lbl_2">Text your friends and share moments</string>
     <string name="welcome_lbl">Welcome !</string>
@@ -14,7 +14,7 @@
     <string name="lbl_get_otp">Get OTP</string>
     <string name="lbl_don_t_receive_the_otp">Don\'t receive the OTP?</string>
     <string name="margin_resend_code">Resend Code</string>
-    <string name="aung_thiha">David Kyaw</string>
+    <string name="aung_thiha">Jennie</string>
     <string name="lbl_name">Name</string>
     <string name="lbl_gender">Gender</string>
     <string name="lbl_other">Other</string>
@@ -70,4 +70,6 @@
     <string name="_1_3">1/3</string>
     <string name="lbl_12_30_am">12:30 AM</string>
     <string name="you_sent_a_video">You sent a Video</string>
+    <string name="please_upload_photo_less_than_1mb">Please upload photo less than 1MB</string>
+    <string name="lbl_dob">DOB</string>
 </resources>

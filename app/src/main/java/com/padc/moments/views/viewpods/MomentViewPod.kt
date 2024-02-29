@@ -2,12 +2,14 @@ package com.padc.moments.views.viewpods
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.RelativeLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padc.moments.adapters.MomentAdapter
 import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.databinding.ViewPodPostBinding
 import com.padc.moments.delegates.MomentItemActionDelegate
+import com.padc.moments.utils.VisibilityTracker
 
 class MomentViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -30,6 +32,10 @@ class MomentViewPod @JvmOverloads constructor(
     }
 
     private fun setUpRecyclerView() {
+        val visibilityTracker = VisibilityTracker(binding.rvMoment){ post ->
+            Log.d("visibility","user seen 1")
+        }
+        binding.rvMoment.addOnScrollListener(visibilityTracker)
         mAdapter = MomentAdapter(mDelegate)
         binding.rvMoment.adapter = mAdapter
         binding.rvMoment.layoutManager = LinearLayoutManager(context)

@@ -45,7 +45,7 @@ object NotificationUtils {
         bigTextStyle.bigText(content)
 
         return NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.black_white_logo)
             .setContentTitle(title)
             .setContentText(content)
             .setAutoCancel(true)

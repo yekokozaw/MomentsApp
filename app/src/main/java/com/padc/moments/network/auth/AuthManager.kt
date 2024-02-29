@@ -15,6 +15,7 @@ interface AuthManager {
         gender:String,
         imageUrl:String,
         fcmKey:String,
+        grade : String,
         onSuccess: (user: UserVO) -> Unit,
         onFailure: (String) -> Unit
     )

@@ -1,7 +1,9 @@
 package com.padc.moments.views.viewholders
 
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.padc.moments.R
@@ -30,6 +32,9 @@ class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDele
             delegate.onTapOptionButton(mMoment?.id ?: "",mMoment?.userId ?: "")
         }
 
+        binding.ivPostComment.setOnClickListener {
+            delegate.onTapCommentButton(mMoment?.id ?: "")
+        }
         binding.btnPostFavourite.setOnClickListener {
             if(mMoment?.isLiked == true) {
                 mMoment!!.likedList?.let { it1 -> delegate.onTapLikeButton(mMoment?.id ?: "" , it1,false) }
@@ -56,6 +61,7 @@ class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDele
 
         Glide.with(itemView.context)
             .load(data.userProfileImage)
+            .placeholder(R.drawable.placeholder_image)
             .into(binding.ivMomentProfilePic)
 
         if (data.imageUrl.isEmpty())

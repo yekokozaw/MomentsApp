@@ -10,5 +10,6 @@ data class UserVO(
     val gender:String = "",
     val qrCode:String = "",
     var imageUrl:String = "",
-    var fcmKey:String = ""
+    var fcmKey:String = "",
+    var grade: String =""
 )

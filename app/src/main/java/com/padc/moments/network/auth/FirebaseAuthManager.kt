@@ -35,6 +35,7 @@ object FirebaseAuthManager : AuthManager {
         gender: String,
         imageUrl:String,
         fcmKey:String,
+        grade : String,
         onSuccess: (user:UserVO) -> Unit,
         onFailure: (String) -> Unit
     ) {
@@ -52,7 +53,7 @@ object FirebaseAuthManager : AuthManager {
                                 UserProfileChangeRequest.Builder().setDisplayName(userName).build()
                             )
                             onSuccess(UserVO(getUserId(),userName,phoneNumber,email,
-                                password, birthDate, gender, getUserId(),imageUrl,fcmKey))
+                                password, birthDate, gender, getUserId(),imageUrl,fcmKey,grade))
                         }
                         else onFailure(it.exception?.message ?: "Something wrong!")
                     }

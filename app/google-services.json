@@ -1,37 +1,26 @@
 {
   "project_info": {
-    "project_number": "531334270340",
-    "firebase_url": "https://wechat-app-9390f-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "wechat-app-9390f",
-    "storage_bucket": "wechat-app-9390f.appspot.com"
+    "project_number": "75395658316",
+    "project_id": "social-app-fb7b9",
+    "storage_bucket": "social-app-fb7b9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:531334270340:android:ff9dcd5485734f38a261d1",
+        "mobilesdk_app_id": "1:75395658316:android:2a5a00e3a54b060628fae9",
         "android_client_info": {
-          "package_name": "com.flexath.moments"
+          "package_name": "com.padc.moments"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "531334270340-lqa517jmbru893dpli7ks4vnuj46nj3e.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAQDzPA592egsICZl0i9L5WxrvvK_4tuwU"
+          "current_key": "AIzaSyC--YNEU7Q4ObfuSYDTusbP8jDL2s4as88"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "531334270340-lqa517jmbru893dpli7ks4vnuj46nj3e.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
