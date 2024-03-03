@@ -28,7 +28,7 @@ const val HEADER_AUTH = "Authorization"
 
 // Keys
 const val GIPHY_API_KEY = "fNcKKGdZ8bta2IdgEAA1PTwLe6VbS1I8"
-const val FCM_AUTH_KEY = "key=AAAAe7X9jYQ:APA91bG7S7iFP05WUtW2qDiK35mCq1jNgn__P-vPKfTaZXjmRaPoBoZKic-kqzbtU1N_ycd56ClkmZll_4WX_IwM3Jykz4pYwcMPaM3e_E3DbfPPipmyMYAtdA3_MpoukdhECGDJrlh9"
+const val FCM_AUTH_KEY = "key=AAAAEY3uckw:APA91bHKhYEmcSlsbF-3J_OFZDO2riuXOUm6WX9in-Yl7DYe1cWph2ZGuv4SRmo3IK5PbU2eo994AlIGv9oyDX_G3oaQJv9BDQw_JfEgn-5ARxTlF-yHsnrdyct8lOcUV9bUZc4RK6T5"
 
 fun getTimeAgo(timestamp: Long): String {
     val now = System.currentTimeMillis()

@@ -72,4 +72,7 @@
     <string name="you_sent_a_video">You sent a Video</string>
     <string name="please_upload_photo_less_than_1mb">Please upload photo less than 1MB</string>
     <string name="lbl_dob">DOB</string>
+    <string name="lbl_teacher">Teacher</string>
+    <string name="lbl_student">Student</string>
+    <string name="lbl_create_account">Create Account</string>
 </resources>

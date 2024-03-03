@@ -8,11 +8,13 @@ import com.padc.moments.data.vos.UserVO
 interface CloudFireStoreFirebaseApi {
     fun addUser(user: UserVO)
 
+    fun addUserToGroup(userId: String,grade: String,token: String)
     fun updateFCMToken( userId: String,token : String)
     fun updateAndUploadProfileImage(bitmap: Bitmap, user: UserVO)
     fun getUsers(
         onSuccess: (users: List<UserVO>) -> Unit, onFailure: (String) -> Unit
     )
+
 
     fun getSpecificUser(userId: String,onSuccess: (users: UserVO) -> Unit, onFailure: (String) -> Unit)
 
@@ -40,6 +42,11 @@ interface CloudFireStoreFirebaseApi {
         onFailure: (String) -> Unit
     )
 
+    fun getTokenByGroup(
+        group : String,
+        onSuccess: (tokens : List<String>) -> Unit,
+        onFailure: (String) -> Unit
+    )
     fun addLikedToMoment(momentId: String,likes : Map<String, String>)
 
     fun getCommentFromMoment(momentId : String,onSuccess: (comments :List<CommentVO>)-> Unit,onFailure: (String) -> Unit)

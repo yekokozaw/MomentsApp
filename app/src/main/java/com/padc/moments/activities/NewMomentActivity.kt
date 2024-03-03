@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -28,6 +29,8 @@ import com.padc.moments.mvp.impls.NewMomentPresenterImpl
 import com.padc.moments.mvp.interfaces.NewMomentPresenter
 import com.padc.moments.mvp.views.NewMomentView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.padc.moments.data.models.UserModel
+import com.padc.moments.data.models.UserModelImpl
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -66,6 +69,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         setUpListeners()
         setUpRecyclerView()
 
+        mPresenter.getTokenByGroup(group = "second")
         mPresenter.onUIReady( this)
     }
 
@@ -80,7 +84,9 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         }
 
         binding.btnCreateNewMoment.setOnClickListener {
-            mPresenter.onTapCreateButton(getMomentPost())
+            binding.progressBar.visibility = View.VISIBLE
+            val body = binding.etPostNewMoment.text.toString()
+            mPresenter.onTapCreateButton(getMomentPost(),userName,body)
             mPresenter.clearMomentImages()
             finish()
         }
@@ -219,6 +225,12 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         dialog.show()
     }
 
+    override fun finishFragment() {
+        binding.progressBar.visibility = View.GONE
+        Toast.makeText(this, "Successfully uploaded!", Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
     private fun chooseImageFromGallery() {
         val intent = Intent()
         intent.type = "image/*"
@@ -255,6 +267,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
             }
         }
     }
+
 
     override fun showError(error: String) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()

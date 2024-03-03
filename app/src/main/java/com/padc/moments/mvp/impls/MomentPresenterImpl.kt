@@ -1,6 +1,5 @@
 package com.padc.moments.mvp.impls
 
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.padc.moments.data.models.AuthenticationModel
@@ -33,7 +32,6 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
                 mView?.showError(it)
             }
         )
-        getUserName()
     }
 
     override fun onTapBookmarkButton(id: String,isBookmarked:Boolean) {
@@ -81,11 +79,13 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
         mMomentModel.addLikedToMoment(momentId = momentId, likeList)
     }
 
-    private fun getUserName() {
+    override fun getUserData() {
         mUserModel.getSpecificUser(
             mAuthModel.getUserId(),
             onSuccess = {
                 userName = it.userName
+                mView?.getUserData(it)
+
             }, onFailure = {
 
             })

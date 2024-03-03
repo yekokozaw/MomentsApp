@@ -13,6 +13,7 @@ interface MomentPresenter  : BasePresenter<MomentView> , MomentItemActionDelegat
 
     fun getUserId(): String
 
+    fun getUserData()
     fun addLikedToMoment(momentId: String,likes : Map<String, String>)
 
     fun deleteLikedToMoment(momentId : String, likes: Map<String, String>)

@@ -7,4 +7,6 @@ interface BasePresenter<V : BaseView> {
 
     fun initPresenter(view: V)
     fun onUIReady(lifecycleOwner: LifecycleOwner)
+
+
 }

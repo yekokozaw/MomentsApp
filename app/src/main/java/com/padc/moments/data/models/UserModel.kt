@@ -1,7 +1,6 @@
 package com.padc.moments.data.models
 
 import android.graphics.Bitmap
-import com.padc.moments.data.vos.TokenVO
 import com.padc.moments.data.vos.UserVO
 import com.padc.moments.data.vos.fcm.FCMBody
 import com.padc.moments.network.retrofit.responses.FCMResponse
@@ -12,6 +11,14 @@ interface UserModel {
     var mFirebaseApi:CloudFireStoreFirebaseApi
 
     fun addUser(user: UserVO)
+
+    fun addUserToGroup(userId: String,grade: String,token: String)
+
+    fun getTokenByGroup(
+        group : String,
+        onSuccess: (tokens : List<String>) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
     fun updateAndUploadProfileImage(bitmap: Bitmap, user: UserVO)
 

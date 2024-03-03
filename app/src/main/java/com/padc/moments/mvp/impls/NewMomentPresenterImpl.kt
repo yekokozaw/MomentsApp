@@ -1,6 +1,7 @@
 package com.padc.moments.mvp.impls
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.padc.moments.data.models.AuthenticationModel
@@ -10,13 +11,16 @@ import com.padc.moments.data.models.MomentModelImpl
 import com.padc.moments.data.models.UserModel
 import com.padc.moments.data.models.UserModelImpl
 import com.padc.moments.data.vos.MomentVO
+import com.padc.moments.data.vos.fcm.Data
+import com.padc.moments.data.vos.fcm.DataX
+import com.padc.moments.data.vos.fcm.FCMBody
 import com.padc.moments.mvp.interfaces.NewMomentPresenter
 import com.padc.moments.mvp.views.NewMomentView
 
 class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
 
     private var mView:NewMomentView? = null
-
+    private var tokens : List<String> = listOf()
     override var mAuthModel: AuthenticationModel = AuthenticationModelImpl
     override var mMomentModel: MomentModel = MomentModelImpl
     override var mUserModel: UserModel = UserModelImpl
@@ -44,8 +48,24 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
         mView?.navigateToPreviousScreen()
     }
 
-    override fun onTapCreateButton(moment:MomentVO) {
+    override fun onTapCreateButton(moment:MomentVO,title: String,body: String) {
+        val dataFCM = Data(
+            title = title,
+            body = body,
+            chat_type = "",
+            chat_id = "",
+            data = DataX()
+        )
+        val fcmBody = FCMBody(tokens.toList().distinct(),dataFCM)
         mMomentModel.createMoment(moment)
+        mUserModel.sendFCMNotification(
+            fcmBody,
+            onSuccess = {
+                mView?.finishFragment()
+                Log.d("notification"," notification success")
+        }, onFailure = {
+            mView?.showError(it)
+        })
     }
 
     override fun createMomentImages(bitmap: Bitmap) {
@@ -58,6 +78,18 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
 
     override fun clearMomentImages() {
         mMomentModel.clearMomentImages()
+    }
+
+    override fun getTokenByGroup(
+        group: String
+    ) {
+        mUserModel.getTokenByGroup(group,
+            onSuccess = {
+                tokens = it
+                //Log.d("tokens",it.toString())
+            }, onFailure = {
+                mView?.showError(it)
+            })
     }
 
     override fun getUserId(): String {

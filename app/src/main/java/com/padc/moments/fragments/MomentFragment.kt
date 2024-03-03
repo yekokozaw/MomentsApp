@@ -21,6 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.messaging.FirebaseMessaging
 import com.padc.moments.activities.CommentActivity
+import com.padc.moments.data.vos.UserVO
 import java.util.*
 
 class MomentFragment : Fragment(), MomentView {
@@ -57,6 +58,7 @@ class MomentFragment : Fragment(), MomentView {
 
         setUpListeners()
 
+        mPresenter.getUserData()
         mPresenter.onUIReady(this)
         mPresenter.getMomentsFromUserBookmarked(mPresenter.getUserId())
     }
@@ -91,6 +93,12 @@ class MomentFragment : Fragment(), MomentView {
             }
         }
         mViewpod.setNewData(mMomentList, "moment")
+    }
+
+    override fun getUserData(user: UserVO) {
+        if (user.gender == "teacher"){
+            binding.btnAddMoment.visibility = View.VISIBLE
+        }
     }
 
     override fun navigateToCommentScreen(momentId: String) {
@@ -143,7 +151,7 @@ class MomentFragment : Fragment(), MomentView {
                 }
             }
         }
-        //mViewpod.setNewData(mMomentList, "moment")
+        mViewpod.setNewData(mMomentList, "moment")
     }
 
     override fun showOptionDialogBox(momentId:String,momentOwnerUserId:String) {
@@ -179,7 +187,6 @@ class MomentFragment : Fragment(), MomentView {
                 dialogDeleteBox.show()
             }
         }
-
         dialog.show()
     }
 

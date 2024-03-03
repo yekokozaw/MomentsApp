@@ -9,6 +9,7 @@ import com.padc.moments.R
 import com.padc.moments.activities.LoginActivity
 import com.padc.moments.databinding.FragmentSettingBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.padc.moments.activities.RegisterActivity
 import com.padc.moments.data.models.AuthenticationModel
 import com.padc.moments.data.models.AuthenticationModelImpl
 
@@ -19,13 +20,17 @@ class SettingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSettingBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.createAccount.setOnClickListener {
+            RegisterActivity.newIntent(requireContext())
+        }
 
         binding.btnLogOut.setOnClickListener {
             val dialog =

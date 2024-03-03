@@ -24,7 +24,6 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
     // General
     private var mMomentImages: String = ""
 
-
     override fun addUser(user: UserVO) {
 
         val userMap = hashMapOf(
@@ -51,6 +50,16 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
+    override fun addUserToGroup(userId: String,grade: String, token: String) {
+        val hashMap = hashMapOf("token" to token)
+        database.collection(grade)
+            .document(userId)
+            .set(hashMap)
+            .addOnSuccessListener {
+                Log.i("FirebaseCall", "Successfully Added token")
+            }
+    }
+
     override fun updateFCMToken(userId: String, token: String) {
 
         database.collection("users")
@@ -66,12 +75,12 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
         val imageRef = storageRef.child("images/${UUID.randomUUID()}")
         val uploadTask = imageRef.putBytes(data)
 
-        Log.i("ImageURL", uploadTask.toString())
+        //Log.i("ImageURL", uploadTask.toString())
 
         uploadTask.addOnFailureListener {
-            Log.i("FileUpload", "File uploaded failed")
+            //Log.i("FileUpload", "File uploaded failed")
         }.addOnSuccessListener {
-            Log.i("FileUpload", "File uploaded successful")
+            //Log.i("FileUpload", "File uploaded successful")
         }
 
         val urlTask = uploadTask.continueWithTask {
@@ -145,6 +154,7 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
+
     override fun getSpecificUser(
         userId: String,
         onSuccess: (UserVO) -> Unit,
@@ -168,6 +178,7 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                     val qrCode = data["qr_code"] as String
                     val imageUrl = data["image_url"] as String
                     val fcmKey = data["fcm_key"].toString()
+                    val grade = data["grade"] as String
                     val user = UserVO(
                         id,
                         name,
@@ -178,7 +189,8 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                         gender,
                         qrCode,
                         imageUrl,
-                        fcmKey
+                        fcmKey,
+                        grade = grade
                     )
                     onSuccess(user)
                 }
@@ -349,17 +361,37 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
-    override fun addLikedToMoment(momentId: String,likes : Map<String, String>) {
-
-        database.collection("moments")
-            .document(momentId)
-            .update("Liked",likes)
-            .addOnSuccessListener {
-                Log.d("success","Successful Add")
-            }.addOnFailureListener {
-                Log.d("addLike","Failure")
+    override fun getTokenByGroup(
+        group: String,
+        onSuccess: (tokens: List<String>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        database.collection(group)
+            .addSnapshotListener{value,error ->
+                error?.let {
+                    onFailure(it.localizedMessage ?: "Check Internet")
+                } ?: run {
+                    val tokenList : MutableList<String> = arrayListOf()
+                    val documentList = value?.documents ?: arrayListOf()
+                    for(document in documentList){
+                        val token = document.data?.get("token") as String
+                        tokenList.add(token)
+                    }
+                    onSuccess(tokenList)
+                }
             }
     }
+
+    override fun addLikedToMoment(momentId: String,likes : Map<String, String>) {
+        database.collection("moments")
+            .document(momentId)
+    .update("Liked",likes)
+    .addOnSuccessListener {
+        Log.d("success","Successful Add")
+    }.addOnFailureListener {
+        Log.d("addLike","Failure")
+    }
+}
 
     override fun getCommentFromMoment(
         momentId: String,

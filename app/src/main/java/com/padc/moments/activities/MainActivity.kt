@@ -7,8 +7,6 @@ import android.net.Network
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -41,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
-            Log.d("NewTokenMainActivity",it.result)
+
         }
     }
     @RequiresApi(Build.VERSION_CODES.N)

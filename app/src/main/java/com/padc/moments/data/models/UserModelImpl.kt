@@ -1,15 +1,11 @@
 package com.padc.moments.data.models
 
-import android.content.Context
 import android.graphics.Bitmap
-import android.util.Log
-import com.padc.moments.data.vos.TokenVO
 import com.padc.moments.data.vos.UserVO
 import com.padc.moments.data.vos.fcm.FCMBody
 import com.padc.moments.network.retrofit.responses.FCMResponse
 import com.padc.moments.network.storage.CloudFireStoreFirebaseApiImpl
 import com.padc.moments.network.storage.CloudFireStoreFirebaseApi
-import com.padc.moments.persistence.MomentDatabase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +16,18 @@ object UserModelImpl : UserModel , RetrofitAbstractBaseModel() {
 
     override fun addUser(user: UserVO) {
         mFirebaseApi.addUser(user)
+    }
+
+    override fun addUserToGroup(userId: String,grade: String, token: String) {
+        mFirebaseApi.addUserToGroup(userId,grade,token)
+    }
+
+    override fun getTokenByGroup(
+        group: String,
+        onSuccess: (tokens: List<String>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getTokenByGroup(group,onSuccess,onFailure)
     }
 
     override fun updateAndUploadProfileImage(bitmap: Bitmap, user: UserVO) {

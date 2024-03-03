@@ -14,7 +14,7 @@ class FCMService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
-        if(message.data["chat_type"] == "private" || message.data["topic"]=="all") {
+        if(message.data["chat_type"] == "private" ) {
 
             NotificationUtils.sendNotification(
                 this,

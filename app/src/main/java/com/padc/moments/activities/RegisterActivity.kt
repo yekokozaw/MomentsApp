@@ -58,10 +58,10 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     override fun onStart() {
         super.onStart()
-        FirebaseMessaging.getInstance().token.addOnCompleteListener {
-            Log.i("NewTokenFCM",it.result)
-            fcmToken = it.result
-        }
+//        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+//            Log.i("NewTokenFCM",it.result)
+              //fcmToken = it.result
+//        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -144,7 +144,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             password = password,
             birthDate = "$year-$month-$day",
             gender = gender,
-            fcmKey = fcmToken,
+            fcmKey = "",
             grade = grade
         )
     }
@@ -152,19 +152,13 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     private fun setUpGenderRadioGroup() {
         binding.rbMale.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                gender = "Male"
+                gender = "teacher"
             }
         }
 
         binding.rbFemale.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                gender = "Female"
-            }
-        }
-
-        binding.rbOther.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                gender = "Other"
+                gender = "student"
             }
         }
     }

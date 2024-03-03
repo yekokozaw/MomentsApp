@@ -4,6 +4,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.RemoteMessage
 
 fun subscribeToTopic(topic: String) {
+
     FirebaseMessaging.getInstance().subscribeToTopic(topic)
         .addOnCompleteListener { task ->
             if (task.isSuccessful) {

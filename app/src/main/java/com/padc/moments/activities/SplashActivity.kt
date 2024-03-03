@@ -31,7 +31,6 @@ class SplashActivity : AppCompatActivity() {
             finish()
         }else{
             binding.btnLoginSplash.visibility = View.VISIBLE
-            binding.btnSignUpSplash.visibility = View.VISIBLE
         }
     }
 
@@ -40,22 +39,19 @@ class SplashActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun crashTheAppForCrashlytics() {
-        val crashButton = Button(this)
-        crashButton.text = "Test Crash"
-        crashButton.setOnClickListener {
-            throw RuntimeException("Test Crash") // Force a crash
-        }
-
-        addContentView(crashButton, ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT))
-    }
+//    private fun crashTheAppForCrashlytics() {
+//        val crashButton = Button(this)
+//        crashButton.text = "Test Crash"
+//        crashButton.setOnClickListener {
+//            throw RuntimeException("Test Crash") // Force a crash
+//        }
+//
+//        addContentView(crashButton, ViewGroup.LayoutParams(
+//            ViewGroup.LayoutParams.MATCH_PARENT,
+//            ViewGroup.LayoutParams.WRAP_CONTENT))
+//    }
 
     private fun setUpListeners() {
-        binding.btnSignUpSplash.setOnClickListener {
-            startActivity(RegisterActivity.newIntent(this))
-        }
 
         binding.btnLoginSplash.setOnClickListener {
             startActivity(LoginActivity.newIntent(this))

@@ -7,17 +7,22 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.messaging.FirebaseMessaging
+import com.padc.moments.data.models.UserModel
+import com.padc.moments.data.models.UserModelImpl
 import com.padc.moments.databinding.ActivityLoginBinding
 import com.padc.moments.mvp.impls.LoginPresenterImpl
 import com.padc.moments.mvp.interfaces.LoginPresenter
 import com.padc.moments.mvp.views.LoginView
+import com.padc.moments.network.auth.AuthManager
+import com.padc.moments.network.auth.FirebaseAuthManager
 
 class LoginActivity : AppCompatActivity() , LoginView {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var mPresenter:LoginPresenter
     private lateinit var fcmToken:String
-
+    private val mAuthManager : AuthManager = FirebaseAuthManager
+    private val mUserModel : UserModel = UserModelImpl
     companion object {
         fun newIntent(context: Context): Intent {
             return Intent(context,LoginActivity::class.java)
@@ -35,8 +40,8 @@ class LoginActivity : AppCompatActivity() , LoginView {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpPresenter()
-
         setUpListeners()
+
     }
 
     private fun setUpPresenter() {
@@ -46,11 +51,10 @@ class LoginActivity : AppCompatActivity() , LoginView {
 
     private fun setUpListeners() {
         binding.btnLogin.setOnClickListener {
-            val phoneNumber = binding.etPhoneNumberLogin.text.toString()
             val email = binding.etEmailLogin.text.toString()
             val password = binding.etPasswordLogin.text.toString()
 
-            if(phoneNumber=="" && email != "" && password != "") {
+            if(email != "" && password != "") {
                 mPresenter.onTapLoginButton(
                     fcmToken,
                     binding.etPhoneNumberLogin.text.toString(),
@@ -62,7 +66,6 @@ class LoginActivity : AppCompatActivity() , LoginView {
                 showError("Please fill the all fields")
             }
         }
-
         binding.btnBackLogin.setOnClickListener {
             mPresenter.onTapBackButton()
         }
@@ -73,6 +76,17 @@ class LoginActivity : AppCompatActivity() , LoginView {
     }
 
     override fun navigateToHomeScreen() {
+        val userId = mAuthManager.getUserId()
+        mUserModel.getSpecificUser(
+            userId,
+            onSuccess = {
+                if (it.gender == "student")
+                    mUserModel.addUserToGroup(it.userId,it.grade,fcmToken)
+            },
+            onFailure = {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        )
         startActivity(MainActivity.newIntent(this))
         finish()
     }

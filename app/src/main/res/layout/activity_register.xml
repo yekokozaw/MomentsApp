@@ -112,7 +112,7 @@
             android:layout_marginStart="@dimen/margin_38dp"
             android:layout_marginTop="@dimen/margin_medium_3"
             android:fontFamily="@font/noto_sans"
-            android:text="Email"
+            android:text="@string/lbl_email"
             android:textColor="@color/colorPrimaryLight"
             android:textSize="@dimen/text_small" />
 
@@ -206,7 +206,7 @@
                 android:layout_marginEnd="@dimen/margin_medium_3"
                 android:buttonTint="@color/colorAccent"
                 android:fontFamily="@font/yorkie_demo_medium"
-                android:text="@string/lbl_male"
+                android:text="@string/lbl_teacher"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/text_regular" />
 
@@ -217,17 +217,7 @@
                 android:layout_marginEnd="@dimen/margin_medium_3"
                 android:checked="false"
                 android:fontFamily="@font/yorkie_demo_medium"
-                android:text="@string/lbl_female"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="@dimen/text_regular" />
-
-            <RadioButton
-                android:id="@+id/rbOther"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:fontFamily="@font/yorkie_demo_medium"
-                android:text="@string/lbl_other"
+                android:text="@string/lbl_student"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/text_regular" />
 

@@ -15,7 +15,6 @@ object ChatModelImpl : ChatModel {
         mFirebaseApi.getOtp(onSuccess, onFailure)
     }
 
-
     override fun sendMessage(
         senderId: String,
         receiverId: String,

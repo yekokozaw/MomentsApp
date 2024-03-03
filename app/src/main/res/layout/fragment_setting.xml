@@ -19,13 +19,14 @@
         android:paddingBottom="@dimen/margin_14dp">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/createAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:fontFamily="@font/nunito_sans_semibold"
             android:gravity="center"
-            android:text="@string/lbl_account_security"
+            android:text="@string/lbl_create_account"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/text_regular_2x"
             tools:ignore="RelativeOverlap" />

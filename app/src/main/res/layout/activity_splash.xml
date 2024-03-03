@@ -52,17 +52,8 @@
         android:weightSum="2">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnSignUpSplash"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/height_48dp"
-            android:visibility="gone"
-            android:layout_marginEnd="@dimen/margin_medium_2"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/button_signup" />
-
-        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnLoginSplash"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="@dimen/height_48dp"
             android:layout_gravity="start"
             android:visibility="gone"

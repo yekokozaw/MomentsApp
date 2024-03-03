@@ -83,7 +83,7 @@
                 android:layout_width="@dimen/width_48dp"
                 android:layout_height="@dimen/height_48dp"
                 android:layout_alignParentBottom="true"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_marginStart="@dimen/margin_50dp"
                 android:layout_marginBottom="@dimen/margin_medium_2"
                 android:layout_toEndOf="@+id/ivUpdatePictureProfile"

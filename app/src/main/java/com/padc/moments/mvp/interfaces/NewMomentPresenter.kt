@@ -15,7 +15,7 @@ interface NewMomentPresenter : BasePresenter<NewMomentView> , NewMomentImageDele
     var mUserModel: UserModel
     fun onTapBackButton()
 
-    fun onTapCreateButton(moment: MomentVO)
+    fun onTapCreateButton(moment: MomentVO,title: String,body: String)
 
     fun createMomentImages(bitmap: Bitmap)
 
@@ -23,5 +23,6 @@ interface NewMomentPresenter : BasePresenter<NewMomentView> , NewMomentImageDele
 
     fun clearMomentImages()
 
+    fun getTokenByGroup(group : String)
     fun getUserId(): String
 }
