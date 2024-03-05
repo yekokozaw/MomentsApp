@@ -21,6 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.messaging.FirebaseMessaging
 import com.padc.moments.activities.CommentActivity
+import com.padc.moments.activities.FullSizeImageActivity
 import com.padc.moments.data.vos.UserVO
 import java.util.*
 
@@ -41,7 +42,7 @@ class MomentFragment : Fragment(), MomentView {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMomentBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -55,7 +56,6 @@ class MomentFragment : Fragment(), MomentView {
 
         setUpPresenter()
         setUpViewPods()
-
         setUpListeners()
 
         mPresenter.getUserData()
@@ -80,7 +80,7 @@ class MomentFragment : Fragment(), MomentView {
     }
 
     override fun navigateToNewMomentScreen() {
-        startActivity(NewMomentActivity.newIntent(requireActivity()))
+        startActivity(NewMomentActivity.newIntent(requireActivity(),"all"))
     }
 
     override fun showMoments(momentList: List<MomentVO>) {
@@ -93,6 +93,10 @@ class MomentFragment : Fragment(), MomentView {
             }
         }
         mViewpod.setNewData(mMomentList, "moment")
+    }
+
+    override fun navigateToImageDetails(image: String) {
+        startActivity(FullSizeImageActivity.newIntent(requireContext(),image))
     }
 
     override fun getUserData(user: UserVO) {

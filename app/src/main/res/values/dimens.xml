@@ -74,7 +74,7 @@
     <dimen name="width_30dp">30dp</dimen>
     <dimen name="height_30dp">30dp</dimen>
     <dimen name="margin_2dp">2dp</dimen>
-    <dimen name="dimen_600dp">600dp</dimen>
+    <dimen name="dimen_800dp">800dp</dimen>
     <dimen name="text_9sp_small">9sp</dimen>
 
 </resources>

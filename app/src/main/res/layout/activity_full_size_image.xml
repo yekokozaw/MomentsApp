@@ -12,16 +12,13 @@
         android:layout_above="@id/fab"
         android:background="@drawable/background_image_view">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="@dimen/margin_medium_2"
             android:layout_marginTop="@dimen/margin_medium_2"
-            android:layout_marginEnd="@dimen/margin_medium_2"
-            android:layout_marginBottom="@dimen/margin_medium_2"
-            android:maxHeight="@dimen/dimen_600dp"
+            android:maxHeight="@dimen/dimen_800dp"
             android:scaleType="fitCenter"
             android:src="@drawable/my_profile" />
 

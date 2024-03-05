@@ -44,6 +44,10 @@ class ProfilePresenterImpl : ProfilePresenter , ViewModel() {
         mView?.showOptionDialogBox(momentId,momentOwnerUserId)
     }
 
+    override fun onLongClickImage(imageUrl: String) {
+
+    }
+
     override fun onTapCommentButton(momentId: String) {
 
     }
@@ -81,7 +85,7 @@ class ProfilePresenterImpl : ProfilePresenter , ViewModel() {
     }
 
     override fun createMoment(moment: MomentVO) {
-        mMomentModel.createMoment(moment)
+        mMomentModel.createMoment(moment,"all")
     }
 
     override fun getMomentsFromUserBookmarked(currentUserId: String) {

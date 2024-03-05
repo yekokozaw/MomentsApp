@@ -13,12 +13,11 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.padc.moments.R
 import com.padc.moments.databinding.ActivityMainBinding
-import com.padc.moments.fragments.ChatFragment
-import com.padc.moments.fragments.ContactsFragment
 import com.padc.moments.fragments.MomentFragment
 import com.padc.moments.fragments.ProfileFragment
 import com.padc.moments.fragments.SettingFragment
 import com.google.firebase.messaging.FirebaseMessaging
+import com.padc.moments.fragments.ClassFragment
 import com.padc.moments.network.auth.AuthManager
 import com.padc.moments.network.auth.FirebaseAuthManager
 import com.padc.moments.network.storage.PresenceManager
@@ -57,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpBottomNavigationView() {
         switchFragment(MomentFragment())
+        val userId = mAuthManager.getUserId()
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
@@ -65,11 +65,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nvgChat -> {
-                    switchFragment(ChatFragment())
-                    true
-                }
-                R.id.nvgContacts -> {
-                    switchFragment(ContactsFragment())
+                    switchFragment(ClassFragment(userId))
                     true
                 }
                 R.id.nvgMe -> {

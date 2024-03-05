@@ -42,6 +42,10 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
         mView?.showOptionDialogBox(momentId,momentOwnerUserId)
     }
 
+    override fun onLongClickImage(imageUrl: String) {
+        mView?.navigateToImageDetails(imageUrl)
+    }
+
     override fun onTapCommentButton(momentId: String) {
         mView?.navigateToCommentScreen(momentId)
     }
@@ -54,8 +58,8 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
         mView?.navigateToNewMomentScreen()
     }
 
-    override fun createMoment(moment: MomentVO) {
-        mMomentModel.createMoment(moment)
+    override fun createMoment(moment: MomentVO,grade : String) {
+        mMomentModel.createMoment(moment,grade)
     }
 
     override fun deleteMoment(momentId: String) {

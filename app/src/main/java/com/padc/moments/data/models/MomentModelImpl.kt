@@ -11,8 +11,8 @@ object MomentModelImpl : MomentModel {
 
     override var mFirebaseApi: CloudFireStoreFirebaseApi = CloudFireStoreFirebaseApiImpl
 
-    override fun createMoment(moment: MomentVO) {
-        mFirebaseApi.createMoment(moment)
+    override fun createMoment(moment: MomentVO,grade : String) {
+        mFirebaseApi.createMoment(moment,grade)
         sendMessageToTopic("all",moment.userName,moment.caption)
     }
 

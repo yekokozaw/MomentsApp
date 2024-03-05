@@ -18,7 +18,7 @@ interface CloudFireStoreFirebaseApi {
 
     fun getSpecificUser(userId: String,onSuccess: (users: UserVO) -> Unit, onFailure: (String) -> Unit)
 
-    fun createMoment(moment: MomentVO)
+    fun createMoment(moment: MomentVO,grade: String)
 
     fun deleteMoment(
         momentId: String,

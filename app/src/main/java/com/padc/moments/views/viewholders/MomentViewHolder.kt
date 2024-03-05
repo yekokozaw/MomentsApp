@@ -1,9 +1,7 @@
 package com.padc.moments.views.viewholders
 
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.padc.moments.R
@@ -97,7 +95,7 @@ class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDele
     }
 
     private fun setUpMomentImages() {
-        mAdapter = MomentImagesAdapter()
+        mAdapter = MomentImagesAdapter(delegate)
         binding.viewPagerMomentImages.adapter = mAdapter
     }
 

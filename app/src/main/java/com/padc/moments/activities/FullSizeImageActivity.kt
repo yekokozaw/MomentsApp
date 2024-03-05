@@ -2,15 +2,12 @@ package com.padc.moments.activities
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.padc.moments.R
 import com.padc.moments.databinding.ActivityFullSizeImageBinding
-import com.padc.moments.databinding.ViewHolderMessageReceiveBinding
 
 class FullSizeImageActivity : AppCompatActivity() {
 
@@ -45,7 +42,7 @@ class FullSizeImageActivity : AppCompatActivity() {
         // Use Glide, Picasso, or another image loading library to load the image
         Glide.with(this)
             .load(imageUrl)
-            .transform(RoundedCorners(22))
+            .transform(RoundedCorners(30))
             .into(mBinding.ivImage) // Assuming your ImageView's ID
     }
 }

@@ -23,7 +23,6 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
 
     // General
     private var mMomentImages: String = ""
-
     override fun addUser(user: UserVO) {
 
         val userMap = hashMapOf(
@@ -197,7 +196,7 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
-    override fun createMoment(moment: MomentVO) {
+    override fun createMoment(moment: MomentVO,grade : String) {
         val userMap = hashMapOf(
             "id" to moment.id,
             "user_id" to moment.userId,
@@ -208,7 +207,7 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             "image_url" to moment.imageUrl
         )
 
-        database.collection("moments")
+        database.collection(grade)
             .document(moment.id)
             .set(userMap)
             .addOnSuccessListener {

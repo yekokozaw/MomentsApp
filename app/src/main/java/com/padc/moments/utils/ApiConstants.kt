@@ -1,5 +1,8 @@
 package com.padc.moments.utils
 
+import android.content.Context
+import android.widget.Toast
+
 // URL
 const val BASE_URL = "https://api.giphy.com/"
 const val BASE_URL_FCM = "https://fcm.googleapis.com/"
@@ -45,4 +48,8 @@ fun getTimeAgo(timestamp: Long): String {
         minutes > 0 -> "$minutes mins ago"
         else -> "just now"
     }
+}
+
+fun makeToast(context: Context, text: String) {
+    Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
 }

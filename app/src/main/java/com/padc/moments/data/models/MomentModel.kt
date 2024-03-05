@@ -8,7 +8,7 @@ import com.padc.moments.network.storage.CloudFireStoreFirebaseApi
 interface MomentModel {
     var mFirebaseApi: CloudFireStoreFirebaseApi
 
-    fun createMoment(moment: MomentVO)
+    fun createMoment(moment: MomentVO,grade : String)
 
     fun deleteMoment(
         momentId: String,

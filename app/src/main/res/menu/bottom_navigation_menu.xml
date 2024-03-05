@@ -9,15 +9,9 @@
 
     <item
         android:id="@+id/nvgChat"
-        android:title="@string/lbl_chat"
+        android:title="@string/lbl_class"
         app:showAsAction="ifRoom"
         android:icon="@drawable/nvg_button_chat"/>
-
-    <item
-        android:id="@+id/nvgContacts"
-        android:title="@string/lbl_contacts"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/baseline_perm_contact_calendar_24dp"/>
 
     <item
         android:id="@+id/nvgMe"

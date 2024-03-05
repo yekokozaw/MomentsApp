@@ -29,8 +29,6 @@ import com.padc.moments.mvp.impls.NewMomentPresenterImpl
 import com.padc.moments.mvp.interfaces.NewMomentPresenter
 import com.padc.moments.mvp.views.NewMomentView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.padc.moments.data.models.UserModel
-import com.padc.moments.data.models.UserModelImpl
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -42,6 +40,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
     private lateinit var binding: ActivityNewMomentBinding
     // Adapter
     private lateinit var mAdapter: NewMomentImageAdapter
+    private var mGrade : String = ""
 
     // Presenter
     private lateinit var mPresenter: NewMomentPresenter
@@ -55,8 +54,11 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
     private lateinit var dialog:BottomSheetDialog
 
     companion object {
-        fun newIntent(context: Context): Intent {
-            return Intent(context, NewMomentActivity::class.java)
+        private const val GRADE = "grade"
+        fun newIntent(context: Context,grade : String): Intent {
+            val intent = Intent(context, NewMomentActivity::class.java)
+            intent.putExtra(GRADE,grade)
+            return intent
         }
     }
 
@@ -65,9 +67,9 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         binding = ActivityNewMomentBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpPresenter()
-
         setUpListeners()
         setUpRecyclerView()
+        mGrade = intent.getStringExtra(GRADE).toString()
 
         mPresenter.getTokenByGroup(group = "second")
         mPresenter.onUIReady( this)
@@ -86,7 +88,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         binding.btnCreateNewMoment.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
             val body = binding.etPostNewMoment.text.toString()
-            mPresenter.onTapCreateButton(getMomentPost(),userName,body)
+            mPresenter.onTapCreateButton(getMomentPost(),userName,body, grade = mGrade)
             mPresenter.clearMomentImages()
             finish()
         }

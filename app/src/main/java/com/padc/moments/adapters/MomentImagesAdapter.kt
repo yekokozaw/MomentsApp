@@ -6,15 +6,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.padc.moments.R
+import com.padc.moments.delegates.MomentItemActionDelegate
 import com.padc.moments.views.viewholders.MomentImagesViewHolder
 
-class MomentImagesAdapter : RecyclerView.Adapter<MomentImagesViewHolder>() {
+class MomentImagesAdapter(private val delegate: MomentItemActionDelegate) : RecyclerView.Adapter<MomentImagesViewHolder>() {
 
      private var mImageList:List<String> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MomentImagesViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_moment_images_list,parent,false)
-        return MomentImagesViewHolder(view)
+        return MomentImagesViewHolder(view,delegate)
     }
 
     override fun onBindViewHolder(holder: MomentImagesViewHolder, position: Int) {

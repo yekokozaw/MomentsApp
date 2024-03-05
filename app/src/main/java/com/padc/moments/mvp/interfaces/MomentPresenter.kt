@@ -7,7 +7,7 @@ import com.padc.moments.mvp.views.MomentView
 interface MomentPresenter  : BasePresenter<MomentView> , MomentItemActionDelegate {
     fun onTapAddMomentButton()
 
-    fun createMoment(moment:MomentVO)
+    fun createMoment(moment:MomentVO,grade : String)
 
     fun deleteMoment(momentId: String)
 

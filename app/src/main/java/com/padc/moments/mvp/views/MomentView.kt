@@ -7,6 +7,7 @@ interface MomentView  : BaseView {
     fun navigateToNewMomentScreen()
     fun showMoments(momentList: List<MomentVO>)
 
+    fun navigateToImageDetails(image : String)
     fun getUserData(user: UserVO)
     fun navigateToCommentScreen(momentId: String)
     fun getMomentIsLiked(id: String, likes : Map<String,String>,isLike : Boolean)

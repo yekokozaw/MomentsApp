@@ -12,10 +12,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.padc.moments.activities.RegisterActivity
 import com.padc.moments.data.models.AuthenticationModel
 import com.padc.moments.data.models.AuthenticationModelImpl
+import com.padc.moments.data.models.UserModel
+import com.padc.moments.data.models.UserModelImpl
+import com.padc.moments.utils.makeToast
 
 class SettingFragment : Fragment() {
 
     private lateinit var binding:FragmentSettingBinding
+    private var mGenre : String = ""
+    private val mUserModel : UserModel = UserModelImpl
     private var mAuthModel : AuthenticationModel =  AuthenticationModelImpl
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +33,21 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.createAccount.setOnClickListener {
-            RegisterActivity.newIntent(requireContext())
+        val userId = mAuthModel.getUserId()
+        mUserModel.getSpecificUser(
+            userId,
+            onSuccess = {
+                mGenre = it.gender
+            },
+            onFailure = {
+                makeToast(requireContext(),it)
+            })
+        binding.rlCreateAccount.setOnClickListener {
+            if (mGenre == "teacher")
+                startActivity(RegisterActivity.newIntent(requireContext()))
+            else
+                makeToast(requireContext(),"You don't have permission")
         }
-
         binding.btnLogOut.setOnClickListener {
             val dialog =
                 MaterialAlertDialogBuilder(requireActivity(), R.style.RoundedAlertDialog)

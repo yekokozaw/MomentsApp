@@ -48,7 +48,7 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
         mView?.navigateToPreviousScreen()
     }
 
-    override fun onTapCreateButton(moment:MomentVO,title: String,body: String) {
+    override fun onTapCreateButton(moment:MomentVO,title: String,body: String,grade : String) {
         val dataFCM = Data(
             title = title,
             body = body,
@@ -57,7 +57,7 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
             data = DataX()
         )
         val fcmBody = FCMBody(tokens.toList().distinct(),dataFCM)
-        mMomentModel.createMoment(moment)
+        mMomentModel.createMoment(moment, grade = "all")
         mUserModel.sendFCMNotification(
             fcmBody,
             onSuccess = {
