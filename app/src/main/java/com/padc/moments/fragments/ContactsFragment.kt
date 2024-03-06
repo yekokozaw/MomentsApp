@@ -10,8 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padc.moments.activities.ChatDetailActivity
-import com.padc.moments.activities.NewContactActivity
-import com.padc.moments.activities.NewGroupActivity
 import com.padc.moments.adapters.GroupAdapter
 import com.padc.moments.data.vos.GroupVO
 import com.padc.moments.data.vos.UserVO
@@ -81,10 +79,6 @@ class ContactsFragment : Fragment(), ContactsView {
     private fun setUpListeners() {
         binding.btnAddNewContact.setOnClickListener {
             mPresenter.onTapAddNewContactButton()
-        }
-
-        binding.btnAddNewGroup.setOnClickListener {
-            startActivity(NewGroupActivity.newIntent(requireActivity()))
         }
 
         binding.etSearchContacts.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -162,7 +156,7 @@ class ContactsFragment : Fragment(), ContactsView {
     }
 
     override fun navigateToNewContactScreen() {
-        startActivity(NewContactActivity.newIntent(requireActivity()))
+
     }
 
     override fun showContacts(contactList: List<UserVO>) {

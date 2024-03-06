@@ -18,6 +18,8 @@ class ClassDetailsActivity : AppCompatActivity() ,MomentItemActionDelegate{
     private lateinit var mBinding : ActivityClassDetailsBinding
     private val mMomentModel : MomentModel = MomentModelImpl
     private var mGender : String = ""
+    private var mGrade : String = ""
+    private var mTitle : String = ""
     private lateinit var mViewPod: MomentViewPod
     private var userId : String = ""
     companion object{
@@ -39,19 +41,17 @@ class ClassDetailsActivity : AppCompatActivity() ,MomentItemActionDelegate{
         mBinding = ActivityClassDetailsBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         userId = intent.getStringExtra(USERID).toString()
-        val grade = intent.getStringExtra(GRADE)
+        mGrade = intent.getStringExtra(GRADE).toString()
         mGender = intent.getStringExtra(GENDER).toString()
-        val title = intent.getStringExtra(TITLE)
-        mBinding.tvTitle.text = title
+        mTitle = intent.getStringExtra(TITLE).toString()
+        mBinding.tvTitle.text = mTitle
         setUpViewPods()
         getMoments()
         if (mGender == "teacher"){
             mBinding.btnAddMoment.show()
         }else
             mBinding.btnAddMoment.hide()
-        if (title != null) {
-            setUpListeners(title)
-        }
+        setUpListeners(mTitle)
     }
 
     private fun setUpViewPods() {
@@ -61,6 +61,7 @@ class ClassDetailsActivity : AppCompatActivity() ,MomentItemActionDelegate{
 
     private fun getMoments(){
         mMomentModel.getMoments(
+            type = mTitle,
             onSuccess = {
                 var mMomentList = it
                 for (moment in mMomentList){
@@ -81,6 +82,10 @@ class ClassDetailsActivity : AppCompatActivity() ,MomentItemActionDelegate{
     private fun setUpListeners(title: String) {
         mBinding.btnAddMoment.setOnClickListener {
             startActivity(NewMomentActivity.newIntent(this,title))
+        }
+
+        mBinding.ivBackButton.setOnClickListener {
+            finish()
         }
     }
     override fun onTapBookmarkButton(id: String, isBookmarked: Boolean) {

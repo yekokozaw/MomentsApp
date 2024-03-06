@@ -34,8 +34,11 @@ object UserModelImpl : UserModel , RetrofitAbstractBaseModel() {
         mFirebaseApi.updateAndUploadProfileImage(bitmap,user)
     }
 
-    override fun getUsers(onSuccess: (users: List<UserVO>) -> Unit, onFailure: (String) -> Unit) {
-        mFirebaseApi.getUsers(onSuccess = onSuccess , onFailure = onFailure)
+    override fun getUsers(
+        onSuccess: (users: List<UserVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getUsers(onSuccess = onSuccess, onFailure = onFailure)
     }
 
     override fun getSpecificUser(userId: String,onSuccess: (users: UserVO) -> Unit, onFailure: (String) -> Unit) {

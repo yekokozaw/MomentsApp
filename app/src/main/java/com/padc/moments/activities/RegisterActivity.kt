@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
@@ -26,7 +27,8 @@ import com.padc.moments.mvp.impls.RegisterPresenterImpl
 import com.padc.moments.mvp.interfaces.RegisterPresenter
 import com.padc.moments.mvp.views.RegisterView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.messaging.FirebaseMessaging
+import com.padc.moments.utils.hide
+import com.padc.moments.utils.show
 import java.io.IOException
 import java.util.Calendar
 
@@ -46,9 +48,8 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     private var month = ""
     private var year = ""
     private var grade = ""
-    private var gender = ""
+    private var gender = "student"
     private lateinit var dialog:BottomSheetDialog
-    private lateinit var fcmToken:String
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -87,8 +88,11 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
         binding.btnSignUpRegister.setOnClickListener {
             bitmap?.let { bitmapImage ->
-                mPresenter.onTapSignUpButton(getNewUserInformation(), bitmapImage)
-            }
+                if (validateInputs()){
+                    binding.progressBarRegister.show()
+                    mPresenter.onTapSignUpButton(getNewUserInformation(), bitmapImage)
+                }
+            }?: showError("Please select image!")
         }
 
         binding.btnBackRegister.setOnClickListener {
@@ -183,11 +187,12 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         binding.gradeSpinner.onItemSelectedListener = object : OnItemSelectedListener{
             override fun onItemSelected(adapter: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
                 grade = adapter?.getItemAtPosition(position).toString()
-                Log.d("grade",grade)
+                //Log.d("grade",grade)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 grade = p0.toString()
+                Log.d("grade",grade)
             }
         }
 
@@ -227,15 +232,15 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         finish()
     }
 
-    override fun navigateToLoginScreen() {
+    override fun navigateBack() {
+        binding.progressBarRegister.hide()
         val dialogBindingRegister = DialogRegisterationSuccessfulBinding.inflate(layoutInflater)
         val dialogRegister = RegisterSuccessfulDialog(this)
         dialogRegister.setContentView(dialogBindingRegister.root)
         dialogRegister.setCancelable(false)
 
         dialogBindingRegister.btnLoginRegister.setOnClickListener {
-            val intent = LoginActivity.newIntent(this)
-            startActivity(intent)
+            dialogRegister.dismiss()
             finish()
         }
         dialogRegister.show()
@@ -281,6 +286,51 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         }
     }
 
+    private fun validateInputs() : Boolean {
+        val name = binding.etNameRegister.text.toString()
+        val email = binding.etEmailRegister.text.toString()
+        val password = binding.etPasswordRegister.text.toString()
+        return when{
+            name.isEmpty() -> {
+                showError("Name require")
+                false
+            }
+            email.isEmpty() -> {
+                showError("Email require")
+                false
+            }
+            password.isEmpty() -> {
+                showError("Password require")
+                false
+            }
+            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                showError("Email is invalid")
+                false
+            }
+            gender.isEmpty() -> {
+                showError("Please select Teacher/Student")
+                false
+            }
+
+            grade.isEmpty() -> {
+                showError("Please fill grade!")
+                false
+            }
+            day.isEmpty() ->{
+                showError("Please select day")
+                false
+            }
+            month.isEmpty() -> {
+                showError("Please select month!")
+                false
+            }
+            year.isEmpty() ->{
+                showError("Please select year!")
+                false
+            }
+            else -> return true
+        }
+    }
     override fun showGallery() {
         val intent = Intent()
         intent.type = "image/*"

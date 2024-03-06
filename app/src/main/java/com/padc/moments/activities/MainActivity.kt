@@ -17,6 +17,8 @@ import com.padc.moments.fragments.MomentFragment
 import com.padc.moments.fragments.ProfileFragment
 import com.padc.moments.fragments.SettingFragment
 import com.google.firebase.messaging.FirebaseMessaging
+import com.padc.moments.data.models.AuthenticationModel
+import com.padc.moments.data.models.AuthenticationModelImpl
 import com.padc.moments.fragments.ClassFragment
 import com.padc.moments.network.auth.AuthManager
 import com.padc.moments.network.auth.FirebaseAuthManager
@@ -26,6 +28,7 @@ import com.padc.moments.network.storage.subscribeToTopic
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
+    private val mAuthModel : AuthenticationModel = AuthenticationModelImpl
     private val mAuthManager : AuthManager = FirebaseAuthManager
     private  lateinit var mPresenceManager: PresenceManager
     private var isNetworkConnected = false
@@ -56,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpBottomNavigationView() {
         switchFragment(MomentFragment())
-        val userId = mAuthManager.getUserId()
+        val userId = mAuthModel.getUserId()
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
@@ -106,10 +109,7 @@ class MainActivity : AppCompatActivity() {
         }
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
     }
-    override fun onDestroy() {
-        mPresenceManager.setUserOffline()
-        super.onDestroy()
-    }
+
     private fun switchFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer,fragment)

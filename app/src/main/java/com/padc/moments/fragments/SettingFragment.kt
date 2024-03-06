@@ -1,5 +1,8 @@
 package com.padc.moments.fragments
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,10 +41,21 @@ class SettingFragment : Fragment() {
             userId,
             onSuccess = {
                 mGenre = it.gender
+                binding.etFcm.setText(it.fcmKey)
             },
             onFailure = {
                 makeToast(requireContext(),it)
             })
+        setUpListeners()
+    }
+
+    private fun copyToClipboard(text: String) {
+        val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData = ClipData.newPlainText("text", text)
+        clipboardManager.setPrimaryClip(clipData)
+    }
+
+    private fun setUpListeners(){
         binding.rlCreateAccount.setOnClickListener {
             if (mGenre == "teacher")
                 startActivity(RegisterActivity.newIntent(requireContext()))
@@ -65,6 +79,12 @@ class SettingFragment : Fragment() {
                     }
                     .create()
             dialog.show()
+        }
+
+        binding.ivCopyToken.setOnClickListener {
+            val copyText = binding.etFcm.text.toString()
+            copyToClipboard(copyText)
+            makeToast(requireContext(),"Copied")
         }
     }
 }

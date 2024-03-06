@@ -2,7 +2,7 @@ package com.padc.moments.mvp.views
 
 interface RegisterView : BaseView {
     fun navigateToPreviousScreen()
-    fun navigateToLoginScreen()
+    fun navigateBack()
     fun showGallery()
     fun openCamera()
 }

@@ -15,6 +15,7 @@ interface NewMomentPresenter : BasePresenter<NewMomentView> , NewMomentImageDele
     var mUserModel: UserModel
     fun onTapBackButton()
 
+    fun getMomentType(type : String)
     fun onTapCreateButton(moment: MomentVO,title: String,body: String,grade: String)
 
     fun createMomentImages(bitmap: Bitmap)

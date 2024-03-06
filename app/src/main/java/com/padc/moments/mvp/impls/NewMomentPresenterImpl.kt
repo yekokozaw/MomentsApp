@@ -21,6 +21,7 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
 
     private var mView:NewMomentView? = null
     private var tokens : List<String> = listOf()
+    private var momentType : String = ""
     override var mAuthModel: AuthenticationModel = AuthenticationModelImpl
     override var mMomentModel: MomentModel = MomentModelImpl
     override var mUserModel: UserModel = UserModelImpl
@@ -48,6 +49,10 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
         mView?.navigateToPreviousScreen()
     }
 
+    override fun getMomentType(type: String) {
+        momentType = type
+    }
+
     override fun onTapCreateButton(moment:MomentVO,title: String,body: String,grade : String) {
         val dataFCM = Data(
             title = title,
@@ -57,12 +62,11 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
             data = DataX()
         )
         val fcmBody = FCMBody(tokens.toList().distinct(),dataFCM)
-        mMomentModel.createMoment(moment, grade = "all")
+        mMomentModel.createMoment(moment, grade = momentType)
         mUserModel.sendFCMNotification(
             fcmBody,
             onSuccess = {
                 mView?.finishFragment()
-                Log.d("notification"," notification success")
         }, onFailure = {
             mView?.showError(it)
         })

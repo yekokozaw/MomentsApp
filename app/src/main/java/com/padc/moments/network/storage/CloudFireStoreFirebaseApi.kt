@@ -12,9 +12,9 @@ interface CloudFireStoreFirebaseApi {
     fun updateFCMToken( userId: String,token : String)
     fun updateAndUploadProfileImage(bitmap: Bitmap, user: UserVO)
     fun getUsers(
-        onSuccess: (users: List<UserVO>) -> Unit, onFailure: (String) -> Unit
+        onSuccess: (users: List<UserVO>) -> Unit,
+        onFailure: (String) -> Unit
     )
-
 
     fun getSpecificUser(userId: String,onSuccess: (users: UserVO) -> Unit, onFailure: (String) -> Unit)
 
@@ -31,7 +31,9 @@ interface CloudFireStoreFirebaseApi {
 
     fun clearMomentImages()
     fun getMoments(
-        onSuccess: (moments: List<MomentVO>) -> Unit, onFailure: (String) -> Unit
+        momentType : String,
+        onSuccess: (moments: List<MomentVO>) -> Unit,
+        onFailure: (String) -> Unit
     )
 
     fun createContact(scannerId: String, qrExporterId: String, contact: UserVO)

@@ -8,27 +8,38 @@ import com.padc.moments.network.storage.CloudFireStoreFirebaseApi
 
 interface UserModel {
 
-    var mFirebaseApi:CloudFireStoreFirebaseApi
+    var mFirebaseApi: CloudFireStoreFirebaseApi
 
     fun addUser(user: UserVO)
 
-    fun addUserToGroup(userId: String,grade: String,token: String)
+    fun addUserToGroup(userId: String, grade: String, token: String)
 
     fun getTokenByGroup(
-        group : String,
-        onSuccess: (tokens : List<String>) -> Unit,
+        group: String,
+        onSuccess: (tokens: List<String>) -> Unit,
         onFailure: (String) -> Unit
     )
 
     fun updateAndUploadProfileImage(bitmap: Bitmap, user: UserVO)
 
-    fun getUsers(onSuccess: (users: List<UserVO>) -> Unit, onFailure: (String) -> Unit)
+    fun getUsers(
+        onSuccess: (users: List<UserVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
-    fun getSpecificUser(userId: String,onSuccess: (users: UserVO) -> Unit, onFailure: (String) -> Unit)
+    fun getSpecificUser(
+        userId: String,
+        onSuccess: (users: UserVO) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
-    fun createContact(scannerId:String,qrExporterId:String,contact: UserVO)
+    fun createContact(scannerId: String, qrExporterId: String, contact: UserVO)
 
-    fun getContacts(scannerId:String,onSuccess: (users: List<UserVO>) -> Unit, onFailure: (String) -> Unit)
+    fun getContacts(
+        scannerId: String,
+        onSuccess: (users: List<UserVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
     fun sendFCMNotification(
         fcmBody: FCMBody,
@@ -36,6 +47,6 @@ interface UserModel {
         onFailure: (String) -> Unit
     )
 
-    fun uploadFCMToken(userId : String,token : String)
+    fun uploadFCMToken(userId: String, token: String)
 
 }

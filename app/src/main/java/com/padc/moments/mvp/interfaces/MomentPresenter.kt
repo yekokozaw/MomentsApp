@@ -9,6 +9,7 @@ interface MomentPresenter  : BasePresenter<MomentView> , MomentItemActionDelegat
 
     fun createMoment(moment:MomentVO,grade : String)
 
+    fun getMomentType(type : String)
     fun deleteMoment(momentId: String)
 
     fun getUserId(): String

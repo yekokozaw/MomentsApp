@@ -13,6 +13,9 @@ data class TokenVO(
     @ColumnInfo(name = "email")
     val email : String?,
 
+    @ColumnInfo(name="user_id")
+    val userId : String?,
+
     @PrimaryKey
     val id : Int? = 1
 )

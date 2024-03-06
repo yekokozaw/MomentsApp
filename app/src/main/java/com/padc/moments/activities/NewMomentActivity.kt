@@ -71,6 +71,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         setUpRecyclerView()
         mGrade = intent.getStringExtra(GRADE).toString()
 
+        mPresenter.getMomentType(mGrade)
         mPresenter.getTokenByGroup(group = "second")
         mPresenter.onUIReady( this)
     }

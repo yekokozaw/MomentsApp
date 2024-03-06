@@ -8,7 +8,7 @@ import com.padc.moments.network.storage.PresenceManager
 object FirebaseAuthManager : AuthManager {
 
     private val mFirebaseAuth = FirebaseAuth.getInstance()
-    private lateinit var mPresenceManager: PresenceManager
+    //private lateinit var mPresenceManager: PresenceManager
 
     override fun login(
         phoneNumber: String,
@@ -39,9 +39,6 @@ object FirebaseAuthManager : AuthManager {
         onSuccess: (user:UserVO) -> Unit,
         onFailure: (String) -> Unit
     ) {
-
-        mPresenceManager = PresenceManager(getUserId())
-        mPresenceManager.addUserId(false)
 
         mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful && it.isComplete) {

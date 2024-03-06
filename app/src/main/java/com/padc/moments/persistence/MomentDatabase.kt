@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.padc.moments.data.vos.TokenVO
 import com.padc.moments.persistence.daos.MomentDao
 
-@Database(entities = [TokenVO::class], version = 1, exportSchema = false)
+@Database(entities = [TokenVO::class], version = 2, exportSchema = false)
 abstract class MomentDatabase : RoomDatabase() {
 
     abstract fun getDao() : MomentDao

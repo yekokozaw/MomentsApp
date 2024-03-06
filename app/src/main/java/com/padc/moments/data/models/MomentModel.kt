@@ -25,7 +25,9 @@ interface MomentModel {
     fun clearMomentImages()
 
     fun getMoments(
-        onSuccess: (moments: List<MomentVO>) -> Unit, onFailure: (String) -> Unit
+        type : String,
+        onSuccess: (moments: List<MomentVO>) -> Unit,
+        onFailure: (String) -> Unit
     )
 
     fun addLikedToMoment(momentId: String,likes : Map<String, String>)

@@ -58,6 +58,7 @@ class MomentFragment : Fragment(), MomentView {
         setUpViewPods()
         setUpListeners()
 
+        mPresenter.getMomentType("all")
         mPresenter.getUserData()
         mPresenter.onUIReady(this)
         mPresenter.getMomentsFromUserBookmarked(mPresenter.getUserId())

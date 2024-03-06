@@ -37,27 +37,10 @@
             android:exported="false"
             android:theme="@style/TranslucentTheme" />
         <activity
-            android:name=".activities.NewGroupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.NewContactActivity"
-            android:exported="false"
-            android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation" />
-        <activity
-            android:name=".activities.CaptureActivityPortrait"
-            android:screenOrientation="sensorPortrait"
-            android:stateNotNeeded="true"
-            android:theme="@style/zxing_CaptureTheme"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
             android:name=".activities.ChatDetailActivity"
             android:exported="false" />
         <activity
             android:name=".activities.NewMomentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.RegisterVerificationActivity"
             android:exported="false" />
         <activity
             android:name=".activities.RegisterActivity"

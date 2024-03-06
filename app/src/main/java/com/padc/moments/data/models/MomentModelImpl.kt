@@ -49,10 +49,11 @@ object MomentModelImpl : MomentModel {
     }
 
     override fun getMoments(
+        type : String,
         onSuccess: (moments: List<MomentVO>) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        mFirebaseApi.getMoments(onSuccess = onSuccess, onFailure = onFailure)
+        mFirebaseApi.getMoments(type,onSuccess = onSuccess, onFailure = onFailure)
     }
 
     override fun addLikedToMoment(momentId: String,likes : Map<String, String>) {

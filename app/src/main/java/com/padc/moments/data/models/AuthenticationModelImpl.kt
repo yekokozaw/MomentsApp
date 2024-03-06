@@ -5,7 +5,6 @@ import com.padc.moments.data.vos.TokenVO
 import com.padc.moments.data.vos.UserVO
 import com.padc.moments.network.auth.AuthManager
 import com.padc.moments.network.auth.FirebaseAuthManager
-import com.padc.moments.network.storage.PresenceManager
 import com.padc.moments.persistence.MomentDatabase
 
 object AuthenticationModelImpl : AuthenticationModel {
@@ -44,7 +43,8 @@ object AuthenticationModelImpl : AuthenticationModel {
     }
 
     override fun getUserId(): String {
-        return mAuthManager.getUserId()
+        val token = mMomentDatabase?.getDao()?.getToken()
+        return token?.userId.toString()
     }
 
     override fun addToken(token: TokenVO) {

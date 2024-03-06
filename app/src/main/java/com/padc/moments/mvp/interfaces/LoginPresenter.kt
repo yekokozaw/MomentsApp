@@ -6,4 +6,6 @@ interface LoginPresenter : BasePresenter<LoginView> {
     fun onTapBackButton()
     fun onTapLoginButton( fcmToken : String,phoneNumber: String, email: String, password: String)
 
+    fun getUserId()
+
 }

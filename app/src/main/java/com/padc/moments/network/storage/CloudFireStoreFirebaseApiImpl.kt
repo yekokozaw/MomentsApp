@@ -165,7 +165,7 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                 error?.let {
                     onFailure(it.localizedMessage ?: "Check Internet Connection")
                 } ?: run {
-                    val userList: MutableList<UserVO> = arrayListOf()
+                    //val userList: MutableList<UserVO> = arrayListOf()
                     val data = value?.data
                     val id = data?.get("id") as String
                     val name = data["name"] as String
@@ -250,10 +250,11 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
     }
 
     override fun getMoments(
+        momentType : String,
         onSuccess: (moments: List<MomentVO>) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        database.collection("moments")
+        database.collection(momentType)
             .addSnapshotListener { value, error ->
                 error?.let {
                     onFailure(it.localizedMessage ?: "Check Internet Connection")

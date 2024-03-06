@@ -7,8 +7,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.messaging.FirebaseMessaging
+import com.padc.moments.data.models.AuthenticationModel
+import com.padc.moments.data.models.AuthenticationModelImpl
 import com.padc.moments.data.models.UserModel
 import com.padc.moments.data.models.UserModelImpl
+import com.padc.moments.data.vos.TokenVO
 import com.padc.moments.databinding.ActivityLoginBinding
 import com.padc.moments.mvp.impls.LoginPresenterImpl
 import com.padc.moments.mvp.interfaces.LoginPresenter
@@ -21,6 +24,7 @@ class LoginActivity : AppCompatActivity() , LoginView {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var mPresenter:LoginPresenter
     private lateinit var fcmToken:String
+    private val mAuthModel : AuthenticationModel = AuthenticationModelImpl
     private val mAuthManager : AuthManager = FirebaseAuthManager
     private val mUserModel : UserModel = UserModelImpl
     companion object {
@@ -42,6 +46,7 @@ class LoginActivity : AppCompatActivity() , LoginView {
         setUpPresenter()
         setUpListeners()
 
+        mPresenter.getUserId()
     }
 
     private fun setUpPresenter() {
@@ -80,6 +85,7 @@ class LoginActivity : AppCompatActivity() , LoginView {
         mUserModel.getSpecificUser(
             userId,
             onSuccess = {
+                mAuthModel.addToken(TokenVO("token",it.email, userId = it.userId ))
                 if (it.gender == "student")
                     mUserModel.addUserToGroup(it.userId,it.grade,fcmToken)
             },

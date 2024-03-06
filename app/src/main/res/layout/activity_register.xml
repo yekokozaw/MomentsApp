@@ -11,6 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ProgressBar
+            android:id="@+id/progressBarRegister"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnBackRegister"
             android:layout_width="wrap_content"
@@ -248,7 +255,7 @@
             android:layout_marginTop="@dimen/margin_xlarge"
             android:layout_marginEnd="@dimen/margin_xlarge"
             android:fontFamily="@font/yorkie_demo_regular"
-            android:hint="Phone number"
+            android:hint="@string/lbl_phone_number"
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:paddingBottom="@dimen/margin_large"

@@ -16,6 +16,7 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
 
     private var mView:MomentView? = null
     private var userName : String = ""
+    private var momentType : String = ""
     private val mMomentModel:MomentModel = MomentModelImpl
     private val mUserModel : UserModel = UserModelImpl
     private val mAuthModel:AuthenticationModel = AuthenticationModelImpl
@@ -25,6 +26,7 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
 
     override fun onUIReady(lifecycleOwner: LifecycleOwner) {
         mMomentModel.getMoments(
+            type = momentType,
             onSuccess =  {
                 mView?.showMoments(it)
             },
@@ -60,6 +62,10 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
 
     override fun createMoment(moment: MomentVO,grade : String) {
         mMomentModel.createMoment(moment,grade)
+    }
+
+    override fun getMomentType(type: String) {
+        momentType = type
     }
 
     override fun deleteMoment(momentId: String) {

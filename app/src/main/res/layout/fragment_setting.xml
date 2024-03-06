@@ -203,24 +203,31 @@
         android:paddingEnd="@dimen/margin_medium_3"
         android:paddingBottom="@dimen/margin_14dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
+            android:id="@+id/tvfcm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:fontFamily="@font/nunito_sans_semibold"
-            android:gravity="center"
-            android:text="@string/lbl_moments_labs"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="@dimen/text_regular_2x"
-            tools:ignore="RelativeOverlap" />
+            android:text="@string/lbl_fcm_key"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:textColor="@color/colorSecondaryText"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/ivCopyToken"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/copy_clipboard"
+            android:layout_toEndOf="@id/tvfcm"
+            android:contentDescription="@string/content_copy_clipboard"
+            android:layout_marginStart="@dimen/margin_medium_2"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etFcm"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/baseline_arrow_forward_ios_accent_24dp" />
+            android:layout_below="@id/tvfcm"
+            android:focusable="false"
+            android:backgroundTint="@color/white" />
 
     </RelativeLayout>
 
@@ -236,11 +243,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
             android:fontFamily="@font/nunito_sans_bold"
             android:gravity="center"
             android:text="@string/lbl_log_out"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/text_regular_2x" />
 
     </RelativeLayout>
