@@ -12,6 +12,7 @@ interface MomentModel {
 
     fun deleteMoment(
         momentId: String,
+        grade: String,
         onSuccess: (String) -> Unit,
         onFailure: (String) -> Unit
     )
@@ -30,7 +31,7 @@ interface MomentModel {
         onFailure: (String) -> Unit
     )
 
-    fun addLikedToMoment(momentId: String,likes : Map<String, String>)
+    fun addLikedToMoment(momentId: String,likes : Map<String, String>,grade: String)
 
     fun addMomentToUserBookmarked(currentUserId:String,moment: MomentVO)
     fun deleteMomentFromUserBookmarked(currentUserId: String,momentId:String)

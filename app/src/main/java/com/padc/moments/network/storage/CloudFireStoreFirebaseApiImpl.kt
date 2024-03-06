@@ -219,10 +219,11 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
 
     override fun deleteMoment(
         momentId: String,
+        grade: String,
         onSuccess: (String) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        database.collection("moments")
+        database.collection(grade)
             .document(momentId)
             .delete()
             .addOnSuccessListener {
@@ -382,8 +383,8 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
-    override fun addLikedToMoment(momentId: String,likes : Map<String, String>) {
-        database.collection("moments")
+    override fun addLikedToMoment(momentId: String,likes : Map<String, String>,grade: String) {
+        database.collection("all")
             .document(momentId)
     .update("Liked",likes)
     .addOnSuccessListener {

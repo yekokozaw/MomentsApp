@@ -68,9 +68,10 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
         momentType = type
     }
 
-    override fun deleteMoment(momentId: String) {
+    override fun deleteMoment(momentId: String,grade: String) {
         mMomentModel.deleteMoment(
-            momentId,
+            grade = grade,
+            momentId = momentId,
             onSuccess = {
                 mView?.showDeleteSuccessfulMessage(it)
             },
@@ -84,9 +85,9 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
         return mAuthModel.getUserId()
     }
 
-    override fun addLikedToMoment(momentId: String,likes : Map<String, String>) {
+    override fun addLikedToMoment(momentId: String,likes : Map<String, String>,grade: String) {
         val likeList = likes + Pair(getUserId(),userName)
-        mMomentModel.addLikedToMoment(momentId = momentId, likeList)
+        mMomentModel.addLikedToMoment(momentId = momentId, likeList,grade)
     }
 
     override fun getUserData() {
@@ -100,9 +101,9 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
 
             })
     }
-    override fun deleteLikedToMoment(momentId: String, likes: Map<String, String>) {
+    override fun deleteLikedToMoment(momentId: String, likes: Map<String, String>,grade: String) {
         val likeList = likes - getUserId()
-        mMomentModel.addLikedToMoment(momentId = momentId, likeList)
+        mMomentModel.addLikedToMoment(momentId = momentId, likeList,grade)
     }
 
     override fun addMomentToUserBookmarked(currentUserId: String, moment: MomentVO) {

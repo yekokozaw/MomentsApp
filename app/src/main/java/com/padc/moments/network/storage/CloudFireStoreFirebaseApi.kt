@@ -22,6 +22,7 @@ interface CloudFireStoreFirebaseApi {
 
     fun deleteMoment(
         momentId: String,
+        grade: String,
         onSuccess: (String) -> Unit,
         onFailure: (String) -> Unit
     )
@@ -49,7 +50,7 @@ interface CloudFireStoreFirebaseApi {
         onSuccess: (tokens : List<String>) -> Unit,
         onFailure: (String) -> Unit
     )
-    fun addLikedToMoment(momentId: String,likes : Map<String, String>)
+    fun addLikedToMoment(momentId: String,likes : Map<String, String>,grade: String)
 
     fun getCommentFromMoment(momentId : String,onSuccess: (comments :List<CommentVO>)-> Unit,onFailure: (String) -> Unit)
     fun addCommentToMoment(momentId : String,comment : CommentVO,onSuccess: (String) -> Unit,onFailure: (String) -> Unit)

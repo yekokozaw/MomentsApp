@@ -30,11 +30,11 @@ class MomentImagesViewHolder(itemView: View,private val delegate: MomentItemActi
             .load(image)
             .placeholder(R.drawable.placeholder_image)
             .error(R.drawable.placeholder_image)
-            .override(7000,900)
+            .override(700,900)
             .into(binding.ivMomentPictureMoment)
 
         val currentCount = adapterPosition + 1
-        val imageCount : String= "$currentCount/${itemCount}"
+        val imageCount = "$currentCount/${itemCount}"
         binding.tvImageCount.text = imageCount
     }
 }

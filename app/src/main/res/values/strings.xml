@@ -77,4 +77,7 @@
     <string name="lbl_create_account">Create Account</string>
     <string name="bll_first_year">First Year</string>
     <string name="lbl_class">Class</string>
+    <string name="lbl_fcm_key">FCM Key</string>
+    <string name="content_copy_clipboard">copy clipBoard</string>
+    <string name="lbl_phone_number">Phone number</string>
 </resources>

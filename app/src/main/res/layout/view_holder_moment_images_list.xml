@@ -5,10 +5,14 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight">
 
+<!--    when I set layout height to wrap_content. the ui has error.
+        the ui set image height to 0 because ui don't know the image is coming from the network.
+        this error occurred when I update the firebase.
+-->
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivMomentPictureMoment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_gravity="center"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/my_profile" />

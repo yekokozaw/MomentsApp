@@ -58,6 +58,7 @@ class MomentFragment : Fragment(), MomentView {
         setUpViewPods()
         setUpListeners()
 
+        Log.d("lifecycle","On viewCreated")
         mPresenter.getMomentType("all")
         mPresenter.getUserData()
         mPresenter.onUIReady(this)
@@ -115,11 +116,11 @@ class MomentFragment : Fragment(), MomentView {
             if (id == moment.id) {
                 if (isLike) {
                     moment.isLiked = true
-                    mPresenter.addLikedToMoment(id,likes)
+                    mPresenter.addLikedToMoment(id,likes,"all")
                     break
                 } else {
                     moment.isLiked = false
-                    mPresenter.deleteLikedToMoment(id,likes)
+                    mPresenter.deleteLikedToMoment(id,likes,"all")
                     break
                 }
             }
@@ -181,7 +182,7 @@ class MomentFragment : Fragment(), MomentView {
                         .setCancelable(false)
                         .setPositiveButton("Yes") { deleteDialog, _ ->
                             Log.i("MomentId",momentId)
-                            mPresenter.deleteMoment(momentId)
+                            mPresenter.deleteMoment(momentId,"all")
                             deleteDialog?.dismiss()
                             dialog.dismiss()
                         }

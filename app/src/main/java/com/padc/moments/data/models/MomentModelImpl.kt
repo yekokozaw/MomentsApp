@@ -18,10 +18,11 @@ object MomentModelImpl : MomentModel {
 
     override fun deleteMoment(
         momentId: String,
+        grade: String,
         onSuccess: (String) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        mFirebaseApi.deleteMoment(momentId, onSuccess, onFailure)
+        mFirebaseApi.deleteMoment(momentId,grade, onSuccess, onFailure)
     }
 
     override fun updateAndUploadMomentImage(bitmap: Bitmap) {
@@ -56,8 +57,8 @@ object MomentModelImpl : MomentModel {
         mFirebaseApi.getMoments(type,onSuccess = onSuccess, onFailure = onFailure)
     }
 
-    override fun addLikedToMoment(momentId: String,likes : Map<String, String>) {
-        mFirebaseApi.addLikedToMoment(momentId,likes)
+    override fun addLikedToMoment(momentId: String,likes : Map<String, String>,grade: String) {
+        mFirebaseApi.addLikedToMoment(momentId,likes,grade)
     }
 
     override fun addMomentToUserBookmarked(currentUserId: String, moment: MomentVO) {

@@ -35,6 +35,4 @@ class MomentAdapter(private val delegate:MomentItemActionDelegate) : RecyclerVie
         mTabName = tabName
         notifyDataSetChanged()
     }
-
-
 }

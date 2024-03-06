@@ -9,6 +9,8 @@ import com.padc.moments.adapters.MomentImagesAdapter
 import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.databinding.ViewHolderMomentListBinding
 import com.padc.moments.delegates.MomentItemActionDelegate
+import com.padc.moments.utils.hide
+import com.padc.moments.utils.show
 
 class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDelegate) : RecyclerView.ViewHolder(itemView) {
 
@@ -62,8 +64,11 @@ class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDele
             .placeholder(R.drawable.placeholder_image)
             .into(binding.ivMomentProfilePic)
 
+        //if we don't set els branch,the bug can occurred
         if (data.imageUrl.isEmpty())
-            binding.viewPagerMomentImages.visibility = View.GONE
+            binding.viewPagerMomentImages.hide()
+        else
+            binding.viewPagerMomentImages.show()
 
         setUpMomentImages()
         mAdapter.setNewData(changeImageStringToList(data.imageUrl))

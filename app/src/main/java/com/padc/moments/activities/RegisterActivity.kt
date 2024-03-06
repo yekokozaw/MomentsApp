@@ -105,10 +105,6 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             dialog.setContentView(dialogBinding.root)
             dialog.setCancelable(true)
 
-            dialogBinding.btnTakePhotoRegister.setOnClickListener {
-                mPresenter.onTapOpenCameraButton()
-            }
-
             dialogBinding.btnChooseFromGalleryRegister.setOnClickListener {
                 mPresenter.onTapProfileImage()
             }
