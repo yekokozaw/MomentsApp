@@ -31,7 +31,7 @@ class MomentFragment : Fragment(), MomentView {
 
     // Presenter
     private lateinit var mPresenter: MomentPresenter
-
+    private val mType = "all"
     // ViewPods
     private lateinit var mViewpod: MomentViewPod
 
@@ -58,7 +58,6 @@ class MomentFragment : Fragment(), MomentView {
         setUpViewPods()
         setUpListeners()
 
-        Log.d("lifecycle","On viewCreated")
         mPresenter.getMomentType("all")
         mPresenter.getUserData()
         mPresenter.onUIReady(this)
@@ -108,7 +107,7 @@ class MomentFragment : Fragment(), MomentView {
     }
 
     override fun navigateToCommentScreen(momentId: String) {
-        startActivity(CommentActivity.newIntent(requireActivity(),momentId))
+        startActivity(CommentActivity.newIntent(requireActivity(),momentId,mType))
     }
 
     override fun getMomentIsLiked(id : String, likes : Map<String,String>, isLike : Boolean) {
@@ -116,11 +115,11 @@ class MomentFragment : Fragment(), MomentView {
             if (id == moment.id) {
                 if (isLike) {
                     moment.isLiked = true
-                    mPresenter.addLikedToMoment(id,likes,"all")
+                    mPresenter.addLikedToMoment(id,likes,mType)
                     break
                 } else {
                     moment.isLiked = false
-                    mPresenter.deleteLikedToMoment(id,likes,"all")
+                    mPresenter.deleteLikedToMoment(id,likes,mType)
                     break
                 }
             }

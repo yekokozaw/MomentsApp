@@ -18,9 +18,20 @@ interface MomentModel {
     )
     fun updateAndUploadMomentImage(bitmap: Bitmap)
 
-    fun addCommentToMoment(momentId : String,comment : CommentVO,onSuccess: (String) -> Unit,onFailure: (String) -> Unit)
+    fun addCommentToMoment(
+        momentId: String,
+        comment: CommentVO,
+        momentType : String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
-    fun getCommentFromMoment(momentId : String,onSuccess: (comments :List<CommentVO>)-> Unit,onFailure: (String) -> Unit)
+    fun getCommentFromMoment(
+        momentId: String,
+        momentType: String,
+        onSuccess: (comments: List<CommentVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
     fun getMomentImages(): String
 
     fun clearMomentImages()

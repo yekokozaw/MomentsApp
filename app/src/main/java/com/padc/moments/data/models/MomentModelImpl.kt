@@ -29,16 +29,23 @@ object MomentModelImpl : MomentModel {
         mFirebaseApi.updateAndUploadMomentImage(bitmap)
     }
 
-    override fun addCommentToMoment(momentId: String, comment: CommentVO, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
-        mFirebaseApi.addCommentToMoment(momentId, comment,onSuccess,onFailure)
+    override fun addCommentToMoment(
+        momentId: String,
+        comment: CommentVO,
+        momentType : String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.addCommentToMoment(momentId, comment,momentType, onSuccess, onFailure)
     }
 
     override fun getCommentFromMoment(
         momentId: String,
+        momentType: String,
         onSuccess: (comments: List<CommentVO>) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        mFirebaseApi.getCommentFromMoment(momentId,onSuccess,onFailure)
+        mFirebaseApi.getCommentFromMoment(momentId,momentType,onSuccess,onFailure)
     }
 
     override fun getMomentImages(): String {

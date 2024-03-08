@@ -384,7 +384,7 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
     }
 
     override fun addLikedToMoment(momentId: String,likes : Map<String, String>,grade: String) {
-        database.collection("all")
+        database.collection(grade)
             .document(momentId)
     .update("Liked",likes)
     .addOnSuccessListener {
@@ -396,10 +396,11 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
 
     override fun getCommentFromMoment(
         momentId: String,
+        momentType: String,
         onSuccess: (comments :List<CommentVO>)-> Unit,
         onFailure: (String) -> Unit
     ) {
-        database.collection("moments")
+        database.collection(momentType)
             .document(momentId)
             .collection("Comments")
             .addSnapshotListener { value, error ->
@@ -427,8 +428,14 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
-    override fun addCommentToMoment(momentId: String, comment: CommentVO, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
-        database.collection("moments")
+    override fun addCommentToMoment(
+        momentId: String,
+        comment: CommentVO,
+        momentType: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        database.collection(momentType)
             .document(momentId)
             .collection("Comments")
             .document(comment.timestamp.toString())

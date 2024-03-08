@@ -30,11 +30,14 @@ class CommentActivity : AppCompatActivity() {
     private lateinit var mUser : UserVO
     private val mAuthModel: AuthenticationModel = AuthenticationModelImpl
     private var mMomentId : String = ""
+    private var momentType : String = ""
 
     companion object{
+        private const val TYPE = "type"
         private const val EXTRA_MOMENT_ID = "EXTRA_IMAGE_ID"
-        fun newIntent(context: Context, momentId: String) : Intent {
+        fun newIntent(context: Context, momentId: String,type : String) : Intent {
             val intent =  Intent(context,CommentActivity::class.java)
+            intent.putExtra(TYPE,type)
             intent.putExtra(EXTRA_MOMENT_ID,momentId)
             return intent
         }
@@ -44,6 +47,7 @@ class CommentActivity : AppCompatActivity() {
         mBinding = ActivityCommentBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
+        momentType = intent.getStringExtra(TYPE).toString()
         mMomentId = intent.getStringExtra(EXTRA_MOMENT_ID).toString()
         setUpRecyclerView()
 
@@ -67,6 +71,7 @@ class CommentActivity : AppCompatActivity() {
 
         mMomentModel.getCommentFromMoment(
             mMomentId,
+            momentType,
             onSuccess = {
                 mCommentAdapter.setNewData(it)
             },
@@ -78,6 +83,7 @@ class CommentActivity : AppCompatActivity() {
             mMomentModel.addCommentToMoment(
                 mMomentId,
                 getCommentData(),
+                momentType = momentType,
                 onSuccess = {
                     mBinding.etComment.setText("")
                     Toast.makeText(this,it,Toast.LENGTH_SHORT).show()
