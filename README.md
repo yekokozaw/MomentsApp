@@ -1,2 +1,2 @@
 # WeChat-Redesign-PADC
-It is the final project
+This is a social app for students and teachers.
