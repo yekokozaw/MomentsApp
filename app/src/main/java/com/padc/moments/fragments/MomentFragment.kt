@@ -107,7 +107,7 @@ class MomentFragment : Fragment(), MomentView {
     }
 
     override fun navigateToCommentScreen(momentId: String) {
-        startActivity(CommentActivity.newIntent(requireActivity(),momentId,mType))
+        startActivity(CommentActivity.newIntent(requireActivity(),momentId,mType,))
     }
 
     override fun getMomentIsLiked(id : String, likes : Map<String,String>, isLike : Boolean) {

@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_below="@id/btnBackLogin"
             android:layout_marginStart="@dimen/margin_38dp"
-            android:layout_marginTop="@dimen/margin_xxlarge"
+            android:layout_marginTop="@dimen/margin_large"
             android:fontFamily="@font/yorkie_demo_bold"
             android:text="@string/welcome_lbl"
             android:textColor="@color/colorPrimaryText"
@@ -51,7 +51,7 @@
             android:background="@color/colorPrimary"
             android:layout_centerHorizontal="true"
             android:scaleType="centerCrop"
-            android:layout_marginTop="@dimen/margin_40dp"
+            android:layout_marginTop="@dimen/margin_xlarge"
             app:srcCompat="@drawable/login_illustration" />
 
         <androidx.appcompat.widget.AppCompatTextView

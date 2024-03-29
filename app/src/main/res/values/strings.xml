@@ -80,4 +80,8 @@
     <string name="lbl_fcm_key">FCM Key</string>
     <string name="content_copy_clipboard">copy clipBoard</string>
     <string name="lbl_phone_number">Phone number</string>
+    <string name="txt_privacy">Welcome to our Social App! We understand the importance of privacy and are committed to protecting the personal information of our users. This Privacy Policy outlines how we collect, use, and safeguard the information provided to us.</string>
+    <string name="lbl_close">Close</string>
+    <string name="lbl_privacy_policy">Privacy Policy</string>
+    <string name="help_and_support">Help and Support</string>
 </resources>

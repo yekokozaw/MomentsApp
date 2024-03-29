@@ -24,14 +24,15 @@ import com.padc.moments.network.auth.AuthManager
 import com.padc.moments.network.auth.FirebaseAuthManager
 import com.padc.moments.network.storage.PresenceManager
 import com.padc.moments.network.storage.subscribeToTopic
+import com.padc.moments.utils.TimestampManager
+import com.padc.moments.utils.makeToast
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
     private val mAuthModel : AuthenticationModel = AuthenticationModelImpl
-    private val mAuthManager : AuthManager = FirebaseAuthManager
-    private  lateinit var mPresenceManager: PresenceManager
     private var isNetworkConnected = false
+    private lateinit var mTimestampManager : TimestampManager
     companion object {
         fun newIntent(context: Context): Intent {
             return Intent(context, MainActivity::class.java)
@@ -51,12 +52,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         checkNetwork()
         subscribeToTopic("all")
-        val userId = mAuthManager.getUserId()
-        mPresenceManager = PresenceManager(userId)
-        mPresenceManager.setUserOnline()
         setUpBottomNavigationView()
+        mTimestampManager = TimestampManager(this)
+        makeToast(this,"${mTimestampManager.getTimestamp()}")
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        val currentTime = System.currentTimeMillis()
+        mTimestampManager.storeTimestamp(currentTime)
+    }
     private fun setUpBottomNavigationView() {
         switchFragment(MomentFragment())
         val userId = mAuthModel.getUserId()

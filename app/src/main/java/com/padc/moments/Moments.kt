@@ -2,16 +2,16 @@ package com.padc.moments
 
 import android.app.Application
 import com.padc.moments.data.models.AuthenticationModelImpl
-import com.padc.moments.data.models.UserModelImpl
-import com.padc.moments.network.auth.AuthManager
-import com.padc.moments.network.auth.FirebaseAuthManager
-import com.padc.moments.network.storage.PresenceManager
+import com.padc.moments.utils.TimestampManager
 
 class Moments : Application() {
 
+    private lateinit var mTimeStampManager : TimestampManager
     override fun onCreate() {
         super.onCreate()
+        mTimeStampManager = TimestampManager(applicationContext)
         AuthenticationModelImpl.initDatabase(applicationContext)
     }
+
 
 }

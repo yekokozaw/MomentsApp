@@ -116,8 +116,9 @@
         android:layout_toStartOf="@+id/btnMomentBookmark"
         android:layout_marginTop="@dimen/margin_medium_2"
         android:layout_below="@+id/viewPagerMomentImages"
-        android:layout_marginEnd="@dimen/margin_card_medium_2"
+        android:layout_marginEnd="@dimen/margin_medium_2"
         android:textSize="@dimen/text_15sp"
+        android:text="7"
         android:textColor="@color/colorPrimaryText"
         android:fontFamily="@font/inter_medium" />
 
@@ -141,6 +142,5 @@
         android:layout_marginTop="@dimen/margin_medium_2"
         android:layout_below="@id/ivPostComment"
         android:background="@color/colorWhiteGrey"/>
-
 
 </RelativeLayout>

@@ -10,6 +10,6 @@ data class MomentVO(
     var likedList: Map<String, String>?,
     var likes:String = "",
     var isLiked: Boolean = false,
-    var isBookmarked:Boolean = false
-
+    var isBookmarked:Boolean = false,
+    var commentCount : Int = 0
 )

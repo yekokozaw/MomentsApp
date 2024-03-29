@@ -9,7 +9,6 @@ import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.AdapterView
@@ -150,13 +149,13 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     }
 
     private fun setUpGenderRadioGroup() {
-        binding.rbMale.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.rbMale.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 gender = "teacher"
             }
         }
 
-        binding.rbFemale.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.rbFemale.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 gender = "student"
             }
@@ -188,7 +187,6 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 grade = p0.toString()
-                Log.d("grade",grade)
             }
         }
 

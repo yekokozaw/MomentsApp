@@ -55,10 +55,14 @@ class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDele
     fun bindData(data: MomentVO, tabName: String) {
         mMoment = data
         binding.tvMomentLastOnline.text = getTimeAgo(data.id.toLong())
-        binding.tvLikes.text = data.likedList?.size.toString()
+        when(val likes = data.likedList?.size.toString()){
+            "0" -> binding.tvLikes.text = "0"
+            "1" -> binding.tvLikes.text = "1 like"
+            else -> binding.tvLikes.text = "$likes likes"
+        }
         binding.tvMomentProfileName.text = data.userName
         binding.tvMomentCaption.text = data.caption
-
+        binding.tvPostNumberOfComments.text = data.commentCount.toString()
         Glide.with(itemView.context)
             .load(data.userProfileImage)
             .placeholder(R.drawable.placeholder_image)

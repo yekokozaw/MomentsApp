@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace 'com.padc.moments'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.padc.moments"
         minSdk 23
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -78,6 +78,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-inappmessaging-display'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
     // Retrofit
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
@@ -101,10 +104,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
     //Room
-    implementation "androidx.room:room-common:2.4.3"
-    implementation "androidx.room:room-ktx:2.4.3"
-    kapt "androidx.room:room-compiler:2.4.3"
+    implementation "androidx.room:room-common:2.6.1"
+    implementation "androidx.room:room-ktx:2.6.1"
+    kapt "androidx.room:room-compiler:2.6.1"
 
+    //work manager
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
     //Photo Picker
     implementation 'androidx.media:media:1.4.0'
     // ViewModel

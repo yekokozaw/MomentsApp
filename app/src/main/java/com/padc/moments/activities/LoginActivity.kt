@@ -85,6 +85,7 @@ class LoginActivity : AppCompatActivity() , LoginView {
         mUserModel.getSpecificUser(
             userId,
             onSuccess = {
+                startActivity(MainActivity.newIntent(this))
                 mAuthModel.addToken(TokenVO("token",it.email, userId = it.userId ))
                 if (it.gender == "student")
                     mUserModel.addUserToGroup(it.userId,it.grade,fcmToken)
@@ -93,7 +94,6 @@ class LoginActivity : AppCompatActivity() , LoginView {
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
         )
-        startActivity(MainActivity.newIntent(this))
         finish()
     }
 

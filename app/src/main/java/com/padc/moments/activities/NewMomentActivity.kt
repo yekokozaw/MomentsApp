@@ -1,7 +1,6 @@
 package com.padc.moments.activities
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,6 +11,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -27,6 +27,8 @@ import com.padc.moments.mvp.impls.NewMomentPresenterImpl
 import com.padc.moments.mvp.interfaces.NewMomentPresenter
 import com.padc.moments.mvp.views.NewMomentView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.padc.moments.utils.makeToast
+import com.theartofdev.edmodo.cropper.CropImage
 import java.io.IOException
 
 class NewMomentActivity : AppCompatActivity(), NewMomentView {
@@ -55,17 +57,29 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         }
     }
 
-    private val openGalleryLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            val selectedImageUri: Uri? = data?.data
-            if (selectedImageUri != null) {
-                imageUri = selectedImageUri
-                uploadImage()
-            }
+    private val cropActivityResultContract = object : ActivityResultContract<Any?,Uri?>(){
+        override fun createIntent(context: Context, input: Any?): Intent {
+            return CropImage.activity()
+                .setAspectRatio(16,12)
+                .getIntent(this@NewMomentActivity)
+
         }
+
+        override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+            return CropImage.getActivityResult(intent)?.uri
+        }
+    }
+
+    private val openGalleryLauncher = registerForActivityResult(
+        cropActivityResultContract
+    ) { result ->
+        if (result != null) {
+            val selectedImageUri: Uri = result
+            imageUri = selectedImageUri
+            uploadImage()
+        }
+        else
+            makeToast(this,"invalid image")
     }
 
     companion object {
@@ -87,8 +101,19 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         mGrade = intent.getStringExtra(GRADE).toString()
 
         mPresenter.getMomentType(mGrade)
-        mPresenter.getTokenByGroup(group = "second")
         mPresenter.onUIReady( this)
+        getTokenByGroupType()
+    }
+
+    private fun getTokenByGroupType() {
+        when(mGrade){
+            "FirstYear" -> mPresenter.getTokenByGroup("first")
+            "SecondYear" -> mPresenter.getTokenByGroup("second")
+            "ThirdYear" -> mPresenter.getTokenByGroup("third")
+            "FourthYear" -> mPresenter.getTokenByGroup("fourth")
+            "FifthYear" -> mPresenter.getTokenByGroup("fifth")
+            "FinalYear" -> mPresenter.getTokenByGroup("final")
+        }
     }
 
     private fun setUpPresenter() {
@@ -113,6 +138,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
     private fun getMomentPost(): MomentVO {
         val caption = binding.etPostNewMoment.text.toString()
         val createLike = "0"
+        val commentCount = 0
         val likedList = emptyMap<String,String>()
         return MomentVO(
             System.currentTimeMillis().toString(),
@@ -122,7 +148,8 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
             caption,
             mPresenter.getMomentImages().dropLast(1),
             likedList,
-            createLike
+            createLike,
+            commentCount = commentCount
         )
     }
 

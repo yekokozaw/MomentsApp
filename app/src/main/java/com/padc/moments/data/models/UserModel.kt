@@ -14,6 +14,7 @@ interface UserModel {
 
     fun addUserToGroup(userId: String, grade: String, token: String)
 
+    fun deleteUserFromGroup(userId : String,grade: String)
     fun getTokenByGroup(
         group: String,
         onSuccess: (tokens: List<String>) -> Unit,

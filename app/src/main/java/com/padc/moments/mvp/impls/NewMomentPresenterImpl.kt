@@ -90,7 +90,7 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
         mUserModel.getTokenByGroup(group,
             onSuccess = {
                 tokens = it
-                //Log.d("tokens",it.toString())
+                Log.d("tokens",it.toString())
             }, onFailure = {
                 mView?.showError(it)
             })

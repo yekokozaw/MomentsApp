@@ -59,6 +59,15 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
+    override fun deleteUserFromGroup(userId: String, grade: String) {
+        database.collection(grade)
+            .document(userId)
+            .delete()
+            .addOnCompleteListener {
+
+            }
+    }
+
     override fun updateFCMToken(userId: String, token: String) {
 
         database.collection("users")
@@ -153,6 +162,13 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
+    override fun downloadImage(
+        imagePath: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+
+    }
 
     override fun getSpecificUser(
         userId: String,
@@ -204,7 +220,8 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             "likes" to moment.likes,
             "user_profile_image" to moment.userProfileImage,
             "caption" to moment.caption,
-            "image_url" to moment.imageUrl
+            "image_url" to moment.imageUrl,
+            "comment_size" to moment.commentCount
         )
 
         database.collection(grade)
@@ -273,6 +290,8 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                         val likes = data["likes"] as String
                         val likedList = data["Liked"] as? Map<String, String> ?: emptyMap()
                         val isBookmarked = data["is_bookmarked"] as? Boolean ?: false
+                        val commentSize = data["comment_size"] as? Long ?: 0
+
                         val moment = MomentVO(
                             id,
                             userId,
@@ -282,13 +301,56 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                             imageUrl,
                             likedList,
                             likes,
-                            isBookmarked
+                            isBookmarked,
+                            commentCount = commentSize.toInt()
                         )
                         momentList.add(moment)
                     }
                     onSuccess(momentList)
                 }
             }
+    }
+
+    override fun getSingleMoment(
+        momentType: String,
+        momentId: String,
+        onSuccess: (moment: MomentVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        database.collection(momentType)
+            .document(momentId)
+            .addSnapshotListener{value ,error ->
+                error?.let {
+                    onFailure(it.localizedMessage ?: "Check Internet Connection")
+                } ?: run {
+                    val data = value?.data
+                    val id = data?.get("id") as String
+                    val userId = data["user_id"] as? String ?: ""
+                    val userName = data["user_name"] as String
+                    val userProfileImage = data["user_profile_image"] as String
+                    val caption = data["caption"] as String
+                    val imageUrl = data["image_url"] as String
+                    val likes = data["likes"] as String
+                    val likedList = data["Liked"] as? Map<String, String> ?: emptyMap()
+                    val isBookmarked = data["is_bookmarked"] as? Boolean ?: false
+                    val commentSize = data["comment_size"] as? Long ?: 0
+                    val moment = MomentVO(
+                        "0",
+                        userId,
+                        userName,
+                        userProfileImage,
+                        caption,
+                        imageUrl,
+                        likedList,
+                        likes,
+                        isBookmarked,
+                        commentCount = commentSize.toInt()
+                    )
+                    onSuccess(moment)
+                }
+
+            }
+
     }
 
     override fun createContact(scannerId: String, qrExporterId: String, contact: UserVO) {
@@ -445,6 +507,15 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
             .addOnFailureListener {
                 onFailure("Failure")
+            }
+    }
+
+    override fun updateCommentToMoment(momentId: String, momentType: String,commentSize : Int) {
+        database.collection(momentType)
+            .document(momentId)
+            .update("comment_size",commentSize)
+            .addOnSuccessListener {
+                Log.d("success","Successful comment count")
             }
     }
 

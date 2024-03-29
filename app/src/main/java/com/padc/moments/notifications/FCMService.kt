@@ -1,9 +1,9 @@
 package com.padc.moments.notifications
 
 import android.app.PendingIntent
-import com.padc.moments.activities.ChatDetailActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.padc.moments.activities.MainActivity
 
 class FCMService : FirebaseMessagingService() {
 
@@ -23,7 +23,7 @@ class FCMService : FirebaseMessagingService() {
                 pendingIntent = PendingIntent.getActivity(
                     this,
                     0,
-                    ChatDetailActivity.newIntent(this,message.data["chat_id"] ?: "",""),
+                    MainActivity.newIntent(this),
                     PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_ONE_SHOT
                 )
             )
@@ -36,7 +36,7 @@ class FCMService : FirebaseMessagingService() {
                 pendingIntent = PendingIntent.getActivity(
                     this,
                     0,
-                    ChatDetailActivity.newIntent(this,"",message.data["chat_id"] ?: ""),
+                    MainActivity.newIntent(this),
                     PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_ONE_SHOT
                 )
             )

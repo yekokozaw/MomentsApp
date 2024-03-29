@@ -1,7 +1,6 @@
 package com.padc.moments.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,6 @@ import com.padc.moments.databinding.FragmentChatBinding
 import com.padc.moments.mvp.impls.ChatPresenterImpl
 import com.padc.moments.mvp.interfaces.ChatPresenter
 import com.padc.moments.mvp.views.ChatView
-import com.padc.moments.network.storage.PresenceManager
 
 class ChatFragment : Fragment(), ChatView {
 
@@ -108,7 +106,7 @@ class ChatFragment : Fragment(), ChatView {
                     break
                 }
             }
-            mPresenter.getLastMessage(mPresenter.getUserId(),userId)
+            mPresenter.getLastMessage(senderId = mPresenter.getUserId(), receiverId = userId)
         }
         mChatUserList.clear()
         mChatUserList = chatUserList

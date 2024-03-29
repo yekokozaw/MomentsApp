@@ -1,254 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingTop="@dimen/margin_medium_3"
     android:paddingBottom="@dimen/margin_medium_3"
     tools:context=".fragments.SettingFragment">
 
-    <RelativeLayout
-        android:id="@+id/rlCreateAccount"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingStart="@dimen/margin_medium_3"
-        android:paddingTop="@dimen/margin_14dp"
-        android:paddingEnd="@dimen/margin_medium_3"
-        android:paddingBottom="@dimen/margin_14dp">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/createAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:fontFamily="@font/nunito_sans_semibold"
-            android:gravity="center"
-            android:text="@string/lbl_create_account"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="@dimen/text_regular_2x"
-            tools:ignore="RelativeOverlap" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/baseline_arrow_forward_ios_accent_24dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_14dp"
-        android:background="@color/white"
-        android:paddingStart="@dimen/margin_medium_3"
-        android:paddingTop="@dimen/margin_14dp"
-        android:paddingEnd="@dimen/margin_medium_3"
-        android:paddingBottom="@dimen/margin_14dp">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:fontFamily="@font/nunito_sans_semibold"
-            android:gravity="center"
-            android:text="@string/lbl_message_notifications"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="@dimen/text_regular_2x"
-            tools:ignore="RelativeOverlap" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/baseline_arrow_forward_ios_accent_24dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingStart="@dimen/margin_medium_3"
-        android:paddingTop="@dimen/margin_14dp"
-        android:paddingEnd="@dimen/margin_medium_3"
-        android:paddingBottom="@dimen/margin_14dp">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:fontFamily="@font/nunito_sans_semibold"
-            android:gravity="center"
-            android:text="@string/lbl_privacy"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="@dimen/text_regular_2x"
-            tools:ignore="RelativeOverlap" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/baseline_arrow_forward_ios_accent_24dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingStart="@dimen/margin_medium_3"
-        android:paddingTop="@dimen/margin_14dp"
-        android:paddingEnd="@dimen/margin_medium_3"
-        android:paddingBottom="@dimen/margin_14dp">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:fontFamily="@font/nunito_sans_semibold"
-            android:gravity="center"
-            android:text="@string/lbl_general"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="@dimen/text_regular_2x"
-            tools:ignore="RelativeOverlap" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/baseline_arrow_forward_ios_accent_24dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_14dp"
-        android:background="@color/white"
-        android:paddingStart="@dimen/margin_medium_3"
-        android:paddingTop="@dimen/margin_14dp"
-        android:paddingEnd="@dimen/margin_medium_3"
-        android:paddingBottom="@dimen/margin_14dp">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:fontFamily="@font/nunito_sans_semibold"
-            android:gravity="center"
-            android:text="@string/lbl_help_amp_feedback"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="@dimen/text_regular_2x"
-            tools:ignore="RelativeOverlap" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/baseline_arrow_forward_ios_accent_24dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingStart="@dimen/margin_medium_3"
-        android:paddingTop="@dimen/margin_14dp"
-        android:paddingEnd="@dimen/margin_medium_3"
-        android:paddingBottom="@dimen/margin_14dp">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:fontFamily="@font/nunito_sans_semibold"
-            android:gravity="center"
-            android:text="@string/lbl_about"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="@dimen/text_regular_2x"
-            tools:ignore="RelativeOverlap" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/baseline_arrow_forward_ios_accent_24dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_14dp"
-        android:background="@color/white"
-        android:paddingStart="@dimen/margin_medium_3"
-        android:paddingTop="@dimen/margin_14dp"
-        android:paddingEnd="@dimen/margin_medium_3"
-        android:paddingBottom="@dimen/margin_14dp">
-
-        <TextView
-            android:id="@+id/tvfcm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lbl_fcm_key"
-            android:textStyle="bold"
-            android:layout_marginBottom="@dimen/margin_medium"
-            android:textColor="@color/colorSecondaryText"/>
-
-        <ImageView
-            android:id="@+id/ivCopyToken"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/copy_clipboard"
-            android:layout_toEndOf="@id/tvfcm"
-            android:contentDescription="@string/content_copy_clipboard"
-            android:layout_marginStart="@dimen/margin_medium_2"/>
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etFcm"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/rlCreateAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvfcm"
-            android:focusable="false"
-            android:backgroundTint="@color/white" />
+            android:background="@color/white"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingStart="@dimen/margin_medium_3"
+            android:paddingTop="@dimen/margin_14dp"
+            android:paddingEnd="@dimen/margin_medium_3"
+            android:paddingBottom="@dimen/margin_14dp">
 
-    </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/createAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:gravity="center"
+                android:text="@string/lbl_create_account"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/text_regular_2x"
+                tools:ignore="RelativeOverlap" />
 
-    <RelativeLayout
-        android:id="@+id/btnLogOut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_14dp"
-        android:background="@color/white"
-        android:padding="@dimen/margin_14dp">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/baseline_arrow_forward_ios_accent_24dp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlPrivacy"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/nunito_sans_bold"
-            android:gravity="center"
-            android:text="@string/lbl_log_out"
-            android:textColor="@color/colorRed"
-            android:textSize="@dimen/text_regular_2x" />
+            android:background="@color/white"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingStart="@dimen/margin_medium_3"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:paddingTop="@dimen/margin_14dp"
+            android:paddingEnd="@dimen/margin_medium_3"
+            android:paddingBottom="@dimen/margin_14dp">
 
-    </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:gravity="center"
+                android:text="@string/lbl_privacy"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/text_regular_2x"
+                tools:ignore="RelativeOverlap" />
 
-</LinearLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/baseline_arrow_forward_ios_accent_24dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlHelpAndSupport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_14dp"
+            android:background="@color/white"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingStart="@dimen/margin_medium_3"
+            android:paddingTop="@dimen/margin_14dp"
+            android:paddingEnd="@dimen/margin_medium_3"
+            android:paddingBottom="@dimen/margin_14dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:gravity="center"
+                android:text="@string/lbl_help_amp_feedback"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/text_regular_2x"
+                tools:ignore="RelativeOverlap" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/baseline_arrow_forward_ios_accent_24dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:paddingStart="@dimen/margin_medium_3"
+            android:paddingTop="@dimen/margin_14dp"
+            android:paddingEnd="@dimen/margin_medium_3"
+            android:paddingBottom="@dimen/margin_14dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/userid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:text="User Id"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/text_regular_2x"
+                tools:ignore="RelativeOverlap" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvUserId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/userid"
+                android:textSize="@dimen/text_regular_2x"
+                android:textColor="@color/colorSecondaryText"
+                android:layout_marginTop="@dimen/margin_medium_2"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_14dp"
+            android:background="@color/white"
+            android:paddingStart="@dimen/margin_medium_3"
+            android:paddingTop="@dimen/margin_14dp"
+            android:paddingEnd="@dimen/margin_medium_3"
+            android:paddingBottom="@dimen/margin_14dp">
+
+            <TextView
+                android:id="@+id/tvfcm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_fcm_key"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:textColor="@color/colorSecondaryText"/>
+
+            <ImageView
+                android:id="@+id/ivCopyToken"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/copy_clipboard"
+                android:layout_toEndOf="@id/tvfcm"
+                android:contentDescription="@string/content_copy_clipboard"
+                android:layout_marginStart="@dimen/margin_medium_2"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etFcm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvfcm"
+                android:focusable="false"
+                android:backgroundTint="@color/white" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnLogOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_14dp"
+            android:background="@color/white"
+            android:padding="@dimen/margin_14dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:elevation="4dp"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:gravity="center"
+                android:text="@string/lbl_log_out"
+                android:textColor="@color/colorRed"
+                android:textSize="@dimen/text_regular_2x" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

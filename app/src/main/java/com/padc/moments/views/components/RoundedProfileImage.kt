@@ -49,7 +49,7 @@ class RoundedProfileImage @JvmOverloads constructor(
     }
 
     @SuppressLint("DrawAllocation")
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         val rectangle = RectF(0f, 0f, width.toFloat(), height.toFloat())
         path.addRoundRect(rectangle, cornerRadius, cornerRadius, Path.Direction.CCW)
         canvas?.clipPath(path)

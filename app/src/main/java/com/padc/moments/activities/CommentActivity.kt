@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +28,7 @@ class CommentActivity : AppCompatActivity() {
     private val mUserModel : UserModel = UserModelImpl
     private lateinit var mUser : UserVO
     private val mAuthModel: AuthenticationModel = AuthenticationModelImpl
+    private var mCommentCount : Int = 0
     private var mMomentId : String = ""
     private var momentType : String = ""
 
@@ -77,6 +77,17 @@ class CommentActivity : AppCompatActivity() {
             },
             onFailure = { Toast.makeText(this,it,Toast.LENGTH_SHORT).show() }
         )
+
+        mMomentModel.getSingleMoment(
+            momentType = momentType,
+            momentId = mMomentId,
+            onSuccess = {
+                mCommentCount = it.commentCount
+            },
+            onFailure = {
+
+            }
+        )
     }
     private fun setUpListeners(){
         mBinding.tlComment.setEndIconOnClickListener {
@@ -87,11 +98,13 @@ class CommentActivity : AppCompatActivity() {
                 onSuccess = {
                     mBinding.etComment.setText("")
                     Toast.makeText(this,it,Toast.LENGTH_SHORT).show()
+                    mMomentModel.updateCommentToMoment(mMomentId,momentType,mCommentCount+1)
                 },
                 onFailure = {
                     Toast.makeText(this,it,Toast.LENGTH_SHORT).show()
                 }
             )
+
         }
     }
 

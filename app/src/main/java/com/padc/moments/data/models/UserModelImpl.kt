@@ -22,6 +22,10 @@ object UserModelImpl : UserModel , RetrofitAbstractBaseModel() {
         mFirebaseApi.addUserToGroup(userId,grade,token)
     }
 
+    override fun deleteUserFromGroup(userId: String, grade: String) {
+        mFirebaseApi.deleteUserFromGroup(userId, grade = grade)
+    }
+
     override fun getTokenByGroup(
         group: String,
         onSuccess: (tokens: List<String>) -> Unit,
@@ -89,6 +93,5 @@ object UserModelImpl : UserModel , RetrofitAbstractBaseModel() {
     override fun uploadFCMToken(userId: String, token : String) {
         mFirebaseApi.updateFCMToken(userId,token)
     }
-
 
 }

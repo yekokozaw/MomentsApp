@@ -6,9 +6,12 @@ import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.data.vos.UserVO
 
 interface CloudFireStoreFirebaseApi {
+
     fun addUser(user: UserVO)
 
     fun addUserToGroup(userId: String, grade: String, token: String)
+
+    fun deleteUserFromGroup(userId : String,grade: String)
     fun updateFCMToken(userId: String, token: String)
     fun updateAndUploadProfileImage(bitmap: Bitmap, user: UserVO)
     fun getUsers(
@@ -16,6 +19,11 @@ interface CloudFireStoreFirebaseApi {
         onFailure: (String) -> Unit
     )
 
+    fun downloadImage(
+        imagePath : String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+        )
     fun getSpecificUser(
         userId: String,
         onSuccess: (users: UserVO) -> Unit,
@@ -42,6 +50,12 @@ interface CloudFireStoreFirebaseApi {
         onFailure: (String) -> Unit
     )
 
+    fun getSingleMoment(
+        momentType: String,
+        momentId: String,
+        onSuccess: (moment : MomentVO) -> Unit,
+        onFailure: (String) -> Unit
+    )
     fun createContact(scannerId: String, qrExporterId: String, contact: UserVO)
 
     fun getContacts(
@@ -49,7 +63,6 @@ interface CloudFireStoreFirebaseApi {
         onSuccess: (users: List<UserVO>) -> Unit,
         onFailure: (String) -> Unit
     )
-
     fun getTokenByGroup(
         group: String,
         onSuccess: (tokens: List<String>) -> Unit,
@@ -73,6 +86,11 @@ interface CloudFireStoreFirebaseApi {
         onFailure: (String) -> Unit
     )
 
+    fun updateCommentToMoment(
+        momentId: String,
+        momentType: String,
+        commentSize : Int
+    )
     fun addMomentToUserBookmarked(currentUserId: String, moment: MomentVO)
 
     fun deleteMomentFromUserBookmarked(currentUserId: String, momentId: String)

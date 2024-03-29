@@ -5,7 +5,6 @@ import com.padc.moments.data.vos.CommentVO
 import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.network.storage.CloudFireStoreFirebaseApiImpl
 import com.padc.moments.network.storage.CloudFireStoreFirebaseApi
-import com.padc.moments.network.storage.sendMessageToTopic
 
 object MomentModelImpl : MomentModel {
 
@@ -13,7 +12,6 @@ object MomentModelImpl : MomentModel {
 
     override fun createMoment(moment: MomentVO,grade : String) {
         mFirebaseApi.createMoment(moment,grade)
-        sendMessageToTopic("all",moment.userName,moment.caption)
     }
 
     override fun deleteMoment(
@@ -37,6 +35,10 @@ object MomentModelImpl : MomentModel {
         onFailure: (String) -> Unit
     ) {
         mFirebaseApi.addCommentToMoment(momentId, comment,momentType, onSuccess, onFailure)
+    }
+
+    override fun updateCommentToMoment(momentId: String, momentType: String,commentSize : Int) {
+        mFirebaseApi.updateCommentToMoment(momentId,momentType,commentSize)
     }
 
     override fun getCommentFromMoment(
@@ -63,6 +65,16 @@ object MomentModelImpl : MomentModel {
     ) {
         mFirebaseApi.getMoments(type,onSuccess = onSuccess, onFailure = onFailure)
     }
+
+    override fun getSingleMoment(
+        momentType: String,
+        momentId: String,
+        onSuccess: (moment: MomentVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getSingleMoment(momentType,momentId,onSuccess,onFailure)
+    }
+
 
     override fun addLikedToMoment(momentId: String,likes : Map<String, String>,grade: String) {
         mFirebaseApi.addLikedToMoment(momentId,likes,grade)

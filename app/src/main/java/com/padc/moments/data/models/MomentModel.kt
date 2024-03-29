@@ -26,6 +26,12 @@ interface MomentModel {
         onFailure: (String) -> Unit
     )
 
+    fun updateCommentToMoment(
+        momentId: String,
+        momentType: String,
+        commentSize : Int
+    )
+
     fun getCommentFromMoment(
         momentId: String,
         momentType: String,
@@ -39,6 +45,13 @@ interface MomentModel {
     fun getMoments(
         type : String,
         onSuccess: (moments: List<MomentVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getSingleMoment(
+        momentType: String,
+        momentId: String,
+        onSuccess: (moment : MomentVO) -> Unit,
         onFailure: (String) -> Unit
     )
 

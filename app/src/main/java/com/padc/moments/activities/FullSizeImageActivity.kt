@@ -5,9 +5,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.padc.moments.databinding.ActivityFullSizeImageBinding
+import com.padc.moments.workmanager.DownloadWorker
 
 class FullSizeImageActivity : AppCompatActivity() {
 
@@ -35,6 +41,23 @@ class FullSizeImageActivity : AppCompatActivity() {
 
         mBinding.fab.setOnClickListener {
             finish()
+        }
+
+        mBinding.ivDownload.setOnClickListener {
+            val data = workDataOf("url" to imageId)
+            val constraints = Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.NOT_ROAMING)
+                .setRequiresStorageNotLow(true)
+                .build()
+
+            val downloadWorkRequest = OneTimeWorkRequestBuilder<DownloadWorker>()
+                .setConstraints(constraints)
+                .setInputData(data)
+                .build()
+
+            WorkManager.getInstance(applicationContext)
+                .enqueue(downloadWorkRequest)
+
         }
     }
 

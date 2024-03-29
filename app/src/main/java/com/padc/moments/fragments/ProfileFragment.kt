@@ -215,7 +215,7 @@ class ProfileFragment : Fragment() , ProfileView {
                 qrCode = user.qrCode
                 imageUrl = user.imageUrl
 
-                Glide.with(requireActivity())
+                Glide.with(requireContext())
                     .load(user.imageUrl)
                     .into(binding.ivProfileImageProfile)
 
