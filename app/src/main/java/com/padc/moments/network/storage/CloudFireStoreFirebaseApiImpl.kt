@@ -23,8 +23,8 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
 
     // General
     private var mMomentImages: String = ""
-    override fun addUser(user: UserVO) {
 
+    override fun addUser(user: UserVO) {
         val userMap = hashMapOf(
             "id" to user.userId,
             "name" to user.userName,
@@ -49,13 +49,17 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
-    override fun addUserToGroup(userId: String,grade: String, token: String) {
+    override fun addUserToGroup(
+        userId: String, grade: String, token: String, onSuccess: (String) -> Unit, onFailure: (String) -> Unit
+    ) {
         val hashMap = hashMapOf("token" to token)
         database.collection(grade)
             .document(userId)
             .set(hashMap)
             .addOnSuccessListener {
-                Log.i("FirebaseCall", "Successfully Added token")
+                onSuccess("Successfully Added")
+            }.addOnFailureListener {
+                onFailure(it.message.toString())
             }
     }
 
@@ -68,11 +72,17 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
-    override fun updateFCMToken(userId: String, token: String) {
-
+    override fun updateFCMToken(
+        userId: String, token: String, onSuccess: (String) -> Unit, onFailure: (String) -> Unit
+    ) {
         database.collection("users")
             .document(userId)
             .update("fcm_key",token)
+            .addOnFailureListener {
+                onFailure(it.message.toString())
+            }.addOnCompleteListener {
+                onSuccess("token updated")
+            }
     }
 
     private fun changeBitmapToUrlString(bitmap: Bitmap): Task<Uri> {
@@ -103,7 +113,6 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
 
         urlTask.addOnCompleteListener {
             val imageUrl = it.result?.toString()
-            Log.i("ImageURL", imageUrl.toString())
             addUser(
                 UserVO(
                     userId = user.userId,
@@ -111,6 +120,7 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                     phoneNumber = user.phoneNumber,
                     email = user.email,
                     password = user.password,
+                    grade = user.grade,
                     birthDate = user.birthDate,
                     gender = user.gender,
                     qrCode = user.userId,
@@ -250,12 +260,15 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
-    override fun updateAndUploadMomentImage(bitmap: Bitmap) {
+    override fun updateAndUploadMomentImage(bitmap: Bitmap, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
         val urlTask = changeBitmapToUrlString(bitmap)
 
         urlTask.addOnCompleteListener {
             val imageUrl = it.result?.toString()
             mMomentImages += "$imageUrl,"
+            onSuccess("Image uploaded")
+        }.addOnFailureListener {
+            onFailure(it.message.toString())
         }
     }
 

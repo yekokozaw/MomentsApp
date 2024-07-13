@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_medium_4_n"
+            app:tint="@color/colorSecondaryText"
             android:layout_marginTop="@dimen/margin_28dp"
             app:srcCompat="@drawable/baseline_arrow_back_accent_30dp" />
 
@@ -74,12 +75,13 @@
 
         <Spinner
             android:id="@+id/gradeSpinner"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="@dimen/margin_36dp"
             android:elevation="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_50dp"
             android:layout_marginEnd="70dp"
             android:layout_alignParentEnd="true"
+            android:background="@drawable/background_spinner"
             android:layout_below="@id/tvCreateANewAccountRegister"
             android:entries="@array/spinner_grade"
             android:spinnerMode="dropdown"

@@ -39,6 +39,7 @@ import com.padc.moments.mvp.views.ProfileView
 import com.padc.moments.views.viewpods.MomentViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
@@ -66,13 +67,20 @@ class ProfileFragment : Fragment() , ProfileView {
     private var day:String = ""
     private var month:String = ""
     private var year:String = ""
-
+    private var fcmToken : String= ""
     private val REQUEST_CODE_GALLERY = 0
     private val REQUEST_IMAGE_CAPTURE = 1
     private var bitmap:Bitmap? = null
     private var mUser:UserVO? = null
     private var mMomentList: ArrayList<MomentVO> = arrayListOf()
     private lateinit var dialog:BottomSheetDialog
+
+    override fun onStart() {
+        super.onStart()
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            fcmToken = it.result
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -105,10 +113,6 @@ class ProfileFragment : Fragment() , ProfileView {
     private fun setUpListeners() {
         binding.btnEditProfile.setOnClickListener {
             mPresenter.onTapEditProfileButton()
-        }
-
-        binding.ivQrCodeProfile.setOnClickListener {
-            mPresenter.onTapQrCodeImage()
         }
 
         dialog = BottomSheetDialog(requireActivity())
@@ -203,6 +207,7 @@ class ProfileFragment : Fragment() , ProfileView {
             if(mPresenter.getUserId() == user.userId) {
 
                 mUser = user
+                mUser!!.fcmKey = fcmToken
 
                 binding.tvGenderGrade.text = user.grade
                 binding.tvNameProfile.text = user.userName
@@ -218,8 +223,6 @@ class ProfileFragment : Fragment() , ProfileView {
                 Glide.with(requireContext())
                     .load(user.imageUrl)
                     .into(binding.ivProfileImageProfile)
-
-                binding.ivQrCodeProfile.setImageBitmap(textToImageEncode(user.qrCode))
             }
         }
     }

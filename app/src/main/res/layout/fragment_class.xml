@@ -13,6 +13,12 @@
         android:layout_marginTop="@dimen/margin_medium_2"
         android:layout_gravity="center"/>
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/ViewPagerCompany"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:elevation="@dimen/margin_medium"
+        android:layout_centerHorizontal="true"/>
     <RelativeLayout
         android:id="@+id/rlFirst"
         android:layout_width="match_parent"

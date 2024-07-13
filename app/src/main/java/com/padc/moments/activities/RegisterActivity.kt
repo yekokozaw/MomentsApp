@@ -1,11 +1,14 @@
 package com.padc.moments.activities
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,7 +18,10 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.padc.moments.data.vos.UserVO
 import com.padc.moments.databinding.ActivityRegisterBinding
@@ -27,7 +33,9 @@ import com.padc.moments.mvp.interfaces.RegisterPresenter
 import com.padc.moments.mvp.views.RegisterView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.padc.moments.utils.hide
+import com.padc.moments.utils.makeToast
 import com.padc.moments.utils.show
+import com.theartofdev.edmodo.cropper.CropImage
 import java.io.IOException
 import java.util.Calendar
 
@@ -35,7 +43,7 @@ import java.util.Calendar
 class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private lateinit var binding: ActivityRegisterBinding
-
+    private lateinit var imageUri : Uri
     // Presenters
     private lateinit var mPresenter: RegisterPresenter
 
@@ -56,12 +64,38 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-//        FirebaseMessaging.getInstance().token.addOnCompleteListener {
-//            Log.i("NewTokenFCM",it.result)
-              //fcmToken = it.result
-//        }
+    private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri?>() {
+        override fun createIntent(context: Context, input: Any?): Intent {
+            return CropImage.activity()
+                .setAspectRatio(14, 14)
+                .getIntent(this@RegisterActivity)
+
+        }
+
+        override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+            return CropImage.getActivityResult(intent)?.uri
+        }
+    }
+
+    private val requestGalleryPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) {
+            chooseImageFromGallery()
+        } else {
+            showError("Permission denied")
+        }
+    }
+
+    private val openGalleryLauncher = registerForActivityResult(
+        cropActivityResultContract
+    ) { result ->
+        if(result != null) {
+            val selectedImageUri: Uri = result
+            imageUri = selectedImageUri
+            changeToBitmap()
+        }
+        else
+            makeToast(this,"invalid image")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,20 +133,13 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         }
 
         binding.ivProfileImageRegister.setOnClickListener {
-            val dialogBinding = BottoomSheetDialogChooseImageBinding.inflate(layoutInflater)
-
-            dialog.setContentView(dialogBinding.root)
-            dialog.setCancelable(true)
-
-            dialogBinding.btnChooseFromGalleryRegister.setOnClickListener {
-                mPresenter.onTapProfileImage()
-            }
-
-            dialogBinding.btnCancelBottomSheetDialog.setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.show()
+            requestGalleryPermission()
         }
+    }
+
+    private fun chooseImageFromGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        openGalleryLauncher.launch(galleryIntent)
     }
 
     private fun setUpYearSpinner() {
@@ -240,6 +267,25 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         dialogRegister.show()
     }
 
+    private fun changeToBitmap(){
+        val filePath = imageUri
+        try {
+            filePath.let { fileUrl ->
+                if (Build.VERSION.SDK_INT >= 29) {
+                    val source = ImageDecoder.createSource(this.contentResolver, fileUrl)
+                    bitmap = ImageDecoder.decodeBitmap(source)
+                } else {
+                    bitmap = MediaStore.Images.Media.getBitmap(
+                        applicationContext.contentResolver, fileUrl
+                    )
+                }
+            }
+            dialog.dismiss()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -305,7 +351,6 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
                 showError("Please select Teacher/Student")
                 false
             }
-
             grade.isEmpty() -> {
                 showError("Please fill grade!")
                 false
@@ -325,6 +370,29 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             else -> return true
         }
     }
+
+    private fun requestGalleryPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_MEDIA_IMAGES
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            // Permission already granted, open the gallery
+            openGallery()
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                requestGalleryPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+            }else{
+                requestGalleryPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+        }
+    }
+
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        openGalleryLauncher.launch(galleryIntent)
+    }
+
     override fun showGallery() {
         val intent = Intent()
         intent.type = "image/*"
@@ -332,15 +400,8 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         startActivityForResult(Intent.createChooser(intent, "Select Upload Image"), REQUEST_CODE_GALLERY)
     }
 
-    @SuppressLint("QueryPermissionsNeeded")
     override fun openCamera() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivityForResult(
-                Intent.createChooser(intent, "Select Upload Image"),
-                REQUEST_IMAGE_CAPTURE
-            )
-        }
+
     }
 
     override fun showError(error: String) {

@@ -40,6 +40,6 @@ class NewContactPresenterImpl : NewContactPresenter , ViewModel() {
     }
 
     override fun getScannerUserId(): String {
-        return mAuthModel.getUserId()
+        return mAuthModel.getUserIdFromDb()
     }
 }

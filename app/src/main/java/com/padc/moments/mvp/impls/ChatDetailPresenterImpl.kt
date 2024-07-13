@@ -60,7 +60,7 @@ class ChatDetailPresenterImpl : ChatDetailPresenter, ViewModel() {
     }
 
     override fun getUserId(): String {
-        return mAuthModel.getUserId()
+        return mAuthModel.getUserIdFromDb()
     }
 
     override fun sendMessage(

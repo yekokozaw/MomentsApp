@@ -16,7 +16,8 @@ interface MomentModel {
         onSuccess: (String) -> Unit,
         onFailure: (String) -> Unit
     )
-    fun updateAndUploadMomentImage(bitmap: Bitmap)
+
+    fun updateAndUploadMomentImage(bitmap: Bitmap,onSuccess: (String) -> Unit,onFailure: (String) -> Unit)
 
     fun addCommentToMoment(
         momentId: String,
@@ -58,6 +59,7 @@ interface MomentModel {
     fun addLikedToMoment(momentId: String,likes : Map<String, String>,grade: String)
 
     fun addMomentToUserBookmarked(currentUserId:String,moment: MomentVO)
+
     fun deleteMomentFromUserBookmarked(currentUserId: String,momentId:String)
 
     fun getMomentsFromUserBookmarked(

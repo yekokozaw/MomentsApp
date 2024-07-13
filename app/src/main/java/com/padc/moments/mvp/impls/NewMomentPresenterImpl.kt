@@ -73,7 +73,14 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
     }
 
     override fun createMomentImages(bitmap: Bitmap) {
-        mMomentModel.updateAndUploadMomentImage(bitmap)
+        mMomentModel.updateAndUploadMomentImage(
+            bitmap,
+            onSuccess = {
+                mView?.imageReady(true)
+            }, onFailure = {
+                mView?.showError(it)
+            }
+        )
     }
 
     override fun getMomentImages() : String {
@@ -90,13 +97,12 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
         mUserModel.getTokenByGroup(group,
             onSuccess = {
                 tokens = it
-                Log.d("tokens",it.toString())
             }, onFailure = {
                 mView?.showError(it)
             })
     }
 
     override fun getUserId(): String {
-        return mAuthModel.getUserId()
+        return mAuthModel.getUserIdFromDb()
     }
 }

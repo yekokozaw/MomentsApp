@@ -7,6 +7,7 @@ import com.padc.moments.network.storage.PresenceManager
 
 interface AuthenticationModel {
     var mAuthManager:AuthManager
+
     fun login(phoneNumber: String,email: String, password: String, onSuccess: () -> Unit, onFailure: (String) -> Unit)
 
     fun register(
@@ -23,10 +24,11 @@ interface AuthenticationModel {
         onFailure: (String) -> Unit
     )
 
-    fun getUserId() : String
+    fun getUserIdFromDb() : String
 
     fun addToken(token: TokenVO)
 
     fun deleteToken()
+
     fun getToken() : TokenVO?
 }

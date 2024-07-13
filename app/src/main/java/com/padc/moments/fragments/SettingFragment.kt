@@ -46,7 +46,7 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mUserId = mAuthModel.getUserId()
+        mUserId = mAuthModel.getUserIdFromDb()
         showToken()
         mUserModel.getSpecificUser(
             mUserId,
@@ -67,6 +67,7 @@ class SettingFragment : Fragment() {
             binding.etFcm.setText(token)
         }
     }
+
     private fun copyToClipboard(text: String) {
         val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clipData = ClipData.newPlainText("text", text)
@@ -84,6 +85,7 @@ class SettingFragment : Fragment() {
             )
         }
     }
+
     private fun setUpListeners(){
         binding.rlCreateAccount.setOnClickListener {
             if (mGenre == "teacher")

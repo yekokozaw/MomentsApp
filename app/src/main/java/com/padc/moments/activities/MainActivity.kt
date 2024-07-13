@@ -20,9 +20,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.padc.moments.data.models.AuthenticationModel
 import com.padc.moments.data.models.AuthenticationModelImpl
 import com.padc.moments.fragments.ClassFragment
-import com.padc.moments.network.auth.AuthManager
-import com.padc.moments.network.auth.FirebaseAuthManager
-import com.padc.moments.network.storage.PresenceManager
 import com.padc.moments.network.storage.subscribeToTopic
 import com.padc.moments.utils.TimestampManager
 import com.padc.moments.utils.makeToast
@@ -32,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     private val mAuthModel : AuthenticationModel = AuthenticationModelImpl
     private var isNetworkConnected = false
+    private var mUserId = ""
     private lateinit var mTimestampManager : TimestampManager
     companion object {
         fun newIntent(context: Context): Intent {
@@ -39,12 +37,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        FirebaseMessaging.getInstance().token.addOnCompleteListener {
-
-        }
-    }
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,17 +46,11 @@ class MainActivity : AppCompatActivity() {
         subscribeToTopic("all")
         setUpBottomNavigationView()
         mTimestampManager = TimestampManager(this)
-        makeToast(this,"${mTimestampManager.getTimestamp()}")
+        mUserId = mAuthModel.getUserIdFromDb()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        val currentTime = System.currentTimeMillis()
-        mTimestampManager.storeTimestamp(currentTime)
-    }
     private fun setUpBottomNavigationView() {
         switchFragment(MomentFragment())
-        val userId = mAuthModel.getUserId()
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
@@ -73,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nvgChat -> {
-                    switchFragment(ClassFragment(userId))
+                    switchFragment(ClassFragment(mUserId))
                     true
                 }
                 R.id.nvgMe -> {

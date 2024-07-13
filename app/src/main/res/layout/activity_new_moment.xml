@@ -25,6 +25,7 @@
                     android:layout_height="@dimen/height_30dp"
                     android:layout_gravity="start|center_vertical"
                     android:layout_marginStart="@dimen/margin_medium_2"
+                    android:tint="@color/colorSecondaryText"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/baseline_close_accent_24dp" />
 
@@ -125,6 +126,15 @@
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/ivReadyImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/cloud_ready"
+        android:layout_above="@id/rvBackground"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBackground"

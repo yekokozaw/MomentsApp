@@ -9,11 +9,25 @@ interface CloudFireStoreFirebaseApi {
 
     fun addUser(user: UserVO)
 
-    fun addUserToGroup(userId: String, grade: String, token: String)
+    fun addUserToGroup(
+        userId: String,
+        grade: String,
+        token: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
     fun deleteUserFromGroup(userId : String,grade: String)
-    fun updateFCMToken(userId: String, token: String)
+
+    fun updateFCMToken(
+        userId: String,
+        token: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
     fun updateAndUploadProfileImage(bitmap: Bitmap, user: UserVO)
+
     fun getUsers(
         onSuccess: (users: List<UserVO>) -> Unit,
         onFailure: (String) -> Unit
@@ -24,6 +38,7 @@ interface CloudFireStoreFirebaseApi {
         onSuccess: (String) -> Unit,
         onFailure: (String) -> Unit
         )
+
     fun getSpecificUser(
         userId: String,
         onSuccess: (users: UserVO) -> Unit,
@@ -39,7 +54,7 @@ interface CloudFireStoreFirebaseApi {
         onFailure: (String) -> Unit
     )
 
-    fun updateAndUploadMomentImage(bitmap: Bitmap)
+    fun updateAndUploadMomentImage(bitmap: Bitmap,onSuccess: (String) -> Unit,onFailure: (String) -> Unit)
 
     fun getMomentImages(): String
 

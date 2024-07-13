@@ -42,7 +42,7 @@ object AuthenticationModelImpl : AuthenticationModel {
         mAuthManager.register(userName, phoneNumber, email, password, birthDate, gender,imageUrl,fcmKey, grade, onSuccess, onFailure)
     }
 
-    override fun getUserId(): String {
+    override fun getUserIdFromDb(): String {
         val token = mMomentDatabase?.getDao()?.getToken()
         return token?.userId.toString()
     }

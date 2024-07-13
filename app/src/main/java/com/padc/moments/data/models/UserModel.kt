@@ -12,7 +12,13 @@ interface UserModel {
 
     fun addUser(user: UserVO)
 
-    fun addUserToGroup(userId: String, grade: String, token: String)
+    fun addUserToGroup(
+        userId: String,
+        grade: String,
+        token: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
     fun deleteUserFromGroup(userId : String,grade: String)
     fun getTokenByGroup(
@@ -48,6 +54,11 @@ interface UserModel {
         onFailure: (String) -> Unit
     )
 
-    fun uploadFCMToken(userId: String, token: String)
+    fun uploadFCMToken(
+        userId: String,
+        token: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
 }

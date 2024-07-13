@@ -12,6 +12,4 @@ class Moments : Application() {
         mTimeStampManager = TimestampManager(applicationContext)
         AuthenticationModelImpl.initDatabase(applicationContext)
     }
-
-
 }

@@ -23,8 +23,8 @@ object MomentModelImpl : MomentModel {
         mFirebaseApi.deleteMoment(momentId,grade, onSuccess, onFailure)
     }
 
-    override fun updateAndUploadMomentImage(bitmap: Bitmap) {
-        mFirebaseApi.updateAndUploadMomentImage(bitmap)
+    override fun updateAndUploadMomentImage(bitmap: Bitmap,onSuccess: (String) -> Unit,onFailure: (String) -> Unit) {
+        mFirebaseApi.updateAndUploadMomentImage(bitmap,onSuccess,onFailure)
     }
 
     override fun addCommentToMoment(

@@ -144,8 +144,17 @@
             android:layout_marginEnd="@dimen/margin_38dp"
             android:fontFamily="@font/noto_sans_medium"
             android:text="@string/lbl_forgot_password"
-            android:textColor="@color/colorSecondaryText"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/text_regular" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvForgotPasswordLabelLogin"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/margin_medium_3"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"

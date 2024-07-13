@@ -1,6 +1,7 @@
 package com.padc.moments.activities
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -28,6 +29,7 @@ import com.padc.moments.mvp.interfaces.NewMomentPresenter
 import com.padc.moments.mvp.views.NewMomentView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.padc.moments.utils.makeToast
+import com.padc.moments.utils.show
 import com.theartofdev.edmodo.cropper.CropImage
 import java.io.IOException
 
@@ -57,26 +59,31 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         }
     }
 
-    private val cropActivityResultContract = object : ActivityResultContract<Any?,Uri?>(){
-        override fun createIntent(context: Context, input: Any?): Intent {
-            return CropImage.activity()
-                .setAspectRatio(16,12)
-                .getIntent(this@NewMomentActivity)
-
-        }
-
-        override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
-            return CropImage.getActivityResult(intent)?.uri
-        }
-    }
+//    private val cropActivityResultContract = object : ActivityResultContract<Any?,Uri?>(){
+//        override fun createIntent(context: Context, input: Any?): Intent {
+//            return CropImage.activity()
+//                .setAspectRatio(16,18)
+//                .getIntent(this@NewMomentActivity)
+//
+//        }
+//
+//        override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+//            return CropImage.getActivityResult(intent)?.uri
+//        }
+//    }
 
     private val openGalleryLauncher = registerForActivityResult(
-        cropActivityResultContract
+        ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        if (result != null) {
-            val selectedImageUri: Uri = result
-            imageUri = selectedImageUri
-            uploadImage()
+        if(result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val selectedImageUri: Uri? = data?.data
+            if (selectedImageUri != null){
+                imageUri = selectedImageUri
+                uploadImage()
+            }else{
+                makeToast(this,"invalid image")
+            }
         }
         else
             makeToast(this,"invalid image")
@@ -248,8 +255,12 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         }
     }
 
+    override fun imageReady(ready: Boolean) {
+        binding.ivReadyImage.show()
+        Toast.makeText(this, "Image is ready", Toast.LENGTH_SHORT).show()
+    }
+
     override fun showError(error: String) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
     }
-
 }

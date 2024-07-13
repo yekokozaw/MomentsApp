@@ -9,4 +9,6 @@ interface NewMomentView : BaseView {
 
     fun finishFragment()
     fun showUserInformation(userList: List<UserVO>)
+
+    fun imageReady(ready : Boolean)
 }

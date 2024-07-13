@@ -61,7 +61,7 @@ class ProfilePresenterImpl : ProfilePresenter , ViewModel() {
     }
 
     override fun getUserId(): String {
-        return mAuthModel.getUserId()
+        return mAuthModel.getUserIdFromDb()
     }
 
     override fun updateUserInformation(user: UserVO) {

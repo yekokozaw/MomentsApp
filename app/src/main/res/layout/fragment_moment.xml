@@ -15,7 +15,7 @@
             android:id="@+id/llActionBarChat"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="#f0f4f8"
             android:elevation="@dimen/margin_medium"
             android:translationZ="@dimen/margin_medium"
             android:fadingEdgeLength="@dimen/margin_small">
@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|start"
                 android:layout_marginStart="@dimen/margin_medium_2"
+                android:textColor="#333333"
                 android:fontFamily="@font/yorkie_demo_semibold"
                 android:text="@string/lbl_moments"
                 android:textSize="@dimen/text_34sp" />

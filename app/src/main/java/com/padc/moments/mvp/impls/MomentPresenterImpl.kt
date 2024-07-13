@@ -82,7 +82,7 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
     }
 
     override fun getUserId(): String {
-        return mAuthModel.getUserId()
+        return mAuthModel.getUserIdFromDb()
     }
 
     override fun addLikedToMoment(momentId: String,likes : Map<String, String>,grade: String) {
@@ -92,7 +92,7 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
 
     override fun getUserData() {
         mUserModel.getSpecificUser(
-            mAuthModel.getUserId(),
+            mAuthModel.getUserIdFromDb(),
             onSuccess = {
                 userName = it.userName
                 mView?.getUserData(it)
@@ -101,6 +101,7 @@ class MomentPresenterImpl : MomentPresenter , ViewModel() {
 
             })
     }
+
     override fun deleteLikedToMoment(momentId: String, likes: Map<String, String>,grade: String) {
         val likeList = likes - getUserId()
         mMomentModel.addLikedToMoment(momentId = momentId, likeList,grade)

@@ -44,7 +44,7 @@ class RegisterPresenterImpl : RegisterPresenter , ViewModel() {
             fcmKey= user.fcmKey,
             grade = user.grade,
             onSuccess = {
-                mUserModel.addUser(it)
+//                mUserModel.addUser(it)
                 mUserModel.updateAndUploadProfileImage(bitmap, it)
                 mView?.navigateBack()
             },

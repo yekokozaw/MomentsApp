@@ -33,6 +33,7 @@
                 android:id="@+id/btnEditProfile"
                 android:layout_width="@dimen/width_36dp"
                 android:layout_height="@dimen/height_36dp"
+                android:visibility="gone"
                 android:layout_gravity="center_vertical|end"
                 android:layout_marginEnd="@dimen/margin_medium_2"
                 app:srcCompat="@drawable/button_edit_profile" />
@@ -77,17 +78,6 @@
                 android:layout_marginBottom="@dimen/margin_medium_2"
                 android:elevation="@dimen/margin_medium_2"
                 android:foreground="@drawable/icon_update_new_profile" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivQrCodeProfile"
-                android:layout_width="@dimen/width_48dp"
-                android:layout_height="@dimen/height_48dp"
-                android:layout_alignParentBottom="true"
-                android:visibility="visible"
-                android:layout_marginStart="@dimen/margin_50dp"
-                android:layout_marginBottom="@dimen/margin_medium_2"
-                android:layout_toEndOf="@+id/ivUpdatePictureProfile"
-                tools:srcCompat="@drawable/icon_qr_profile" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvNameProfile"

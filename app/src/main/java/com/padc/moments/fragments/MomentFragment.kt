@@ -124,7 +124,6 @@ class MomentFragment : Fragment(), MomentView {
                 }
             }
         }
-        //mViewpod.setNewData(mMomentList, "moment")
     }
 
     override fun getMomentIsBookmarked(id: String, isBookmarked: Boolean) {
@@ -198,6 +197,7 @@ class MomentFragment : Fragment(), MomentView {
     override fun showDeleteSuccessfulMessage(successfulMessage: String) {
         Toast.makeText(requireActivity(), successfulMessage, Toast.LENGTH_SHORT).show()
     }
+
     override fun showError(error: String) {
         Toast.makeText(requireActivity(), error, Toast.LENGTH_SHORT).show()
     }

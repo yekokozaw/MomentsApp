@@ -35,17 +35,14 @@ class LoginPresenterImpl : LoginPresenter, ViewModel() {
             email,
             password,
             onSuccess = {
-                val userId = mAuthModel.mAuthManager.getUserId()
-                mUserModel.uploadFCMToken(userId,fcmToken)
                 mView?.navigateToHomeScreen()
-
             },
             onFailure = {
                 mView?.showError(it)
             })
     }
 
-    override fun getUserId() {
-        mUserId = mAuthModel.getUserId()
+    override fun getUserIdDb() {
+        mUserId = mAuthModel.getUserIdFromDb()
     }
 }

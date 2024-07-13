@@ -18,6 +18,8 @@ import com.padc.moments.mvp.interfaces.LoginPresenter
 import com.padc.moments.mvp.views.LoginView
 import com.padc.moments.network.auth.AuthManager
 import com.padc.moments.network.auth.FirebaseAuthManager
+import com.padc.moments.utils.hide
+import com.padc.moments.utils.show
 
 class LoginActivity : AppCompatActivity() , LoginView {
 
@@ -39,14 +41,13 @@ class LoginActivity : AppCompatActivity() , LoginView {
             fcmToken = it.result
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpPresenter()
         setUpListeners()
-
-        mPresenter.getUserId()
     }
 
     private fun setUpPresenter() {
@@ -60,6 +61,8 @@ class LoginActivity : AppCompatActivity() , LoginView {
             val password = binding.etPasswordLogin.text.toString()
 
             if(email != "" && password != "") {
+                binding.progressBar.show()
+                binding.btnLogin.hide()
                 mPresenter.onTapLoginButton(
                     fcmToken,
                     binding.etPhoneNumberLogin.text.toString(),
@@ -84,20 +87,51 @@ class LoginActivity : AppCompatActivity() , LoginView {
         val userId = mAuthManager.getUserId()
         mUserModel.getSpecificUser(
             userId,
-            onSuccess = {
-                startActivity(MainActivity.newIntent(this))
-                mAuthModel.addToken(TokenVO("token",it.email, userId = it.userId ))
-                if (it.gender == "student")
-                    mUserModel.addUserToGroup(it.userId,it.grade,fcmToken)
+            onSuccess = { user ->
+                if (user.gender == "student"){
+                    mUserModel.addUserToGroup(
+                        user.userId,
+                        user.grade,
+                        fcmToken,
+                        onSuccess = {
+                            mUserModel.uploadFCMToken(
+                                user.userId,
+                                fcmToken,
+                                onSuccess = {
+                                    mAuthModel.addToken(TokenVO("token",user.email, userId = user.userId ))
+                                    startActivity(MainActivity.newIntent(this))
+                                    finish()
+                                }, onFailure = {
+                                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                                }
+                            )
+                        }, onFailure = {
+                            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }else{
+                    mUserModel.uploadFCMToken(
+                        user.userId,
+                        fcmToken,
+                        onSuccess = {
+                            mAuthModel.addToken(TokenVO("token",user.email, userId = user.userId ))
+                            startActivity(MainActivity.newIntent(this))
+                            finish()
+                        }, onFailure = {
+                            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
             },
             onFailure = {
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
         )
-        finish()
     }
 
     override fun showError(error: String) {
+        binding.progressBar.hide()
+        binding.btnLogin.show()
         Toast.makeText(this,error,Toast.LENGTH_SHORT).show()
     }
 }

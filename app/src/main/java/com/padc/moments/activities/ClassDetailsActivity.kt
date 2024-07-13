@@ -45,6 +45,7 @@ class ClassDetailsActivity : AppCompatActivity() ,MomentItemActionDelegate{
             return intent
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityClassDetailsBinding.inflate(layoutInflater)

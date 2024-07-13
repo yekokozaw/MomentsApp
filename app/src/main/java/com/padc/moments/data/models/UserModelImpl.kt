@@ -18,8 +18,14 @@ object UserModelImpl : UserModel , RetrofitAbstractBaseModel() {
         mFirebaseApi.addUser(user)
     }
 
-    override fun addUserToGroup(userId: String,grade: String, token: String) {
-        mFirebaseApi.addUserToGroup(userId,grade,token)
+    override fun addUserToGroup(
+        userId: String,
+        grade: String,
+        token: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.addUserToGroup(userId,grade,token,onSuccess,onFailure)
     }
 
     override fun deleteUserFromGroup(userId: String, grade: String) {
@@ -90,8 +96,12 @@ object UserModelImpl : UserModel , RetrofitAbstractBaseModel() {
         })
     }
 
-    override fun uploadFCMToken(userId: String, token : String) {
-        mFirebaseApi.updateFCMToken(userId,token)
+    override fun uploadFCMToken(
+        userId: String, token : String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.updateFCMToken(userId,token,onSuccess,onFailure)
     }
 
 }

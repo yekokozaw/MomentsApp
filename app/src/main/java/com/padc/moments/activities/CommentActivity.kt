@@ -63,7 +63,7 @@ class CommentActivity : AppCompatActivity() {
 
     private fun setUpNetworkCall() {
         mUserModel.getSpecificUser(
-            mAuthModel.getUserId(),
+            mAuthModel.getUserIdFromDb(),
             onSuccess = {
                 mUser = it
             },
