@@ -258,7 +258,7 @@
             android:layout_marginEnd="@dimen/margin_xlarge"
             android:fontFamily="@font/yorkie_demo_regular"
             android:hint="@string/lbl_phone_number"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:minHeight="48dp"
             android:paddingBottom="@dimen/margin_large"
             android:textColor="@color/colorSecondaryText"

@@ -92,6 +92,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         if(result != null) {
             val selectedImageUri: Uri = result
             imageUri = selectedImageUri
+            binding.ivProfileImageRegister.setImageURI(selectedImageUri)
             changeToBitmap()
         }
         else
@@ -145,7 +146,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     private fun setUpYearSpinner() {
         val years = arrayListOf("Year")
         val thisYear: Int = Calendar.getInstance().get(Calendar.YEAR)
-        for (year in 1900..thisYear) {
+        for (year in 1950..thisYear) {
             years.add(year.toString())
         }
 

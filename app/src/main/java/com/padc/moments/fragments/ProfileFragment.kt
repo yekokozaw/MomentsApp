@@ -124,24 +124,6 @@ class ProfileFragment : Fragment() , ProfileView {
             dialog.setContentView(dialogBinding.root)
             dialog.setCancelable(true)
 
-            dialogBinding.btnTakePhotoRegister.setOnClickListener {
-                if (ContextCompat.checkSelfPermission(
-                        requireActivity(),
-                        Manifest.permission.CAMERA
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    // Request permission
-                    ActivityCompat.requestPermissions(
-                        requireActivity(),
-                        arrayOf(Manifest.permission.CAMERA),
-                        REQUEST_IMAGE_CAPTURE
-                    )
-                } else {
-                    // Permission already granted, open the gallery
-                    mPresenter.onTapOpenCameraButton()
-                }
-            }
-
             dialogBinding.btnChooseFromGalleryRegister.setOnClickListener {
                 if (ContextCompat.checkSelfPermission(
                         requireActivity(),
@@ -367,10 +349,6 @@ class ProfileFragment : Fragment() , ProfileView {
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(dialogBinding.root)
         dialog.setCancelable(true)
-
-        dialogBinding.btnEditMoment.setOnClickListener {
-
-        }
 
         dialogBinding.btnDeleteMoment.setOnClickListener {
             val dialogDeleteBox =

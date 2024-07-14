@@ -114,8 +114,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_marginStart="@dimen/margin_card_medium"
+            android:layout_marginEnd="@dimen/margin_card_medium"
+            android:background="@drawable/background_setting_card"
+            android:layout_marginTop="@dimen/margin_large"
             android:paddingStart="@dimen/margin_medium_3"
             android:paddingTop="@dimen/margin_14dp"
             android:paddingEnd="@dimen/margin_medium_3"
@@ -146,7 +148,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_14dp"
-            android:background="@color/white"
+            android:layout_marginEnd="@dimen/margin_card_medium"
+            android:layout_marginStart="@dimen/margin_card_medium"
+            android:background="@drawable/background_setting_card"
             android:paddingStart="@dimen/margin_medium_3"
             android:paddingTop="@dimen/margin_14dp"
             android:paddingEnd="@dimen/margin_medium_3"
@@ -181,22 +185,23 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/btnLogOut"
+            android:id="@+id/rlLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_14dp"
-            android:background="@color/white"
             android:padding="@dimen/margin_14dp">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogOut"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
                 android:layout_centerInParent="true"
+                android:backgroundTint="@color/colorLightBlue"
                 android:elevation="4dp"
+                android:textColor="@color/white"
                 android:fontFamily="@font/nunito_sans_bold"
                 android:gravity="center"
                 android:text="@string/lbl_log_out"
-                android:textColor="@color/colorRed"
                 android:textSize="@dimen/text_regular_2x" />
 
         </RelativeLayout>

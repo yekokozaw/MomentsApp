@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Social</string>
-    <string name="splash_lbl_1">End-to-end secured messaging app with Social Elements</string>
-    <string name="splash_lbl_2">Text your friends and share moments</string>
+    <string name="splash_lbl_1">Secured social app for IT Department</string>
+    <string name="splash_lbl_2">Share your memories and feelings</string>
     <string name="welcome_lbl">Welcome !</string>
     <string name="lbl_login_to_continue">Login to continue</string>
     <string name="lbl_enter_your_phone_number">Enter Your Phone Number</string>
@@ -57,7 +57,7 @@
     <string name="lbl_hide_moment">Hide moment</string>
     <string name="lbl_save_moment">Save moment</string>
     <string name="lbl_account_security">Account Security</string>
-    <string name="lbl_log_out">Log Out</string>
+    <string name="lbl_log_out">Log out</string>
     <string name="lbl_moments_labs">Moments Labs</string>
     <string name="lbl_about">About</string>
     <string name="lbl_message_notifications">Message Notifications</string>

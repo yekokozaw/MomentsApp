@@ -164,10 +164,6 @@ class MomentFragment : Fragment(), MomentView {
         dialog.setContentView(dialogBinding.root)
         dialog.setCancelable(true)
 
-        dialogBinding.btnEditMoment.setOnClickListener {
-
-        }
-
         if(mPresenter.getUserId() != momentOwnerUserId) {
             dialogBinding.btnDeleteMoment.visibility = View.GONE
         } else {

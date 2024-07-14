@@ -32,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/llButtonSplash"
+        android:layout_marginTop="@dimen/margin_small"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/margin_50dp"
         android:text="@string/splash_lbl_1"
