@@ -3,12 +3,10 @@ package com.padc.moments.network.auth
 import com.padc.moments.data.vos.UserVO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.padc.moments.network.storage.PresenceManager
 
 object FirebaseAuthManager : AuthManager {
 
     private val mFirebaseAuth = FirebaseAuth.getInstance()
-    //private lateinit var mPresenceManager: PresenceManager
 
     override fun login(
         phoneNumber: String,

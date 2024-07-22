@@ -24,7 +24,7 @@ class CommentAdapter : RecyclerView.Adapter<CommentViewHolder>() {
         holder.bindData(mComments[position])
     }
 
-    @SuppressLint("NotifyDataSetChange")
+    @SuppressLint("NotifyDataSetChanged")
     fun setNewData(comments : List<CommentVO>){
         mComments = comments
         notifyDataSetChanged()

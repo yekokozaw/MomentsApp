@@ -1,10 +1,12 @@
 package com.padc.moments.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.padc.moments.activities.BookDetailsActivity
 import com.padc.moments.activities.ClassDetailsActivity
 import com.padc.moments.data.models.UserModel
 import com.padc.moments.data.models.UserModelImpl
@@ -58,6 +60,10 @@ class ClassFragment(private val userId : String) : Fragment() {
     }
 
     private fun setUpListeners() {
+        mBinding.rlBook.setOnClickListener {
+            val intent = Intent(context,BookDetailsActivity::class.java)
+            startActivity(intent)
+        }
         mBinding.rlFirst.setOnClickListener {
             startActivity(ClassDetailsActivity.newIntent(requireContext(),mGender,mGrade,mUserId,"FirstYear"))
         }

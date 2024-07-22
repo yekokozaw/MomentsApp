@@ -1,22 +1,14 @@
 package com.padc.moments.activities
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
 import com.padc.moments.R
-import com.padc.moments.adapters.GifAdapter
 import com.padc.moments.data.models.GiphyModel
 import com.padc.moments.data.models.GiphyModelImpl
 import com.padc.moments.databinding.ActivitySearchGifsBinding
 import com.padc.moments.delegates.GifItemActionDelegate
-import com.jakewharton.rxbinding4.widget.textChanges
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 
 class SearchGifsActivity : AppCompatActivity(),GifItemActionDelegate {
 
@@ -26,7 +18,6 @@ class SearchGifsActivity : AppCompatActivity(),GifItemActionDelegate {
     private var mGiphyModel: GiphyModel = GiphyModelImpl
 
     // General
-    private lateinit var mAdapter: GifAdapter
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -38,45 +29,42 @@ class SearchGifsActivity : AppCompatActivity(),GifItemActionDelegate {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchGifsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setUpRecyclerView()
-
-        setUpListeners()
     }
 
-    @SuppressLint("CheckResult")
-    private fun setUpListeners() {
-        binding.etSearchGif.textChanges()
-            .debounce(500L, TimeUnit.MILLISECONDS)
-            .flatMap {
-                mGiphyModel.searchGifs(it.toString())
-            }
-            .map {data ->
-                if(data.isEmpty()) {
-                    mGiphyModel.getAllTrendingGifs(
-                        onSuccess = {dataList ->
-                            mAdapter.setNewData(dataList)
-                        },
-                        onFailure = {error ->
-                            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
-                        }
-                    )
-                }
-                data
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                mAdapter.setNewData(it)
-            }, {
-                Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
-            })
-    }
-
-    private fun setUpRecyclerView() {
-        mAdapter = GifAdapter(this)
-        binding.rvGif.adapter = mAdapter
-        binding.rvGif.layoutManager = GridLayoutManager(this, 2)
-    }
+//    @SuppressLint("CheckResult")
+//    private fun setUpListeners() {
+//        binding.etSearchGif.textChanges()
+//            .debounce(500L, TimeUnit.MILLISECONDS)
+//            .flatMap {
+//                mGiphyModel.searchGifs(it.toString())
+//            }
+//            .map {data ->
+//                if(data.isEmpty()) {
+//                    mGiphyModel.getAllTrendingGifs(
+//                        onSuccess = {dataList ->
+//                            mAdapter.setNewData(dataList)
+//                        },
+//                        onFailure = {error ->
+//                            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+//                        }
+//                    )
+//                }
+//                data
+//            }
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({
+//                mAdapter.setNewData(it)
+//            }, {
+//                Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
+//            })
+//    }
+//
+//    private fun setUpRecyclerView() {
+//        mAdapter = GifAdapter(this)
+//        binding.rvGif.adapter = mAdapter
+//        binding.rvGif.layoutManager = GridLayoutManager(this, 2)
+//    }
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {

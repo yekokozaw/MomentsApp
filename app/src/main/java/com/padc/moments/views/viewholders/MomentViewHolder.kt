@@ -58,7 +58,9 @@ class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDele
         when(val likes = data.likedList?.size.toString()){
             "0" -> binding.tvLikes.text = "0"
             "1" -> binding.tvLikes.text = "1 like"
-            else -> binding.tvLikes.text = "$likes likes"
+            else -> {
+                binding.tvLikes.text = "$likes likes"
+            }
         }
         binding.tvMomentProfileName.text = data.userName
         binding.tvMomentCaption.text = data.caption
@@ -108,7 +110,7 @@ class MomentViewHolder(itemView: View,private val delegate: MomentItemActionDele
         binding.viewPagerMomentImages.adapter = mAdapter
     }
 
-    fun getTimeAgo(timestamp: Long): String {
+    private fun getTimeAgo(timestamp: Long): String {
         val now = System.currentTimeMillis()
         val timeAgo = DateUtils.getRelativeTimeSpanString(timestamp, now, DateUtils.MINUTE_IN_MILLIS)
         return timeAgo.toString()
