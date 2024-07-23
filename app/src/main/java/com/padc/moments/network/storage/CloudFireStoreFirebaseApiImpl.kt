@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.padc.moments.data.vos.BookVo
 import com.padc.moments.data.vos.CommentVO
 import java.io.ByteArrayOutputStream
 import java.util.UUID
@@ -607,6 +608,36 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                         momentList.add(moment)
                     }
                     onSuccess(momentList)
+                }
+            }
+    }
+
+    override fun getPdfBooks(
+        onSuccess: (books: List<BookVo>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        database.collection("books")
+            .addSnapshotListener { value, error ->
+                error?.let {
+                    onFailure(it.localizedMessage ?: "Check Internet Connection")
+                } ?: run {
+                    val bookList : MutableList<BookVo> = arrayListOf()
+                    val documentList = value?.documents ?: arrayListOf()
+                    for (document in documentList){
+                        val data = document.data
+                        val bookId = data?.get("id") as? String ?: ""
+                        val bookTitle = data?.get("title") as? String ?: ""
+                        val fileUrl = data?.get("file_url") as? String ?: "file is null"
+                        val selectedYear = data?.get("selected_year") as? String ?: ""
+                        val book = BookVo(
+                            bookId = bookId,
+                            bookTitle = bookTitle,
+                            fileUrl = fileUrl,
+                            selectedYear = selectedYear
+                        )
+                        bookList.add(book)
+                    }
+                    onSuccess(bookList)
                 }
             }
     }

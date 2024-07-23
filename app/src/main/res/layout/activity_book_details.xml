@@ -28,4 +28,15 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:listitem="@layout/view_holder_book"/>
     </RelativeLayout>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabAddBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:text="@string/lbl_new"
+        android:fontFamily="@font/yorkie_demo_regular"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableLeft="@drawable/baseline_add_24"
+        android:layout_marginEnd="@dimen/margin_medium_2"
+        android:layout_marginBottom="@dimen/margin_medium_2" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

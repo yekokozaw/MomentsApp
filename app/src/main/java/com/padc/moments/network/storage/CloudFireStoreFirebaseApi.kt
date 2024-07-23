@@ -1,6 +1,7 @@
 package com.padc.moments.network.storage
 
 import android.graphics.Bitmap
+import com.padc.moments.data.vos.BookVo
 import com.padc.moments.data.vos.CommentVO
 import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.data.vos.UserVO
@@ -113,6 +114,11 @@ interface CloudFireStoreFirebaseApi {
     fun getMomentsFromUserBookmarked(
         currentUserId: String,
         onSuccess: (moments: List<MomentVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getPdfBooks(
+        onSuccess: (books : List<BookVo>) -> Unit,
         onFailure: (String) -> Unit
     )
 }

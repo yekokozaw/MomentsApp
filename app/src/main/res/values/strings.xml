@@ -84,4 +84,6 @@
     <string name="lbl_close">Close</string>
     <string name="lbl_privacy_policy">Privacy Policy</string>
     <string name="help_and_support">Help and Support</string>
+    <string name="lbl_new">New</string>
+    <string name="lbl_download">Download</string>
 </resources>
