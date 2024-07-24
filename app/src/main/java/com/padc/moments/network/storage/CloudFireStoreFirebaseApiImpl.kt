@@ -14,6 +14,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.padc.moments.data.vos.BookVo
 import com.padc.moments.data.vos.CommentVO
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.util.UUID
 
 @SuppressLint("StaticFieldLeak")
@@ -612,6 +613,41 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
+    override fun uploadPdfFile(
+        id: String,
+        title: String,
+        fileUri: Uri,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        val pdfRef = storageRef.child("pdf/$title${UUID.randomUUID()}")
+
+        pdfRef.putFile(fileUri).addOnSuccessListener {
+            val urlTask = it.task.continueWithTask {
+                return@continueWithTask pdfRef.downloadUrl
+            }
+
+            urlTask.addOnCompleteListener {
+                val userMap = hashMapOf(
+                    "id" to id,
+                    "title" to title,
+                    "file_url" to urlTask.result.toString()
+                )
+                database.collection("books")
+                    .document(id)
+                    .set(userMap)
+                    .addOnSuccessListener {
+                        onSuccess("$it")
+                    }
+                    .addOnFailureListener {
+                        onFailure("Sorry,${it.localizedMessage}")
+                    }
+            }
+        }.addOnFailureListener {
+            onFailure(it.localizedMessage ?: "Pdf upload fail")
+        }
+    }
+
     override fun getPdfBooks(
         onSuccess: (books: List<BookVo>) -> Unit,
         onFailure: (String) -> Unit
@@ -628,17 +664,37 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                         val bookId = data?.get("id") as? String ?: ""
                         val bookTitle = data?.get("title") as? String ?: ""
                         val fileUrl = data?.get("file_url") as? String ?: "file is null"
-                        val selectedYear = data?.get("selected_year") as? String ?: ""
                         val book = BookVo(
                             bookId = bookId,
                             bookTitle = bookTitle,
                             fileUrl = fileUrl,
-                            selectedYear = selectedYear
                         )
                         bookList.add(book)
                     }
                     onSuccess(bookList)
                 }
+            }
+    }
+
+    override fun deleteBook(
+        bookId: String,
+        pdfFilePath: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        database.collection("books")
+            .document(bookId)
+            .delete()
+            .addOnSuccessListener {
+                storageRef.child(pdfFilePath).delete().addOnSuccessListener {
+                    onSuccess("File successfully deleted")
+                }
+                    .addOnFailureListener {
+                        onFailure("Error deleting: $it")
+                    }
+            }
+            .addOnFailureListener {
+                onFailure("Error deleting: $it")
             }
     }
 }

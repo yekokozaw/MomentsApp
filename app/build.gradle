@@ -20,6 +20,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    packagingOptions{
+        exclude("META-INF/DEPENDENCIES")
+    }
+
     buildTypes {
         release {
             minifyEnabled false

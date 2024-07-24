@@ -1,10 +1,13 @@
 package com.padc.moments.data.models
 
 import android.graphics.Bitmap
+import android.net.Uri
+import com.padc.moments.data.vos.BookVo
 import com.padc.moments.data.vos.CommentVO
 import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.network.storage.CloudFireStoreFirebaseApiImpl
 import com.padc.moments.network.storage.CloudFireStoreFirebaseApi
+import java.io.File
 
 object MomentModelImpl : MomentModel {
 
@@ -94,5 +97,42 @@ object MomentModelImpl : MomentModel {
         onFailure: (String) -> Unit
     ) {
         mFirebaseApi.getMomentsFromUserBookmarked(currentUserId, onSuccess, onFailure)
+    }
+
+    override fun getPdfBooks(
+        onSuccess: (books: List<BookVo>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getPdfBooks(onSuccess,onFailure)
+    }
+
+    override fun uploadPdfFile(
+        id: String,
+        title: String,
+        fileUri: Uri,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.uploadPdfFile(
+            id = id,
+            title,
+            fileUri = fileUri,
+            onSuccess,
+            onFailure
+        )
+    }
+
+    override fun deleteBook(
+        bookId: String,
+        pdfFilePath: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.deleteBook(
+            bookId,
+            pdfFilePath,
+            onSuccess,
+            onFailure
+        )
     }
 }

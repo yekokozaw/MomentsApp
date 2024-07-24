@@ -86,4 +86,8 @@
     <string name="help_and_support">Help and Support</string>
     <string name="lbl_new">New</string>
     <string name="lbl_download">Download</string>
+    <string name="lbl_cancel">cancel</string>
+    <string name="upload">Upload</string>
+    <string name="lbl_download_books">Download Books</string>
+    <string name="delete_instruction">If you want to delete,press a book</string>
 </resources>

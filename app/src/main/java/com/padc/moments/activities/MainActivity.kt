@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     private val mAuthModel : AuthenticationModel = AuthenticationModelImpl
     private var isNetworkConnected = false
     private var mUserId = ""
-    private lateinit var mTimestampManager : TimestampManager
     companion object {
         fun newIntent(context: Context): Intent {
             return Intent(context, MainActivity::class.java)
@@ -45,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         checkNetwork()
         subscribeToTopic("all")
         setUpBottomNavigationView()
-        mTimestampManager = TimestampManager(this)
         mUserId = mAuthModel.getUserIdFromDb()
     }
 
@@ -59,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nvgChat -> {
-                    switchFragment(ClassFragment(mUserId))
+                    switchFragment(ClassFragment.newInstance(mUserId))
                     true
                 }
                 R.id.nvgMe -> {

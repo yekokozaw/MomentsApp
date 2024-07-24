@@ -1,10 +1,13 @@
 package com.padc.moments.network.storage
 
 import android.graphics.Bitmap
+import android.icu.text.CaseMap.Title
+import android.net.Uri
 import com.padc.moments.data.vos.BookVo
 import com.padc.moments.data.vos.CommentVO
 import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.data.vos.UserVO
+import java.io.File
 
 interface CloudFireStoreFirebaseApi {
 
@@ -107,6 +110,7 @@ interface CloudFireStoreFirebaseApi {
         momentType: String,
         commentSize : Int
     )
+
     fun addMomentToUserBookmarked(currentUserId: String, moment: MomentVO)
 
     fun deleteMomentFromUserBookmarked(currentUserId: String, momentId: String)
@@ -117,8 +121,23 @@ interface CloudFireStoreFirebaseApi {
         onFailure: (String) -> Unit
     )
 
+    fun uploadPdfFile(
+        id : String,
+        title: String,
+        fileUri : Uri,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
     fun getPdfBooks(
         onSuccess: (books : List<BookVo>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun deleteBook(
+        bookId : String,
+        pdfFilePath : String,
+        onSuccess: (String) -> Unit,
         onFailure: (String) -> Unit
     )
 }

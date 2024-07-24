@@ -1,9 +1,12 @@
 package com.padc.moments.data.models
 
 import android.graphics.Bitmap
+import android.net.Uri
+import com.padc.moments.data.vos.BookVo
 import com.padc.moments.data.vos.CommentVO
 import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.network.storage.CloudFireStoreFirebaseApi
+import java.io.File
 
 interface MomentModel {
     var mFirebaseApi: CloudFireStoreFirebaseApi
@@ -65,6 +68,26 @@ interface MomentModel {
     fun getMomentsFromUserBookmarked(
         currentUserId: String,
         onSuccess: (moments: List<MomentVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getPdfBooks(
+        onSuccess: (books : List<BookVo>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun uploadPdfFile(
+        id : String,
+        title: String,
+        fileUri : Uri,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun deleteBook(
+        bookId : String,
+        pdfFilePath : String,
+        onSuccess: (String) -> Unit,
         onFailure: (String) -> Unit
     )
 }

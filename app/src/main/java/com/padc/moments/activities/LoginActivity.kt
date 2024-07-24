@@ -84,6 +84,7 @@ class LoginActivity : AppCompatActivity() , LoginView {
     }
 
     override fun navigateToHomeScreen() {
+
         val userId = mAuthManager.getUserId()
         mUserModel.getSpecificUser(
             userId,
@@ -98,7 +99,7 @@ class LoginActivity : AppCompatActivity() , LoginView {
                                 user.userId,
                                 fcmToken,
                                 onSuccess = {
-                                    mAuthModel.addToken(TokenVO("token",user.email, userId = user.userId ))
+                                    mAuthModel.addToken(TokenVO(user.gender,user.email, userId = user.userId ))
                                     startActivity(MainActivity.newIntent(this))
                                     finish()
                                 }, onFailure = {
@@ -114,7 +115,7 @@ class LoginActivity : AppCompatActivity() , LoginView {
                         user.userId,
                         fcmToken,
                         onSuccess = {
-                            mAuthModel.addToken(TokenVO("token",user.email, userId = user.userId ))
+                            mAuthModel.addToken(TokenVO(user.gender,user.email, userId = user.userId ))
                             startActivity(MainActivity.newIntent(this))
                             finish()
                         }, onFailure = {

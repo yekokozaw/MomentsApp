@@ -1,6 +1,7 @@
 package com.padc.moments.data.models
 
 import android.content.Context
+import com.google.firebase.auth.FirebaseAuth
 import com.padc.moments.data.vos.TokenVO
 import com.padc.moments.data.vos.UserVO
 import com.padc.moments.network.auth.AuthManager

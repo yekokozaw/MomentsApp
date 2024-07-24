@@ -13,14 +13,18 @@ class DownloadWorker(private val context : Context, workerParams : WorkerParamet
     : Worker(context,workerParams) {
     override fun doWork(): Result {
         val url = inputData.getString("url")
+        val title = inputData.getString("title")
+        val mimeType = inputData.getString("type")
+
         try {
             val request =
                 DownloadManager.Request(Uri.parse(url))
             request.apply {
-                setTitle("Download Image")
+                setTitle(title)
                 setDescription("Downloading")
                 setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"${UUID.randomUUID()}.jpeg")
+                setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,title)
+                    .setMimeType(mimeType)
 
                 val downloadManager : DownloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
                 downloadManager.enqueue(request)

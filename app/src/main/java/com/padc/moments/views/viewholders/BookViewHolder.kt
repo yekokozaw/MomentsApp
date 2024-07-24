@@ -12,13 +12,20 @@ class BookViewHolder(private val binding : ViewHolderBookBinding,private val del
     private var mBook : BookVo? = null
 
     init {
+        binding.btnDownload.setOnClickListener {
+            mBook?.let { delegate.onTapPdfViewHolder(mBook!!.bookTitle, mBook!!.fileUrl) }
+        }
 
+        binding.root.setOnLongClickListener {
+            mBook?.let { delegate.onLongPressViewHolder(mBook!!.bookId,mBook!!.bookTitle,mBook!!.fileUrl)
+                true
+            } == true
+        }
     }
 
     fun bindData(book : BookVo){
         mBook = book
         binding.tvTitle.text = book.bookTitle
-        binding.tvGradeName.text = book.bookTitle
 
     }
 }

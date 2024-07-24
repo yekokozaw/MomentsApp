@@ -15,13 +15,29 @@ import com.padc.moments.utils.hide
 import com.padc.moments.utils.makeToast
 import com.padc.moments.utils.show
 
-class ClassFragment(private val userId : String) : Fragment() {
+class ClassFragment : Fragment() {
 
     private lateinit var mBinding : FragmentClassBinding
     private val mUserModel : UserModel = UserModelImpl
     private var mGender : String = ""
     private var mGrade : String = ""
+    private var userId : String = ""
     private var mUserId : String = ""
+
+    companion object{
+        fun newInstance(someParameter: String): ClassFragment {
+            val fragment = ClassFragment()
+            val args = Bundle()
+            args.putString("key", someParameter)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+         userId = arguments?.getString("key").toString()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +77,7 @@ class ClassFragment(private val userId : String) : Fragment() {
 
     private fun setUpListeners() {
         mBinding.rlBook.setOnClickListener {
-            val intent = Intent(context,BookDetailsActivity::class.java)
+            val intent = Intent(requireContext(),BookDetailsActivity::class.java)
             startActivity(intent)
         }
         mBinding.rlFirst.setOnClickListener {

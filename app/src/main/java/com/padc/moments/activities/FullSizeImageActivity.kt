@@ -12,6 +12,7 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.padc.moments.data.vos.giphy.Data
 import com.padc.moments.databinding.ActivityFullSizeImageBinding
 import com.padc.moments.workmanager.DownloadWorker
 
@@ -44,7 +45,12 @@ class FullSizeImageActivity : AppCompatActivity() {
         }
 
         mBinding.ivDownload.setOnClickListener {
-            val data = workDataOf("url" to imageId)
+            val data = androidx.work.Data.Builder()
+                .putString("url",imageId)
+                .putString("title","${System.currentTimeMillis()}.jpeg")
+                .putString("type","image/jpeg")
+                .build()
+
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.NOT_ROAMING)
                 .setRequiresStorageNotLow(true)

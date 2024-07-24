@@ -14,25 +14,40 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Download Books"
+            android:text="@string/lbl_download_books"
             android:fontFamily="@font/yorkie_demo_bold"
             android:layout_marginTop="@dimen/margin_medium_2"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/text_regular_3x"/>
+
+        <TextView
+            android:id="@+id/tvInstruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:fontFamily="@font/yorkie_demo_medium"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_below="@id/tvTitle"
+            android:textSize="@dimen/text_small"
+            android:text="@string/delete_instruction"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBook"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tvTitle"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/view_holder_book"/>
+            android:layout_marginTop="@dimen/margin_medium_2"
+            tools:listitem="@layout/view_holder_book" />
     </RelativeLayout>
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabAddBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:visibility="gone"
         android:text="@string/lbl_new"
         android:fontFamily="@font/yorkie_demo_regular"
         android:backgroundTint="@color/colorPrimary"

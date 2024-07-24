@@ -13,15 +13,15 @@ class BookAdapter (private val delegate : BookViewHolderDelegate): RecyclerView.
     private var mBooks : List<BookVo> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val binding = ViewHolderBookBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return BookViewHolder(binding)
+        return BookViewHolder(binding,delegate)
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return mBooks.size
     }
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-
+        holder.bindData(mBooks[position])
     }
 
     @SuppressLint("NotifyDataSetChanged")

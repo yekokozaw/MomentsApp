@@ -13,6 +13,7 @@ import com.padc.moments.R
 import com.padc.moments.activities.LoginActivity
 import com.padc.moments.databinding.FragmentSettingBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessaging
 import com.padc.moments.activities.RegisterActivity
 import com.padc.moments.data.models.AuthenticationModel
@@ -103,7 +104,9 @@ class SettingFragment : Fragment() {
                     .setPositiveButton("Yes") { logoutDialog, _ ->
                         logoutDialog?.dismiss()
                         deleteUserToken()
-                        startActivity(LoginActivity.newIntent(requireContext()))
+                        context?.let { ctx ->
+                            startActivity(LoginActivity.newIntent(ctx))
+                        }
                         activity?.finish()
                     }
                     .setNegativeButton("Cancel") { logoutDialog, _ ->
