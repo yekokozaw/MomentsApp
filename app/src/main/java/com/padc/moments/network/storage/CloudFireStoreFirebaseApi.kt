@@ -37,11 +37,6 @@ interface CloudFireStoreFirebaseApi {
         onFailure: (String) -> Unit
     )
 
-    fun downloadImage(
-        imagePath : String,
-        onSuccess: (String) -> Unit,
-        onFailure: (String) -> Unit
-        )
 
     fun getSpecificUser(
         userId: String,

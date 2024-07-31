@@ -12,7 +12,7 @@ const val API_GET_GIPHY_TRENDING = "v1/gifs/trending"
 const val API_GET_GIPHY_SEARCH = "/v1/gifs/search"
 
 // POST
-const val API_POST_FCM = "fcm/send"
+const val API_POST_FCM = "v1/projects/social-app-fb7b9/messages:send"
 
 // PARAM
 const val PARAM_API_KEY = "api_key"
@@ -31,7 +31,7 @@ const val HEADER_AUTH = "Authorization"
 
 // Keys
 const val GIPHY_API_KEY = "fNcKKGdZ8bta2IdgEAA1PTwLe6VbS1I8"
-const val FCM_AUTH_KEY = "key=AAAAEY3uckw:APA91bHKhYEmcSlsbF-3J_OFZDO2riuXOUm6WX9in-Yl7DYe1cWph2ZGuv4SRmo3IK5PbU2eo994AlIGv9oyDX_G3oaQJv9BDQw_JfEgn-5ARxTlF-yHsnrdyct8lOcUV9bUZc4RK6T5"
+const val FCM_AUTH_KEY = "Bearer ya29.a0AXooCgsTxqeOtMRk-S2F8OiS94NdXRvsscHiSLOpXbN7B98yr0ZR36OWlK2MyOXX3qmE5yXFNxViXhNw6upt6_Yp0TdROucJaPURDlghC1jqLVYKUMMTkW2XJPRXSN5O0sDURvujKr9nu7rkEKxKV7XCkU1ppzVHEgP3aCgYKAcMSARASFQHGX2MimbX3zzGRTK_uDowkHNXyZQ0171"
 
 fun getTimeAgo(timestamp: Long): String {
     val now = System.currentTimeMillis()

@@ -185,6 +185,8 @@ class ProfileFragment : Fragment() , ProfileView {
     }
 
     override fun showUserInformation(userList: List<UserVO>) {
+        if (!isAdded) return
+
         for(user in userList) {
             if(mPresenter.getUserId() == user.userId) {
 
@@ -202,9 +204,11 @@ class ProfileFragment : Fragment() , ProfileView {
                 qrCode = user.qrCode
                 imageUrl = user.imageUrl
 
-                Glide.with(requireContext())
-                    .load(user.imageUrl)
-                    .into(binding.ivProfileImageProfile)
+                context?.let {ctx ->
+                    Glide.with(ctx)
+                        .load(user.imageUrl)
+                        .into(binding.ivProfileImageProfile)
+                }
             }
         }
     }

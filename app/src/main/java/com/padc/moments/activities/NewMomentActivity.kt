@@ -28,6 +28,8 @@ import com.padc.moments.mvp.impls.NewMomentPresenterImpl
 import com.padc.moments.mvp.interfaces.NewMomentPresenter
 import com.padc.moments.mvp.views.NewMomentView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.padc.moments.network.storage.getAccessToken
+import com.padc.moments.network.storage.sendMessageToTopic
 import com.padc.moments.utils.makeToast
 import com.padc.moments.utils.show
 import com.theartofdev.edmodo.cropper.CropImage
@@ -138,6 +140,9 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
             val body = binding.etPostNewMoment.text.toString()
             mPresenter.onTapCreateButton(getMomentPost(),userName,body, grade = mGrade)
             mPresenter.clearMomentImages()
+            getAccessToken(this){token ->
+                sendMessageToTopic(token,"all","Breaking News","This is shit")
+            }
             finish()
         }
     }
@@ -218,7 +223,6 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
                         requestGalleryPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                     }
                 }
-
         }
 
         dialogBinding.btnCancelBottomSheetDialog.setOnClickListener {
@@ -228,6 +232,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
     }
 
     override fun finishFragment() {
+
         binding.progressBar.visibility = View.GONE
         Toast.makeText(this, "Successfully uploaded!", Toast.LENGTH_SHORT).show()
         finish()

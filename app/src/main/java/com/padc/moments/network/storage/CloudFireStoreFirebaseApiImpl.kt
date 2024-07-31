@@ -174,14 +174,6 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
             }
     }
 
-    override fun downloadImage(
-        imagePath: String,
-        onSuccess: (String) -> Unit,
-        onFailure: (String) -> Unit
-    ) {
-
-    }
-
     override fun getSpecificUser(
         userId: String,
         onSuccess: (UserVO) -> Unit,

@@ -21,4 +21,5 @@ interface AuthManager {
     )
 
     fun getUserId() : String
+
 }

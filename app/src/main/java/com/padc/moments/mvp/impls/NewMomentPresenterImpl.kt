@@ -16,6 +16,7 @@ import com.padc.moments.data.vos.fcm.DataX
 import com.padc.moments.data.vos.fcm.FCMBody
 import com.padc.moments.mvp.interfaces.NewMomentPresenter
 import com.padc.moments.mvp.views.NewMomentView
+import com.padc.moments.network.storage.sendMessageToTopic
 
 class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
 
@@ -63,13 +64,17 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
         )
         val fcmBody = FCMBody(tokens.toList().distinct(),dataFCM)
         mMomentModel.createMoment(moment, grade = momentType)
-        mUserModel.sendFCMNotification(
-            fcmBody,
-            onSuccess = {
-                mView?.finishFragment()
-        }, onFailure = {
-            mView?.showError(it)
-        })
+        if (grade == "all"){
+            //sendMessageToTopic("all",title,body)
+        }else{
+            mUserModel.sendFCMNotification(
+                fcmBody,
+                onSuccess = {
+                    mView?.finishFragment()
+                }, onFailure = {
+                    mView?.showError(it)
+                })
+        }
     }
 
     override fun createMomentImages(bitmap: Bitmap) {
