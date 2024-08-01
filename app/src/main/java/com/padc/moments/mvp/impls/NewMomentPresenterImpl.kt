@@ -16,6 +16,7 @@ import com.padc.moments.data.vos.fcm.DataX
 import com.padc.moments.data.vos.fcm.FCMBody
 import com.padc.moments.mvp.interfaces.NewMomentPresenter
 import com.padc.moments.mvp.views.NewMomentView
+import com.padc.moments.network.storage.getAccessToken
 import com.padc.moments.network.storage.sendMessageToTopic
 
 class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
@@ -55,25 +56,37 @@ class NewMomentPresenterImpl: NewMomentPresenter , ViewModel() {
     }
 
     override fun onTapCreateButton(moment:MomentVO,title: String,body: String,grade : String) {
-        val dataFCM = Data(
-            title = title,
-            body = body,
-            chat_type = "",
-            chat_id = "",
-            data = DataX()
-        )
-        val fcmBody = FCMBody(tokens.toList().distinct(),dataFCM)
+        val topicGrade = getTokenByGroupType(grade)
+//        val dataFCM = Data(
+//            title = title,
+//            body = body,
+//            chat_type = "",
+//            chat_id = "",
+//            data = DataX()
+//        )
+//        val fcmBody = FCMBody(tokens.toList().distinct(),dataFCM)
         mMomentModel.createMoment(moment, grade = momentType)
-        if (grade == "all"){
-            //sendMessageToTopic("all",title,body)
-        }else{
-            mUserModel.sendFCMNotification(
-                fcmBody,
-                onSuccess = {
-                    mView?.finishFragment()
-                }, onFailure = {
-                    mView?.showError(it)
-                })
+        mView?.finishFragment(topicGrade)
+//            mUserModel.sendFCMNotification(
+//                fcmBody,
+//                onSuccess = {
+//                    mView?.finishFragment()
+//                }, onFailure = {
+//                    mView?.showError(it)
+//                })
+//        }
+    }
+
+    private fun getTokenByGroupType(grade : String): String {
+        return when(grade) {
+            "all" -> "all"
+            "FirstYear" -> "first"
+            "SecondYear" -> "second"
+            "ThirdYear" -> "third"
+            "FourthYear" -> "fourth"
+            "FifthYear" -> "fifth"
+            "FinalYear" -> "final"
+            else -> throw IllegalArgumentException("Invalid grade: $grade")
         }
     }
 

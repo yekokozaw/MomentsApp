@@ -13,12 +13,15 @@ import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.data.vos.UserVO
 import com.padc.moments.mvp.interfaces.ProfilePresenter
 import com.padc.moments.mvp.views.ProfileView
+import com.padc.moments.network.auth.AuthManager
+import com.padc.moments.network.auth.FirebaseAuthManager
 
 class ProfilePresenterImpl : ProfilePresenter , ViewModel() {
 
     override var mAuthModel: AuthenticationModel = AuthenticationModelImpl
     override var mUserModel: UserModel = UserModelImpl
     override var mMomentModel: MomentModel = MomentModelImpl
+    private val mAuthManager : AuthManager = FirebaseAuthManager
 
     private var mView:ProfileView? = null
     override fun initPresenter(view: ProfileView) {
@@ -26,9 +29,11 @@ class ProfilePresenterImpl : ProfilePresenter , ViewModel() {
     }
 
     override fun onUIReady(lifecycleOwner: LifecycleOwner) {
-        mUserModel.getUsers(
+        val userId = mAuthManager.getUserId()
+        mUserModel.getSpecificUser(
+            userId,
             onSuccess = {
-                mView?.showUserInformation(it)
+                 mView?.showUserInformation(it)
             },
             onFailure = {
                 mView?.showError(it)

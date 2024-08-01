@@ -14,7 +14,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.padc.moments.data.vos.BookVo
 import com.padc.moments.data.vos.CommentVO
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.util.UUID
 
 @SuppressLint("StaticFieldLeak")
@@ -192,10 +191,10 @@ object CloudFireStoreFirebaseApiImpl : CloudFireStoreFirebaseApi {
                     val phoneNumber = data["phone_number"] as String
                     val email = data["email"] as String
                     val password = data["password"] as String
-                    val birthDate = data["birth_date"] as String
+                    val birthDate = data["birth_date"] as? String ?: "_"
                     val gender = data["gender"] as String
-                    val qrCode = data["qr_code"] as String
-                    val imageUrl = data["image_url"] as String
+                    val qrCode = data["qr_code"] as? String ?: "_"
+                    val imageUrl = data["image_url"] as? String ?: "null image"
                     val fcmKey = data["fcm_key"].toString()
                     val grade = data["grade"] as String
                     val user = UserVO(

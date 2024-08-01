@@ -18,6 +18,7 @@ import com.padc.moments.mvp.interfaces.LoginPresenter
 import com.padc.moments.mvp.views.LoginView
 import com.padc.moments.network.auth.AuthManager
 import com.padc.moments.network.auth.FirebaseAuthManager
+import com.padc.moments.network.storage.subscribeToTopic
 import com.padc.moments.utils.hide
 import com.padc.moments.utils.show
 
@@ -84,45 +85,15 @@ class LoginActivity : AppCompatActivity() , LoginView {
     }
 
     override fun navigateToHomeScreen() {
-
         val userId = mAuthManager.getUserId()
+        val token = TokenVO(fcmToken, email = binding.etEmailLogin.text.toString(),userId)
+        mAuthModel.addToken(token)
         mUserModel.getSpecificUser(
             userId,
             onSuccess = { user ->
-                if (user.gender == "student"){
-                    mUserModel.addUserToGroup(
-                        user.userId,
-                        user.grade,
-                        fcmToken,
-                        onSuccess = {
-                            mUserModel.uploadFCMToken(
-                                user.userId,
-                                fcmToken,
-                                onSuccess = {
-                                    mAuthModel.addToken(TokenVO(user.gender,user.email, userId = user.userId ))
-                                    startActivity(MainActivity.newIntent(this))
-                                    finish()
-                                }, onFailure = {
-                                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                                }
-                            )
-                        }, onFailure = {
-                            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                        }
-                    )
-                }else{
-                    mUserModel.uploadFCMToken(
-                        user.userId,
-                        fcmToken,
-                        onSuccess = {
-                            mAuthModel.addToken(TokenVO(user.gender,user.email, userId = user.userId ))
-                            startActivity(MainActivity.newIntent(this))
-                            finish()
-                        }, onFailure = {
-                            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                        }
-                    )
-                }
+                subscribeToTopic("all")
+                subscribeToTopic(user.grade)
+                startActivity(MainActivity.newIntent(this))
             },
             onFailure = {
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()

@@ -20,6 +20,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.padc.moments.data.models.AuthenticationModel
 import com.padc.moments.data.models.AuthenticationModelImpl
 import com.padc.moments.fragments.ClassFragment
+import com.padc.moments.network.auth.AuthManager
+import com.padc.moments.network.auth.FirebaseAuthManager
 import com.padc.moments.network.storage.subscribeToTopic
 import com.padc.moments.utils.TimestampManager
 import com.padc.moments.utils.makeToast
@@ -42,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         checkNetwork()
-        subscribeToTopic("all")
         setUpBottomNavigationView()
         mUserId = mAuthModel.getUserIdFromDb()
     }

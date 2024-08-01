@@ -4,6 +4,12 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.padc.moments.R
 import com.padc.moments.data.models.AuthenticationModel
 import com.padc.moments.data.models.AuthenticationModelImpl
 import com.padc.moments.data.models.MomentModel
@@ -12,6 +18,7 @@ import com.padc.moments.data.models.UserModel
 import com.padc.moments.data.models.UserModelImpl
 import com.padc.moments.data.vos.MomentVO
 import com.padc.moments.databinding.ActivityClassDetailsBinding
+import com.padc.moments.databinding.BottomSheetDialogMomentOptionBinding
 import com.padc.moments.delegates.MomentItemActionDelegate
 import com.padc.moments.utils.hide
 import com.padc.moments.utils.makeToast
@@ -101,6 +108,45 @@ class ClassDetailsActivity : AppCompatActivity() ,MomentItemActionDelegate{
         )
     }
 
+    private fun showOptionDialogBox(momentId:String,momentOwnerUserId:String) {
+        val dialogBinding = BottomSheetDialogMomentOptionBinding.inflate(layoutInflater)
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(dialogBinding.root)
+        dialog.setCancelable(true)
+
+        if(userId != momentOwnerUserId) {
+            dialogBinding.btnDeleteMoment.visibility = View.GONE
+        } else {
+            dialogBinding.btnDeleteMoment.visibility = View.VISIBLE
+            dialogBinding.btnDeleteMoment.setOnClickListener {
+                val dialogDeleteBox =
+                    MaterialAlertDialogBuilder(this, R.style.RoundedAlertDialog)
+                        .setTitle("Delete Moment ?")
+                        .setMessage("Are you sure to delete ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes") { deleteDialog, _ ->
+                            Log.i("MomentId",momentId)
+                            mMomentModel.deleteMoment(
+                                momentId,
+                                mTitle,
+                                onSuccess = {
+                                    Toast.makeText(this, "Deleted successfully", Toast.LENGTH_SHORT).show()
+                                }, onFailure = {
+                                    Toast.makeText(this, "Failed to delete", Toast.LENGTH_SHORT).show()
+                                })
+                            deleteDialog?.dismiss()
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton("Cancel") { deleteDialog, _ ->
+                            deleteDialog?.dismiss()
+                        }
+                        .create()
+                dialogDeleteBox.show()
+            }
+        }
+        dialog.show()
+    }
+
     private fun setUpListeners() {
         mBinding.btnAddMoment.setOnClickListener {
             startActivity(NewMomentActivity.newIntent(this,mTitle))
@@ -110,12 +156,13 @@ class ClassDetailsActivity : AppCompatActivity() ,MomentItemActionDelegate{
             finish()
         }
     }
+
     override fun onTapBookmarkButton(id: String, isBookmarked: Boolean) {
 
     }
 
     override fun onTapOptionButton(momentId: String, momentOwnerUserId: String) {
-
+        showOptionDialogBox(momentId,momentOwnerUserId)
     }
 
     override fun onLongClickImage(imageUrl: String) {

@@ -7,8 +7,9 @@ interface NewMomentView : BaseView {
     fun navigateToPreviousScreen()
     fun showGallery()
 
-    fun finishFragment()
+    fun finishFragment(topic : String)
     fun showUserInformation(userList: List<UserVO>)
 
     fun imageReady(ready : Boolean)
+
 }

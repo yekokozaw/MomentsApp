@@ -5,7 +5,7 @@ import com.padc.moments.data.vos.UserVO
 
 interface ProfileView  : BaseView {
 
-    fun showUserInformation(userList:List<UserVO>)
+    fun showUserInformation(userVO: UserVO)
 
     fun showEditProfileDialog()
     fun showQrCodeDialog()

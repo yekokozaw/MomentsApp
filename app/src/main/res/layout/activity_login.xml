@@ -160,7 +160,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_48dp"
+            android:layout_height="@dimen/margin_50dp"
             app:cornerRadius="@dimen/margin_medium_3"
             android:text="@string/lbl_login"
             android:layout_marginStart="@dimen/margin_large"

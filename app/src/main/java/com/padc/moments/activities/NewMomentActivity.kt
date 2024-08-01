@@ -1,6 +1,7 @@
 package com.padc.moments.activities
 
 import android.Manifest
+import android.adservices.topics.Topic
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -140,10 +141,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
             val body = binding.etPostNewMoment.text.toString()
             mPresenter.onTapCreateButton(getMomentPost(),userName,body, grade = mGrade)
             mPresenter.clearMomentImages()
-            getAccessToken(this){token ->
-                sendMessageToTopic(token,"all","Breaking News","This is shit")
-            }
-            finish()
+
         }
     }
 
@@ -231,8 +229,10 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         dialog.show()
     }
 
-    override fun finishFragment() {
-
+    override fun finishFragment(topic: String) {
+        getAccessToken(this){token ->
+            sendMessageToTopic(token,topic,userName,binding.etPostNewMoment.text.toString())
+        }
         binding.progressBar.visibility = View.GONE
         Toast.makeText(this, "Successfully uploaded!", Toast.LENGTH_SHORT).show()
         finish()
@@ -264,6 +264,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         binding.ivReadyImage.show()
         Toast.makeText(this, "Image is ready", Toast.LENGTH_SHORT).show()
     }
+
 
     override fun showError(error: String) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()

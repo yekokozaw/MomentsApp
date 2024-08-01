@@ -29,7 +29,6 @@ class LoginPresenterImpl : LoginPresenter, ViewModel() {
     }
 
     override fun onTapLoginButton(fcmToken: String,phoneNumber: String, email: String, password: String) {
-        //mAuthModel.addToken(TokenVO("token",email, userId = mUserId ))
         mAuthModel.login(
             phoneNumber,
             email,

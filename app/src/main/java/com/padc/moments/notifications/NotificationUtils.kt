@@ -45,7 +45,7 @@ object NotificationUtils {
         bigTextStyle.bigText(content)
 
         return NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.drawable.network_social)
+            .setSmallIcon(R.drawable.world_small_icon)
             .setContentTitle(title)
             .setContentText(content)
             .setAutoCancel(true)

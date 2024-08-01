@@ -184,32 +184,26 @@ class ProfileFragment : Fragment() , ProfileView {
         return years
     }
 
-    override fun showUserInformation(userList: List<UserVO>) {
+    override fun showUserInformation(userVO : UserVO) {
         if (!isAdded) return
+        mUser = userVO
+        mUser!!.fcmKey = fcmToken
 
-        for(user in userList) {
-            if(mPresenter.getUserId() == user.userId) {
+        binding.tvGenderGrade.text = userVO.grade
+        binding.tvNameProfile.text = userVO.userName
+        binding.tvPhoneNumberProfile.text = userVO.phoneNumber
+        binding.tvDateProfile.text = userVO.birthDate
+        binding.tvGenderProfile.text = userVO.gender
 
-                mUser = user
-                mUser!!.fcmKey = fcmToken
+        email = userVO.email
+        password = userVO.password
+        qrCode = userVO.qrCode
+        imageUrl = userVO.imageUrl
 
-                binding.tvGenderGrade.text = user.grade
-                binding.tvNameProfile.text = user.userName
-                binding.tvPhoneNumberProfile.text = user.phoneNumber
-                binding.tvDateProfile.text = user.birthDate
-                binding.tvGenderProfile.text = user.gender
-
-                email = user.email
-                password = user.password
-                qrCode = user.qrCode
-                imageUrl = user.imageUrl
-
-                context?.let {ctx ->
-                    Glide.with(ctx)
-                        .load(user.imageUrl)
-                        .into(binding.ivProfileImageProfile)
-                }
-            }
+        context?.let { ctx ->
+            Glide.with(ctx)
+                .load(userVO.imageUrl)
+                .into(binding.ivProfileImageProfile)
         }
     }
 
