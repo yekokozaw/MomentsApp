@@ -24,8 +24,19 @@ fun subscribeToTopic(topic: String) {
         }
 }
 
+fun unsubscribeFromTopic(topic: String){
+    FirebaseMessaging.getInstance().unsubscribeFromTopic(topic)
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                println("Unsubscribed to topic: $topic")
+            } else {
+                println("Unsubscribe to topic $topic failed: ${task.exception?.message}")
+            }
+        }
+}
+
 fun getServiceAccountJson(context: Context): String {
-    val inputStream = context.assets.open("social-service-account.json")
+    val inputStream = context.assets.open("social-app.json")
     val reader = InputStreamReader(inputStream)
     return reader.readText()
 }

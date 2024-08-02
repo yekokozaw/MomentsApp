@@ -63,9 +63,10 @@
         android:layout_marginStart="@dimen/margin_medium_2"
         android:layout_marginTop="@dimen/margin_card_medium_2"
         android:layout_marginEnd="@dimen/margin_medium_2"
+        android:clickable="true"
+        android:focusable="true"
         android:textSize="@dimen/text_regular_2x"
         android:fontFamily="@font/noto_sans_medium"
-        android:maxLines="5"
         android:textColor="@color/colorPrimaryText"
         android:text="@string/lbl_a_machine_resembling_a_human_being_and_able_to_replicate_certain_human_movements_and_functions_automatically" />
 

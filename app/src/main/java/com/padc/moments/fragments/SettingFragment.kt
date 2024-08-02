@@ -22,6 +22,7 @@ import com.padc.moments.data.models.UserModel
 import com.padc.moments.data.models.UserModelImpl
 import com.padc.moments.databinding.DialogHelpSupportBinding
 import com.padc.moments.databinding.DialogPrivacyPolicyBinding
+import com.padc.moments.network.storage.unsubscribeFromTopic
 import com.padc.moments.utils.makeToast
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -104,6 +105,8 @@ class SettingFragment : Fragment() {
                     .setPositiveButton("Yes") { logoutDialog, _ ->
                         logoutDialog?.dismiss()
                         deleteUserToken()
+                        unsubscribeFromTopic("all")
+                        unsubscribeFromTopic(mGrade)
                         context?.let { ctx ->
                             startActivity(LoginActivity.newIntent(ctx))
                         }
@@ -142,6 +145,19 @@ class SettingFragment : Fragment() {
             dialogView.btnClose.setOnClickListener {
                 dialog.dismiss()
             }
+        }
+    }
+
+    private fun getTokenByGroupType(grade : String): String {
+        return when(grade) {
+            "all" -> "all"
+            "FirstYear" -> "first"
+            "SecondYear" -> "second"
+            "ThirdYear" -> "third"
+            "FourthYear" -> "fourth"
+            "FifthYear" -> "fifth"
+            "FinalYear" -> "final"
+            else -> throw IllegalArgumentException("Invalid grade: $grade")
         }
     }
 }
