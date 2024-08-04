@@ -83,6 +83,7 @@
         android:layout_below="@+id/viewPagerMomentImages"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:clickable="true"
+        android:contentDescription="@string/desc_like_click"
         android:layout_marginStart="@dimen/margin_medium_2"
         android:layout_marginTop="@dimen/margin_medium_2"
         android:layout_alignParentStart="true"

@@ -21,7 +21,6 @@ class ProfilePresenterImpl : ProfilePresenter , ViewModel() {
     override var mAuthModel: AuthenticationModel = AuthenticationModelImpl
     override var mUserModel: UserModel = UserModelImpl
     override var mMomentModel: MomentModel = MomentModelImpl
-    private val mAuthManager : AuthManager = FirebaseAuthManager
 
     private var mView:ProfileView? = null
     override fun initPresenter(view: ProfileView) {
@@ -29,7 +28,7 @@ class ProfilePresenterImpl : ProfilePresenter , ViewModel() {
     }
 
     override fun onUIReady(lifecycleOwner: LifecycleOwner) {
-        val userId = mAuthManager.getUserId()
+        val userId = mAuthModel.getToken()?.userId !!
         mUserModel.getSpecificUser(
             userId,
             onSuccess = {

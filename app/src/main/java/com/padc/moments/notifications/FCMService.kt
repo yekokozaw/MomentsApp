@@ -15,19 +15,21 @@ class FCMService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
-        if(message.data["chat_type"] == "private" ) {
-
-//            NotificationUtils.sendNotification(
-//                this,
-//                title = message.data["title"] ?: "",
-//                body = message.data["body"] ?: "",
-//                pendingIntent = PendingIntent.getActivity(
-//                    this,
-//                    0,
-//                    MainActivity.newIntent(this),
-//                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_ONE_SHOT
-//                )
-//            )
+        if(message.data["key1"] == "all" ) {
+            message.notification?.let {
+                NotificationUtils.sendNotification(
+                    this,
+                    it.body ?: "null",
+                    it.title ?: "null",
+                    pendingIntent = PendingIntent.getActivity(
+                        this,
+                        0,
+                        MainActivity.newIntent(this),
+                        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_UPDATE_CURRENT
+                    ),
+                    type = message.data["key1"]!!
+                )
+            }
         }
         else {
             message.notification?.let {
@@ -40,7 +42,8 @@ class FCMService : FirebaseMessagingService() {
                         0,
                         MainActivity.newIntent(this),
                         PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_UPDATE_CURRENT
-                    )
+                    ),
+                    type = message.data["key1"]!!
                 )
             }
 

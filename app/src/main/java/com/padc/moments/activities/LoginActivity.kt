@@ -86,13 +86,14 @@ class LoginActivity : AppCompatActivity() , LoginView {
 
     override fun navigateToHomeScreen() {
         val userId = mAuthManager.getUserId()
-        val token = TokenVO(fcmToken, email = binding.etEmailLogin.text.toString(),userId)
-        mAuthModel.addToken(token)
+
         mUserModel.getSpecificUser(
             userId,
             onSuccess = { user ->
                 subscribeToTopic("all")
                 subscribeToTopic(user.grade)
+                val token = TokenVO(user.gender, email = binding.etEmailLogin.text.toString(),userId)
+                mAuthModel.addToken(token)
                 startActivity(MainActivity.newIntent(this))
             },
             onFailure = {

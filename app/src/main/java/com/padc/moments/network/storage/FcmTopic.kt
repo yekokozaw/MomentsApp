@@ -68,7 +68,7 @@ fun sendMessageToTopic(accessToken: String, topic: String, title: String, body: 
               "body": "$body"
             },
             "data": {
-              "key1": "value1"
+              "key1": "$topic"
             }
           }
         }

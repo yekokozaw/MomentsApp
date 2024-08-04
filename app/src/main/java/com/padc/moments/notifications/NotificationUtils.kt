@@ -11,7 +11,7 @@ import com.padc.moments.R
 
 object NotificationUtils {
 
-    fun sendNotification(context: Context, body: String, title: String , pendingIntent: PendingIntent) {
+    fun sendNotification(context: Context, body: String, title: String , pendingIntent: PendingIntent,type : String) {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 

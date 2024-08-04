@@ -90,4 +90,6 @@
     <string name="upload">Upload</string>
     <string name="lbl_download_books">Download Books</string>
     <string name="delete_instruction">If you want to delete,press a book</string>
+    <string name="desc_like_click">like click</string>
+    <string name="email_thetmonaye_it_gmail_com">Email : thetmonaye.it@gmail.com</string>
 </resources>

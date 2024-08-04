@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:visibility="gone"
+        android:visibility="visible"
         android:text="@string/lbl_new"
         android:fontFamily="@font/yorkie_demo_regular"
         android:backgroundTint="@color/colorPrimary"

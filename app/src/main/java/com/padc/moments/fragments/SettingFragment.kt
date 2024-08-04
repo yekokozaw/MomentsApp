@@ -80,11 +80,8 @@ class SettingFragment : Fragment() {
     private fun deleteUserToken(){
         mAuthModel.deleteToken()
         GlobalScope.launch (Dispatchers.Main){
-
-            mUserModel.deleteUserFromGroup(
-                mUserId,
-                grade = mGrade
-            )
+            unsubscribeFromTopic("all")
+            unsubscribeFromTopic(mGrade)
         }
     }
 
@@ -105,8 +102,7 @@ class SettingFragment : Fragment() {
                     .setPositiveButton("Yes") { logoutDialog, _ ->
                         logoutDialog?.dismiss()
                         deleteUserToken()
-                        unsubscribeFromTopic("all")
-                        unsubscribeFromTopic(mGrade)
+
                         context?.let { ctx ->
                             startActivity(LoginActivity.newIntent(ctx))
                         }
