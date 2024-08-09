@@ -94,7 +94,9 @@ class LoginActivity : AppCompatActivity() , LoginView {
                 subscribeToTopic(user.grade)
                 val token = TokenVO(user.gender, email = binding.etEmailLogin.text.toString(),userId)
                 mAuthModel.addToken(token)
-                startActivity(MainActivity.newIntent(this))
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             },
             onFailure = {
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
